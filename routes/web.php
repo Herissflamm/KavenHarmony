@@ -33,6 +33,18 @@ Route::get('/account', function () {
     return view('home');
 });
 
+Route::get('/messaging', function () {
+    return view('home');
+});
+
+Route::get('/search', function () {
+    return view('market/listIntrument');
+});
+
+Route::get('/about', function () {
+    return view('home');
+});
+
 Route::get('logout', function ()
 {
     auth()->logout();
