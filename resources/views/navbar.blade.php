@@ -2,7 +2,7 @@
     <nav class="bg-white border-gray-200 dark:bg-red-50">
         @if (Route::has('login'))
         <div class="flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="{{ url('/home') }}" class="block py-2 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-100 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">KAVEN HARMONY</a> 
+            <a href="{{ url('/home') }}"> <img src="/images/Plan_de_travail_7.png" class="w-24"/> </a>
             <div class="hidden w-full md:block md:w-auto">
             <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-red-50 dark:border-gray-700">
             @auth
@@ -10,7 +10,7 @@
                     <a href="{{ url('/sell') }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-100 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">+ Vendre</a>
                 </li>
                 <li>
-                    <form>   
+                    <form method="get" action="{{ url('/search') }}">   
                         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Rechercher</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -32,7 +32,7 @@
                 </li>
                 <li>
                 <svg class="w-[24px] h-[24px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                    <a href="{{ url('/about') }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-100 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                    <a href="{{ url('/partition') }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-100 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
                         <path fill-rule="evenodd" d="M11 4.7C8.7 4.1 6.8 4 4 4a2 2 0 0 0-2 2v11c0 1.1 1 2 2 2 2.8 0 4.5.2 7 .8v-15Zm2 15.1c2.5-.6 4.2-.8 7-.8a2 2 0 0 0 2-2V6c0-1-.9-2-2-2-2.8 0-4.7.1-7 .7v15.1Z" clip-rule="evenodd"/>
                     </a>
                 </svg>

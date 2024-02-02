@@ -41,7 +41,15 @@ Route::get('/search', function () {
     return view('market/listIntrument');
 });
 
+Route::get('/product', function () {
+    return view('market/product');
+});
+
 Route::get('/about', function () {
+    return view('home');
+});
+
+Route::get('/partition', function () {
     return view('home');
 });
 
