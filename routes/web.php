@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +31,14 @@ Route::get('/buy', function () {
     return view('home');
 });
 
-Route::get('/account', function () {
-    return view('home');
+Route::get('/account', function (Request $request) {
+    $userController = new UserController();
+    return $userController->showMyAccount($request);
+});
+
+Route::get('/modifyAccount', function (Request $request) {
+    $userController = new UserController();
+    return $userController->showModifyAccount($request);
 });
 
 Route::get('/messaging', function () {

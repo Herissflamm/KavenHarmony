@@ -17,10 +17,16 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    protected $primaryKey = 'idUsers';
     protected $fillable = [
-        'name',
+        'firstName',
+        'lastName',
+        'username',
+        'phone',
         'email',
         'password',
+        'Adress_idAdress'
     ];
 
     /**
@@ -42,4 +48,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function profile()
+    {
+        return $this->hasOne(Adress::class, "idAdress");
+    }
 }
