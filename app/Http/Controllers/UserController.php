@@ -17,4 +17,10 @@ class UserController extends Controller
         $user = $request->user();
         return view('account/modifyAccount', ['user' => $user]);
     }
+
+    public function getIdUserConnected(Request $request)
+    {
+        $user = $request->user();
+        return $user->idUsers;
+    }
 }

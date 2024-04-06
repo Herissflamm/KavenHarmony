@@ -4,6 +4,8 @@ namespace App\Actions\Fortify;
 
 use App\Models\User;
 use App\Models\Adress;
+use App\Models\Seller;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -34,7 +36,7 @@ class CreateNewUser implements CreatesNewUsers
             ],
             'city'=> ['required', 'string', 'max:45'],
             'postCode'=> ['required', 'string', 'max:5'],
-            'streetNumber'=> ['required', 'int', 'max:4'],
+            'streetNumber'=> ['required', 'int'],
             'street'=> ['required', 'string', 'max:256'],
             'password' => $this->passwordRules(),
         ])->validate();
@@ -56,6 +58,19 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
             'Adress_idAdress' =>  $adress -> idAdress,
         ]);
+
+        
+        if($input['seller']){
+            $seller = Seller::create([
+                'User_idUsers' =>  $user -> idUsers,
+            ]);
+        }
+        
+        if($input['customer']){
+            $customer = Customer::create([
+                'User_idUsers' =>  $user -> idUsers,
+            ]);
+        }
         
         return $user;
     }

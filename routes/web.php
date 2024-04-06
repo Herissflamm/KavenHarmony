@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -23,7 +25,15 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/sell', function () {
+Route::get('/sell', [ProductController::class, 'show']);
+
+    //return view('market/createProduct');
+//});
+
+Route::post('/newProduct', function (Request $request) {
+    $productController = new ProductController();
+    $imageController = new ImageController();
+    $imageController->store($request);
     return view('home');
 });
 

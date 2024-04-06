@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  @vite('resources/css/app.css')
+</head>
+<body class = "dark:bg-white-50">
+@include('navbar')
+<div class="container flex flex-col items-center row justify-center col-md-8 card">
+            
+            <div class="card-header">{{ __('Créer mon annonce - Vente') }}</div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url('/newProduct') }}" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="row mb-3">
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nom de l instrument') }} : </label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <select name="instrumentType" id="instrumentType">
+                                <option value="">
+                                    {{ __('Type d instrument') }}
+                                </option>
+                                @foreach ($allType as $type)
+                                    <option value="{{$type->type}}">{{$type->type}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="price" class="col-md-4 col-form-label text-md-end">{{ __('Quel Prix ?') }} : </label>
+
+                            <div class="col-md-6">
+                                <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" required autocomplete="price" autofocus>
+
+                                @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <fieldset>
+                                <label for="state" class="col-md-4 col-form-label text-md-end">{{ __('Quel Etat ?') }} : </label>
+
+                                <div class="col-md-6">
+                                    
+                                    @foreach ($allState as $state)
+                                        <input name="state" type="radio" class="form-control" id="{{ $state->state}}" required value="{{ $state->state}}">
+                                        <label for="{{ $state->state}}">{{ $state->state}}</label>
+                                    @endforeach
+                                    
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Ajouter une image') }} : </label>
+
+                            <div class="col-md-6">
+                                <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required autocomplete="image" autofocus>
+
+                                @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="mb-3">                    
+                            <img id="image-preview" src="/images/Plan_de_travail_7.png"
+                                    alt="preview image" style="max-height: 250px;">
+                        </div>
+
+                        <div class="row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Ajouter en vente') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+</div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+     
+$(document).ready(function (e) {
+
+  
+   $('#image').change(function(){
+           
+    let reader = new FileReader();
+
+    reader.onload = (e) => { 
+
+      $('#image-preview').attr('src', e.target.result); 
+    }
+
+    reader.readAsDataURL(this.files[0]); 
+  
+   });
+  
+});
+
+</script>
+</html>
