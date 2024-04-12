@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Seller extends User
 {
@@ -19,5 +18,11 @@ class Seller extends User
     public function profile()
     {
         return $this->hasOne(User::class, "idUsers");
+    }
+
+    public static function getSellerByID($id){
+      $val = DB::table('seller')->where('User_idUsers', $id)->first();
+      $userVal = User::getUserById($val->User_idUsers);
+      return $userVal; 
     }
 }

@@ -48,7 +48,6 @@ class CreateNewUser implements CreatesNewUsers
             'streetNumber' => $input['streetNumber'],
             'street' => $input['street'],
         ]);
-        
         $user = User::create([
             'username' => $input['username'],
             'firstName' => $input['firstName'],

@@ -68,13 +68,18 @@
                             </fieldset>
                         </div>
 
+                        <div class="mb-3">
+                            <label for="description" class="block mb-2 te   xt-sm font-medium text-gray-900 dark:text-white">Descritpion</label>
+                            <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-sm" placeholder="Decrivez votre article ici....."></textarea>
+                        </div>
+
                         <div class="row mb-3">
-                            <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Ajouter une image') }} : </label>
+                            <label for="images" class="col-md-4 col-form-label text-md-end">{{ __('Ajouter une image') }} : </label>
 
                             <div class="col-md-6">
-                                <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required autocomplete="image" autofocus>
+                                <input id="images" type="file" class="form-control @error('images') is-invalid @enderror" name="images[]" value="{{ old('images') }}" required multiple>
 
-                                @error('image')
+                                @error('images')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -82,10 +87,12 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">                    
-                            <img id="image-preview" src="/images/Plan_de_travail_7.png"
-                                    alt="preview image" style="max-height: 250px;">
-                        </div>
+                        <div class="mb-3">
+                            <div id="image-preview">                    
+                                <img id="first-image-preview" src="/images/Plan_de_travail_7.png"
+                                        alt="preview image" style="max-height: 250px;">
+                            </div>
+                        </img>
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -106,20 +113,20 @@
      
 $(document).ready(function (e) {
 
-  
-   $('#image').change(function(){
-           
-    let reader = new FileReader();
-
-    reader.onload = (e) => { 
-
-      $('#image-preview').attr('src', e.target.result); 
+   $('#images').change(function(){
+    let previewDiv = document.getElementById('image-preview');
+    while (previewDiv.firstChild) {
+        previewDiv.removeChild(previewDiv.firstChild);
     }
-
-    reader.readAsDataURL(this.files[0]); 
-  
-   });
-  
+    let images = document.getElementById('images').files;
+    for(let i =0; i < images.length; i++){
+        let reader = new FileReader();
+        reader.onload = (e) => { 
+            $($.parseHTML('<img>')).attr('src', e.target.result).attr('style', 'max-height: 250px;+').appendTo("#image-preview");
+        }
+        reader.readAsDataURL(this.files[i]);         
+    }  
+   });  
 });
 
 </script>

@@ -166,7 +166,7 @@
                             <input type="checkbox" name="seller">
                             Je suis un vendeur
                         </label>
-
+                        <br>
                         <label>
                             <input type="checkbox" name="customer">
                             Je suis un acheteur

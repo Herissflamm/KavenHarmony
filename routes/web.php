@@ -25,16 +25,14 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/sell', [ProductController::class, 'show']);
+Route::get('/sell', [ProductController::class, 'showCreate']);
 
-    //return view('market/createProduct');
-//});
 
 Route::post('/newProduct', function (Request $request) {
     $productController = new ProductController();
     $imageController = new ImageController();
     $imageController->store($request);
-    return view('home');
+    return redirect('/search');
 });
 
 Route::get('/buy', function () {
@@ -55,13 +53,13 @@ Route::get('/messaging', function () {
     return view('home');
 });
 
-Route::get('/search', function () {
-    return view('market/listIntrument');
-});
 
-Route::get('/product', function () {
-    return view('market/product');
-});
+Route::get('/search', [ProductController::class, 'showSearch']);
+
+Route::get('/product', function (Request $request) {
+    $productController = new ProductController();
+    return $productController->showProduct($request);
+})->name('product');
 
 Route::get('/about', function () {
     return view('home');

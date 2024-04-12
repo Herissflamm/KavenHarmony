@@ -16,7 +16,7 @@ class CreateNewImage
                        
         $image = Image::create([
             'path' => $input,
-            'createIdUsers' => $id
+            'createIdUser' => $id
         ]);
 
         return $image;

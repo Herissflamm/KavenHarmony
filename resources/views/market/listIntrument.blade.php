@@ -19,7 +19,22 @@
           <a href="#" class="block px-2 py-3">Prix</a>
         </li>
         <li>
-          <a href="#" class="block px-2 py-3">Type</a>
+          <ul role="list" class="px-2 py-3">Type
+          @foreach ($allType as $type)
+            <li class="font-normal">
+              {{$type->getType()}}
+            </li>
+          @endforeach
+          </ul>
+        </li>
+        <li>
+          <ul role="list" class="px-2 py-3">Etat
+          @foreach ($allState as $state)
+            <li class="font-normal">
+              {{$state->getState()}}
+            </li>
+          @endforeach
+          </ul>
         </li>
         <li>
           <a href="#" class="block px-2 py-3">Marque</a>
@@ -33,14 +48,17 @@
   <div class="m-auto">
     <h1 class="text-xl p-10">Derniers ajouts</h1>
     <div class="grid grid-cols-4 gap-2 object-center">
-    
-      @for ($i = 0; $i < 12; $i++)
-        <div class="rounded overflow-hidden shadow-lg w-60" name="{{ $i }}">
-              <p class="text-center">Classe</p>
-              <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam posuere dignissim ante id rhoncus. Aliquam quis pulvinar libero. Integer id nibh vitae nisi luctus commodo id at eros. Morbi non nulla eu felis viverra placerat. Vivamus semper felis sit amet egestas egestas. Donec hendrerit mauris eget nisi porttitor imperdiet. Aenean.</p>
-              <a href="{{ url('/product') }}" class="block px-2 py-3 text-center rounded-lg dark:bg-red-50 m-auto">Voir l'instrument</a>
+      @foreach ($instruments as $instrument)
+        <div class="rounded overflow-hidden shadow-lg w-60" name="{{ $instrument->getName() }}">
+              <p class="text-center">{{ $instrument->getType()->getType() }}</p>
+              <p class="text-center">{{ $instrument->getState()->getState() }}</p>
+              @if($instrument->getImage()!=null)
+                <img src="/images/{{$instrument->getImage()[0]->getPath()}}" class="w-24"/>
+              @endif
+              <p class="text-center">{{ $instrument->getSell()->getPrice()}} €</p>
+              <a href="{{ route('product', ['id' => $instrument->getId()]) }}" class="block px-2 py-3 text-center rounded-lg dark:bg-red-50 m-auto">Voir l'instrument</a>
         </div>
-      @endfor
+      @endforeach
     </div>
   </div>
 </div>

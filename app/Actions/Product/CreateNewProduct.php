@@ -15,19 +15,20 @@ class CreateNewProduct
      *
      * @param  array<string, string>  $input
      */
-    public function create(array $input, int $idImage, $idTypeInstrument, $idState, $idUser): Instrument
+    public function create(array $input, $idTypeInstrument, $idState, $idUser, $idSell): Instrument
     {
                       
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255']
         ])->validate();
-        
+
         $product = Instrument::create([
             'name' => $input['name'],
+            'description' => $input['description'],
             'idTypeInstrument' => $idTypeInstrument,
-            'idState' => $idState,
+            'State_idState' => $idState,
             'SelleridUser' => $idUser,
-            'idImage' => $idImage,
+            'Sell_idSell' => $idSell,
         ]);
 
 
