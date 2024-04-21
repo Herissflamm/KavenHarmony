@@ -39,6 +39,8 @@ Route::get('/buy', function () {
     return view('home');
 });
 
+Route::post('/filterProduct', [ProductController::class,'filterProduct']);
+
 Route::get('/account', function (Request $request) {
     $userController = new UserController();
     return $userController->showMyAccount($request);

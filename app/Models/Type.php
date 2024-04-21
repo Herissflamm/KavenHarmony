@@ -38,4 +38,10 @@ class Type extends Model
         return $type;
     }
 
+    public static function getTypeByTypeName($type){
+        $val = DB::table('typeinstrument')->where('type', $type)->first();
+        $type = new TypeBuilder($val->idTypeInstrument, $val->type);
+        return $type;
+    }
+
 }

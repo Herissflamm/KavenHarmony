@@ -41,6 +41,12 @@ class State extends Model
         return $state;
     }
 
+    public static function getStateByStateName($state){
+        $val = DB::table('state')->where('state', $state)->first();
+        $state = new StateBuilder($val->idState, $val->state);
+        return $state;
+    }
+
     public function getId(){
         return $this->id;
     }
