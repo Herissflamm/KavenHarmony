@@ -4,135 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  @routes
   @vite('resources/css/app.css')
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script type="text/javascript">
-    $( document ).ready(function() {
-      let allType = document.getElementsByName("Type");
-      let allState = document.getElementsByName("State");
-      let clearFilter = document.getElementById("clearFilter");
-      for(let i = 0; i<allType.length; i++){
-        allType[i].addEventListener("click", getAllInstrumentWithFilter);
-      }
-      for(let i = 0; i<allState.length; i++){
-        allState[i].addEventListener("click", getAllInstrumentWithFilter);
-      }
-      clearFilter.addEventListener("click", deleteSelectFilter);
-    });
-    async function getAllInstrumentWithFilter(event){
-      if(!event.target.classList.contains("selected")){
-        let allSelectedFilter = getSelectedFilter(event);
-        event.target.classList.add("selected");
-        let state = "";
-        let type = "";
-        for(let i = 0; i < allSelectedFilter.length; i++){
-          if(allSelectedFilter[i].getAttribute("Name") == 'State'){
-            state = allSelectedFilter[i].id;
-          } 
-          if(allSelectedFilter[i].getAttribute("Name") == 'Type'){
-            type = allSelectedFilter[i].id;
-          }
-        }
-        await jQuery.ajax({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
-          url: '/filterProduct',
-          method : "POST",
-          data: {state: state, type: type},
-          success: function (data) {
-            changeView(data);
-          }
-        });
-      }else{
-        event.target.classList.remove("selected");
-      }
-    }
-
-    function changeView(data){
-      let divInstrument = document.getElementById("allInstrument");
-      while (divInstrument.firstChild) {
-        divInstrument.removeChild(divInstrument.lastChild);
-      }
-      for(let i = 0; i<data.length; i++){
-        let div = document.createElement("div");
-        div.classList.add("rounded", "overflow-hidden", "shadow-lg", "w-60");
-        divInstrument.appendChild(div);
-
-        let pType = document.createElement("p");
-        pType.classList.add("text-center");
-        pType.innerHTML = data[i].type;
-        div.appendChild(pType);
-
-        let pState = document.createElement("p");
-        pState.classList.add("text-center");
-        pState.innerHTML = data[i].state;
-        div.appendChild(pState);
-        if(data[i].image !== null){
-          let image = document.createElement("img");
-          image.classList.add("w-24");
-          image.src = "/images/"+data[i].image;
-          div.appendChild(image);
-        }
-
-        let pPrice = document.createElement("p");
-        pPrice.classList.add("text-center");
-        pPrice.innerHTML = data[i].price + "€";
-        div.appendChild(pPrice);
-
-        let button = document.createElement("a");
-        button.classList.add("block", "px-2", "py-3", "text-center", "rounded-lg", "dark:bg-red-50", "m-auto");
-        button.innerHTML = "Voir l'instrument";
-        let href ="{{ route('product', ['id' => 'idVal']) }}"
-        href = href.replace('idVal',data[i].id);
-        button.href = href;
-        div.appendChild(button);
-        
-      }
-    }
-
-    async function deleteSelectFilter(){
-      let allSelectedFilter = document.getElementsByClassName("selected");
-      console.log(allSelectedFilter[1]);
-      for(let i = 0; i <= allSelectedFilter.length; i++){
-        allSelectedFilter[0].classList.remove("selected"); 
-      }
-      await jQuery.ajax({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
-          url: '/filterProduct',
-          method : "POST",
-          data: {state: null, type: null},
-          success: function (data) {
-            changeView(data);
-          }
-        });
-    }
-    
-    function getSelectedFilter(event){
-      let name = event.target.getAttribute("Name");
-      let allSelectedFilter = document.getElementsByClassName("selected");
-      if(allSelectedFilter != null){
-        if(name === "State"){
-          for(let i = 0; i < allSelectedFilter.length; i++){
-            if(allSelectedFilter[i].getAttribute("Name") == 'State'){
-              allSelectedFilter[i].classList.remove("selected");
-            } 
-          }
-        }else if(name === "Type"){
-          for(let i = 0; i < allSelectedFilter.length; i++){
-            if(allSelectedFilter[i].getAttribute("Name") == 'Type'){
-              console.log(allSelectedFilter);
-              allSelectedFilter[i].classList.remove("selected");
-              console.log(allSelectedFilter);
-            } 
-          }
-        }
-      }
-      return allSelectedFilter;
-    }
-  </script>
+  @vite(['resources/js/filter.js'])
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>  
 </head>
 <body class = "dark:bg-white-50">
 @include('navbar')
@@ -145,7 +21,47 @@
           <a href="#" class="block px-2 py-3" id="clearFilter">Retirer les filtres selectionné</a>
         </li>
         <li>
-          <a href="#" class="block px-2 py-3">Prix</a>
+        <div class="flex justify-center items-center">
+          <div id="priceDiv">
+            <div>
+              <input type="range"
+                    step="1"
+                    id="minPrice"
+                    value="0"
+                    min="0" max="{{$biggestPrice}}"
+                    class="absolute  appearance-none z-20 h-2 w-full opacity-0 cursor-pointer">
+
+              <input type="range" 
+                    step="1"
+                    id="maxPrice"
+                    value="{{$biggestPrice}}"
+                    min="0" max="{{$biggestPrice}}"
+                    class="absolute pointer-events-none appearance-none z-20 h-2 w-full opacity-0 cursor-pointer">
+
+              <div class="relative z-10 h-2">
+
+                <div class="absolute z-10 left-0 right-0 bottom-0 top-0 rounded-md bg-gray-200"></div>
+
+                <div id ="barthumb" class="absolute z-20 top-0 bottom-0 rounded-md bg-black" style="right:0%; left: 0%"></div>
+
+                <div id="minthumb" class="absolute z-30 w-6 h-6 top-0 left-0 bg-black rounded-full -mt-2 -ml-1" style="left: 0%"></div>
+
+                <div id="maxthumb"class="absolute z-30 w-6 h-6 top-0 right-0 bg-black rounded-full -mt-2 -mr-3" style="right: 0%"></div>
+        
+              </div>
+
+            </div>
+            
+            <div class="flex justify-between items-center py-5">
+              <div>
+                <input type="text" id="minPriceInput" maxlength="5" value="0" class="px-3 py-2 border border-gray-200 rounded w-24 text-center">
+              </div>
+              <div>
+                <input type="text" id="maxPriceInput" maxlength="5" value="{{$biggestPrice}}" class="px-3 py-2 border border-gray-200 rounded w-24 text-center">
+              </div>
+            </div>
+            
+          </div>
         </li>
         <li>
           <ul role="list" class="px-2 py-3">Type

@@ -58,6 +58,8 @@
         </div>
     </div>
   </div>
+  <a href="{{ url('/boughtProduct') }}">Espace Client</a>
+  <a href="{{ url('/soldProduct') }}">Espace Professionnel</a>
 </div>
 </body>
 </html>

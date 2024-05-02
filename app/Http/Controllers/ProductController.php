@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Type;
+use App\Models\Sell;
 use App\Models\State;
 use App\Models\Instrument;
 use Illuminate\Http\Request;
@@ -18,15 +19,21 @@ class ProductController extends Controller
     }
 
     public function showSearch(Request $request){
-        $instrument = null;
+        $instruments = null;
         if($request->searchValue != null){
-            $instrument = Instrument::getAllInstrumentWithSearch($request->searchValue);
+            $instruments = Instrument::getAllInstrumentWithSearch($request->searchValue);
         }else{
-            $instrument = Instrument::getAllInstrument();
+            $instruments = Instrument::getAllInstrument();
         }
         $allState = State::getAllState();
         $allType = Type::getAllType();
-        return view('market/listIntrument', ['allState' => $allState, 'allType' => $allType, 'instruments' => $instrument]);
+        $biggestPrice = 0;
+        foreach($instruments as $instrument){
+            if($biggestPrice < $instrument->getSell()->getPrice()){
+                $biggestPrice = $instrument->getSell()->getPrice();
+            }
+        }
+        return view('market/listIntrument', ['allState' => $allState, 'allType' => $allType, 'instruments' => $instruments, 'biggestPrice'=>$biggestPrice]);
     }
 
     public function showProduct(Request $request){
@@ -34,8 +41,22 @@ class ProductController extends Controller
         return view('market/product', ['instrument' => $instrument]);
     }
 
+    public function showAllMyProduct(Request $request){
+        $userController = new UserController();
+        $idUser = $userController->getIdUserConnected($request);
+        $instrument = Instrument::getInstrumentBySeller($idUser);
+        return view('account/soldProduct', ['instruments' => $instrument]);
+    }
+
+    public function showAllProductBought(Request $request){
+        $userController = new UserController();
+        $idUser = $userController->getIdUserConnected($request);
+        $instrument = Instrument::getInstrumentBySeller($idUser);
+        return view('account/soldProduct', ['instruments' => $instrument]);
+    }
+
     public function filterProduct(Request $request){
-        $instrumentQuery = Instrument::getInstrumentsByFilter($request->state, $request->type);
+        $instrumentQuery = Instrument::getInstrumentsByFilter($request->state, $request->type, $request->minPrice, $request->maxPrice);
         $allInstruments = [];
         foreach ($instrumentQuery as $instrument)
         {

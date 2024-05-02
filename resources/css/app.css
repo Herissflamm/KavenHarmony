@@ -6,3 +6,10 @@
 .selected {
   color: rgb(194 65 12);
 }
+ 
+input[type=range]::-webkit-slider-thumb {
+	pointer-events: all;
+	width: 24px;
+	height: 24px;
+	-webkit-appearance: none;
+}
