@@ -16,7 +16,7 @@
 @include('navbar')
 <div class="flex">
   <div class="m-auto">
-    <h1 class="text-xl p-10">Derniers ajouts</h1>
+    <h1 class="text-xl p-10">Mon historique d'achat</h1>
     <div class="grid grid-cols-4 gap-2 object-center" id="allInstrument">
       @foreach ($instruments as $instrument)
         <div class="rounded overflow-hidden shadow-lg w-60" name="{{ $instrument->getName() }}">

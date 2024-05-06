@@ -22,8 +22,13 @@ class Order extends Model
     ];
 
 
-    public static function getLastOpenOrder(){
-        $order = DB::table('order')->join('orderstatus', 'orderstatus.idOrderStatus', '=', 'order.OrderStatus_idOrderStatus')->where('orderstatus.status', '=', 'En Cours')->get()->first();
+    public static function getLastOpenOrderOfUser($idUser){
+        $order = DB::table('order')
+        ->join('orderstatus', 'orderstatus.idOrderStatus', '=', 'order.OrderStatus_idOrderStatus')
+        ->where('orderstatus.status', '=', 'En Cours')
+        ->where('order.Customer_User_idUser','=',$idUser)
+        ->get()
+        ->first();
         return $order;
     }
 }

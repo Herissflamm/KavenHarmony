@@ -71,18 +71,17 @@ class Instrument extends Model
             $typeId = $typeFilter->getId();
         }
         $allInstrument= [];
-        $instrumentQuery = null;
-        if($typeId != null && $stateId != null){      
-            $instrumentQuery = DB::table('instrument')->join('sell', 'sell.idSell', '=', 'instrument.Sell_idSell' )->where('State_idState', $stateId)->where('idTypeInstrument', $typeId)->where('sell.price', '>=', $minPrice)->where('sell.price', '<=', $maxPrice)->get();
-        }else if($typeId != null && $stateId == null){
-            $instrumentQuery = DB::table('instrument')->join('sell', 'sell.idSell', '=', 'instrument.Sell_idSell' )->where('idTypeInstrument', $typeId)->where('sell.price', '>=', $minPrice)->where('sell.price', '<=', $maxPrice)->get();
-        }else if($stateId != null && $typeId == null){
-            $instrumentQuery = DB::table('instrument')->join('sell', 'sell.idSell', '=', 'instrument.Sell_idSell' )->where('State_idState', $stateId)->where('sell.price', '>=', $minPrice)->where('sell.price', '<=', $maxPrice)->get();
-        }else if($typeId == null && $stateId == null && $minPrice != null && $maxPrice != null){
-            $instrumentQuery = DB::table('instrument')->join('sell', 'sell.idSell', '=', 'instrument.Sell_idSell' )->where('sell.price', '>=', $minPrice)->where('sell.price', '<=', $maxPrice)->get();
-        }else if($typeId == null && $stateId == null && $minPrice == null && $maxPrice == null){
-            $instrumentQuery = DB::table('instrument')->get();
+        $instrumentQuery = DB::table('instrument')->join('sell', 'sell.idSell', '=', 'instrument.Sell_idSell' );
+        if($typeId != null ){      
+            $instrumentQuery = $instrumentQuery->where('idTypeInstrument', $typeId);
         }
+        if($stateId != null){
+            $instrumentQuery = $instrumentQuery->where('State_idState', $stateId);
+        }
+        if($minPrice != null && $maxPrice != null){
+            $instrumentQuery = $instrumentQuery->where('sell.price', '>=', $minPrice)->where('sell.price', '<=', $maxPrice);
+        }
+        $instrumentQuery = $instrumentQuery->get();
         if($instrumentQuery!=null){
             foreach($instrumentQuery as $instrument){
                 $type = Type::getTypeByID($instrument->idTypeInstrument);
@@ -139,4 +138,19 @@ class Instrument extends Model
         return $allInstrument;
     }
     
+    public static function getInstrumentByOrderId($id){
+        $instrumentQuery = DB::table('instrument')
+        ->join('instrument_has_order', 'instrument_has_order.Instrument_idInstrument', '=', 'instrument.idInstrument')
+        ->where('instrument_has_order.Order_idOrder', '=', $id)
+        ->get()
+        ->first();
+        $type = Type::getTypeByID($instrumentQuery->idTypeInstrument);
+        $seller = Seller::getSellerByID($instrumentQuery->SelleridUser);
+        $image = InstrumentHasImage::getAllImageByInstrumentId($instrumentQuery->idInstrument);
+        $state = State::getStateByID($instrumentQuery->State_idState);
+        $sell = Sell::getSellByID($instrumentQuery->Sell_idSell);
+        $description = $instrumentQuery->description == null ? "" : $instrumentQuery->description; 
+        $instrument = new InstrumentBuilder($instrumentQuery->idInstrument, $instrumentQuery->name, $description, $type, $state, $seller, $image, $sell);
+        return $instrument;
+    }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -39,7 +40,17 @@ Route::get('/buy', function () {
     return view('home');
 });
 
-Route::post('/filterProduct', [ProductController::class,'filterProduct']);
+Route::get('/myBasket', [OrderController::class, 'getMyBasket'])->name("myBasket");
+
+Route::get('/addToBasket', [OrderController::class, 'addToBasket'])->name("addToBasket");
+
+Route::get('/boughtProduct', [OrderController::class, 'getAllOrders']);
+
+Route::get('/soldProduct', [ProductController::class, 'showAllMyProduct']);
+
+Route::get('/filterProduct', [ProductController::class,'filterProduct']);
+
+Route::delete('/deleteFromMyOrder', [OrderController::class,'deleteInstrumentFromOrder']);
 
 Route::get('/account', function (Request $request) {
     $userController = new UserController();

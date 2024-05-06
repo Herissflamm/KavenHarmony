@@ -7,7 +7,6 @@
   @routes
   @vite('resources/css/app.css')
   @vite(['resources/js/filter.js'])
-  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>  
 </head>
 <body class = "dark:bg-white-50">

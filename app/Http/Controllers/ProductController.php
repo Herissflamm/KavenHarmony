@@ -52,7 +52,7 @@ class ProductController extends Controller
         $userController = new UserController();
         $idUser = $userController->getIdUserConnected($request);
         $instrument = Instrument::getInstrumentBySeller($idUser);
-        return view('account/soldProduct', ['instruments' => $instrument]);
+        return view('account/boughtProduct', ['instruments' => $instrument]);
     }
 
     public function filterProduct(Request $request){
