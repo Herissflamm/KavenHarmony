@@ -15,8 +15,8 @@ class CreateInstrumentHasImage
     {   
                        
         $instrumentHasImage = InstrumentHasImage::create([
-            'Instrument_idInstrument' => $idInstrument,
-            'Image_idImage' => $idImage
+            'id_instrument' => $idInstrument,
+            'id_image' => $idImage
         ]);
 
         return $instrumentHasImage;

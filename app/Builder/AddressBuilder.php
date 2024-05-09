@@ -2,7 +2,7 @@
 
 namespace App\Builder;
 
-class AdressBuilder
+class AddressBuilder
 {
 
     private int $id;

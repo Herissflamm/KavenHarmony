@@ -15,8 +15,8 @@ class CreateInstrumentHasOrder
     {   
                        
         $instrumentHasOrder = InstrumentHasOrder::create([
-            'Instrument_idInstrument' => $idInstrument,
-            'Order_idOrder' => $idOrder
+            'id_instrument' => $idInstrument,
+            'id_order' => $idOrder
         ]);
 
         return $instrumentHasOrder;

@@ -3,7 +3,7 @@
 namespace App\Actions\Product;
 
 use App\Models\Instrument;
-use App\Models\Adress;
+use App\Models\Address;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -25,10 +25,10 @@ class CreateNewProduct
         $product = Instrument::create([
             'name' => $input['name'],
             'description' => $input['description'],
-            'idTypeInstrument' => $idTypeInstrument,
-            'State_idState' => $idState,
-            'SelleridUser' => $idUser,
-            'Sell_idSell' => $idSell,
+            'id_type_instrument' => $idTypeInstrument,
+            'id_state' => $idState,
+            'id_seller' => $idUser,
+            'id_sell' => $idSell,
         ]);
 
 

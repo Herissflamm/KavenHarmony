@@ -21,12 +21,12 @@ class OrderController extends Controller
         if($orderOpen == null){
             $orderStorage = new CreateNewOrder();
             $order = $orderStorage->create($request->input(), $userId);
-            $orderId = $order->idOrder;
+            $orderId = $order->id;
             $instrumentHasOrderStorage = new CreateInstrumentHasOrder();
             $instrumentHasOrderStorage->create($instrumentId, $orderId);
             
         }else{
-            $orderId = $orderOpen->idOrder;
+            $orderId = $orderOpen->id;
             $instrumentHasOrderStorage = new CreateInstrumentHasOrder();
             $instrumentHasOrderStorage->create($instrumentId, $orderId);
         }

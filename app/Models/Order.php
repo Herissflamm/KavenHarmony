@@ -10,23 +10,36 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'idOrder';
+    protected $primaryKey = 'id';
     public $table = 'order';
-    public $timestamps = false;
 
     protected $fillable = [
-        'shippingPrice',
-        'totalPrice',
-        'Customer_User_idUser',
-        'OrderStatus_idOrderStatus'
+        'shipping_price',
+        'total_price',
+        'id_customer',
+        'id_status'
     ];
 
+    public function instrument_has_order()
+    {
+        return $this->belongsTo(InstrumentHasOrder::class, "id");
+    }
+
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, "id_users");
+    }
+
+    public function order()
+    {
+        return $this->hasOne(Order::class, "id");
+    }
 
     public static function getLastOpenOrderOfUser($idUser){
         $order = DB::table('order')
-        ->join('orderstatus', 'orderstatus.idOrderStatus', '=', 'order.OrderStatus_idOrderStatus')
-        ->where('orderstatus.status', '=', 'En Cours')
-        ->where('order.Customer_User_idUser','=',$idUser)
+        ->join('order_status', 'order_status.id', '=', 'order.id_status')
+        ->where('order_status.status', '=', 'En Cours')
+        ->where('order.id_customer','=',$idUser)
         ->get()
         ->first();
         return $order;

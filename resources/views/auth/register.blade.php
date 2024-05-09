@@ -15,12 +15,12 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="firstName" class="col-md-4 col-form-label text-md-end">{{ __('Nom de famille') }} : </label>
+                            <label for="first_name" class="col-md-4 col-form-label text-md-end">{{ __('Nom de famille') }} : </label>
 
                             <div class="col-md-6">
-                                <input id="firstName" type="text" class="form-control @error('firstName') is-invalid @enderror" name="firstName" value="{{ old('firstName') }}" required autocomplete="firstName" autofocus>
+                                <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
 
-                                @error('firstName')
+                                @error('first_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -29,12 +29,12 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="lastName" class="col-md-4 col-form-label text-md-end">{{ __('Prenom') }} : </label>
+                            <label for="last_name" class="col-md-4 col-form-label text-md-end">{{ __('Prenom') }} : </label>
 
                             <div class="col-md-6">
-                                <input id="lastName" type="text" class="form-control @error('lastName') is-invalid @enderror" name="lastName" value="{{ old('lastName') }}" required autocomplete="lastName" autofocus>
+                                <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
 
-                                @error('lastName')
+                                @error('last_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -121,12 +121,12 @@
                         </div>
                         
                         <div class="row mb-3">
-                            <label for="postCode" class="col-md-4 col-form-label text-md-end">{{ __('Code Postal') }} : </label>
+                            <label for="post_code" class="col-md-4 col-form-label text-md-end">{{ __('Code Postal') }} : </label>
 
                             <div class="col-md-6">
-                                <input id="postCode" type="text" class="form-control @error('postCode') is-invalid @enderror" name="postCode" value="{{ old('postCode') }}" required autocomplete="postCode" autofocus>
+                                <input id="post_code" type="text" class="form-control @error('post_code') is-invalid @enderror" name="post_code" value="{{ old('post_code') }}" required autocomplete="post_code" autofocus>
 
-                                @error('postCode')
+                                @error('post_code')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -135,12 +135,12 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="streetNumber" class="col-md-4 col-form-label text-md-end">{{ __('Numéro de rue') }} : </label>
+                            <label for="street_number" class="col-md-4 col-form-label text-md-end">{{ __('Numéro de rue') }} : </label>
 
                             <div class="col-md-6">
-                                <input id="streetNumber" type="text" class="form-control @error('streetNumber') is-invalid @enderror" name="streetNumber" value="{{ old('streetNumber') }}" required autocomplete="streetNumber" autofocus>
+                                <input id="street_number" type="text" class="form-control @error('street_number') is-invalid @enderror" name="street_number" value="{{ old('street_number') }}" required autocomplete="street_number" autofocus>
 
-                                @error('streetNumber')
+                                @error('street_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -149,12 +149,12 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="street" class="col-md-4 col-form-label text-md-end">{{ __('Rue') }} : </label>
+                            <label for="street_name" class="col-md-4 col-form-label text-md-end">{{ __('Rue') }} : </label>
 
                             <div class="col-md-6">
-                                <input id="street" type="text" class="form-control @error('street') is-invalid @enderror" name="street" value="{{ old('street') }}" required autocomplete="street" autofocus>
+                                <input id="street_name" type="text" class="form-control @error('street_name') is-invalid @enderror" name="street_name" value="{{ old('street_name') }}" required autocomplete="street_name" autofocus>
 
-                                @error('street')
+                                @error('street_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

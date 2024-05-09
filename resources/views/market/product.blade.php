@@ -16,7 +16,7 @@
   @endforeach
   <div class="col-span-2 grid grid-cols-3 gap-2 rounded border-2">
     <img src="/images/Plan_de_travail_7-100.jpg" class="rounded-full"/>
-    <h1 class="col-span-2">{{$instrument->getSeller()->getLastName()}} {{$instrument->getSeller()->getFirstName()}}</h1>
+    <h1 class="col-span-2">{{$instrument->getSeller()->getlast_name()}} {{$instrument->getSeller()->getfirst_name()}}</h1>
     <a href="{{ route('addToBasket', ['id' => $instrument->getId()]) }}">
       <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
         <path d="M12.3 6A2 2 0 0 0 14 9h1v1a2 2 0 0 0 3 1.7l-.3 1.5a1 1 0 0 1-1 .8h-8l.2 1H16a3 3 0 1 1-2.8 2h-2.4a3 3 0 1 1-4-1.8L4.7 5H4a1 1 0 0 1 0-2h1.5c.5 0 .9.3 1 .8L6.9 6h5.4Z"/>

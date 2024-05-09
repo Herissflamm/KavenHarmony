@@ -7,22 +7,24 @@ use Illuminate\Support\Facades\DB;
 class Seller extends User
 {
 
-    protected $primaryKey = 'User_idUsers';
+    protected $primaryKey = 'id_users';
     public $table = 'seller';
-    public $timestamps = false;
-
     protected $fillable = [
-      'User_idUsers',
+      'id_users',
     ];
 
-    public function profile()
+    public function instrument()
     {
-        return $this->hasOne(User::class, "idUsers");
+        return $this->belongsTo(Instrument::class, "id");
+    }
+    public function users()
+    {
+        return $this->hasOne(User::class, "id");
     }
 
     public static function getSellerByID($id){
-      $val = DB::table('seller')->where('User_idUsers', $id)->first();
-      $userVal = User::getUserById($val->User_idUsers);
+      $val = DB::table('seller')->where('id_users', $id)->first();
+      $userVal = User::getUserById($val->id_users);
       return $userVal; 
     }
 }

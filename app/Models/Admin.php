@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class Admin extends Model
 {
     use HasFactory;
+
     protected $primaryKey = 'id_users';
-    public $table = 'customer';
+    public $table = 'admin';
     protected $fillable = [
-      'id_users',
+        'id_users'
     ];
 
-    public function profile()
+    public function users()
     {
-        return $this->hasOne(User::class, "id");
+        return $this->belongsTo(User::class, "id");
     }
 }

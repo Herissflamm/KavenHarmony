@@ -16,10 +16,10 @@ class CreateNewOrder
     {
         
         $order = Order::create([
-            'shippingPrice' => 0,
-            'totalPrice' => 0,
-            'Customer_User_idUser' => $userId,
-            'OrderStatus_idOrderStatus' => 1
+            'shipping_price' => 0,
+            'total_price' => 0,
+            'id_customer' => $userId,
+            'id_status' => 1
         ]);
 
 

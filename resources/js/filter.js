@@ -38,9 +38,11 @@ async function getAllInstrumentWithPrice(event){
   let type = "";
   let minPrice = document.getElementById("minPrice").value;
   let maxPrice = document.getElementById("maxPrice").value;
+  console.log(maxPrice);
   for(let i = 0; i < allSelectedFilter.length; i++){
     if(allSelectedFilter[i].getAttribute("Name") == 'State'){
       state = allSelectedFilter[i].id;
+
     } 
     if(allSelectedFilter[i].getAttribute("Name") == 'Type'){
       type = allSelectedFilter[i].id;

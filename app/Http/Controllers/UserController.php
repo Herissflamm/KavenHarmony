@@ -21,6 +21,6 @@ class UserController extends Controller
     public function getIdUserConnected(Request $request)
     {
         $user = $request->user();
-        return $user->idUsers;
+        return $user->id;
     }
 }

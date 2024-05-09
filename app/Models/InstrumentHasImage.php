@@ -13,19 +13,28 @@ class InstrumentHasImage extends Model
 {
     use HasFactory;
     public $table = 'instrument_has_image';
-    public $timestamps = false;
 
     protected $fillable = [
-      'Instrument_idInstrument',
-      'Image_idImage'
+      'id_instrument',
+      'id_image'
     ];
 
+    public function image()
+    {
+        return $this->hasOne(Image::class, "id");
+    }
+
+    public function instrument()
+    {
+        return $this->hasOne(Instrument::class, "id");
+    }
+
     public static function getAllImageByInstrumentId($id){
-      $val = DB::table('instrument_has_image')->where('Instrument_idInstrument', $id)->get();
+      $val = DB::table('instrument_has_image')->where('id_instrument', $id)->get();
       $allImage= [];
-      if($val!= null){
+      if(!empty($val)){
         foreach($val as $image){
-          $allImage[] = Image::getImageByID($image->Image_idImage);
+          $allImage[] = Image::getImageByID($image->id_image);
         }
       }
       return $allImage;

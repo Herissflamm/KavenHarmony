@@ -11,12 +11,12 @@ class CreateNewImage
      *
      * @param  array<string, string>  $input
      */
-    public function create(string $input, $id): Image
+    public function create($image, $id): Image
     {   
                        
         $image = Image::create([
-            'path' => $input,
-            'createIdUser' => $id
+            'path' => $image,
+            'id_user' => $id
         ]);
 
         return $image;

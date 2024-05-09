@@ -13,12 +13,21 @@ class InstrumentHasOrder extends Model
 {
     use HasFactory;
     public $table = 'instrument_has_Order';
-    public $timestamps = false;
 
     protected $fillable = [
-      'Instrument_idInstrument',
-      'Order_idOrder'
+      'id_instrument',
+      'id_order'
     ];
+
+    public function order()
+    {
+        return $this->hasOne(Order::class, "id");
+    }
+
+    public function instrument()
+    {
+        return $this->hasOne(Instrument::class, "id");
+    }
 
     public static function getAllInstrumentByOrderId($id){
         $val = DB::table('instrument_has_order')->where('Order_idOrder', $id)->get();
@@ -34,13 +43,13 @@ class InstrumentHasOrder extends Model
 
       public static function getAllInstrumentOfOrderByUserId($id){
         $val = DB::table('instrument_has_order')
-        ->join('order', 'order.idOrder', '=', 'instrument_has_order.Order_idOrder')
-        ->join('users', 'users.idUsers', '=', 'order.Customer_User_idUser')
-        ->where('users.idUsers', $id)->get();
+        ->join('order', 'order.id', '=', 'instrument_has_order.id_order')
+        ->join('customer', 'customer.id_users', '=', 'order.id_customer')
+        ->where('customer.id_users', $id)->get();
         $allInstruments= [];
-        if($val!= null){
+        if(!empty($val)){
           foreach($val as $instrument){
-            $allInstruments[] = Instrument::getInstrumentByID($instrument->Instrument_idInstrument);
+            $allInstruments[] = Instrument::getInstrumentByID($instrument->id_instrument);
           }
         }
         return $allInstruments;
@@ -48,7 +57,7 @@ class InstrumentHasOrder extends Model
       }
 
       public static function deleteInstrumentFromOrder($id){
-        InstrumentHasOrder::where('Instrument_idInstrument', $id)->delete();        
+        InstrumentHasOrder::where('id_instrument', $id)->delete();        
       }
     
 }

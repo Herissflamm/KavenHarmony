@@ -12,17 +12,27 @@ class Sell extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'idSell';
+    protected $primaryKey = 'id';
     public $table = 'sell';
-    public $timestamps = false;
 
     protected $fillable = [
       'price',
+      'id_discount'
     ];
 
+    public function instrument()
+    {
+        return $this->belongsTo(Instrument::class, "id");
+    }
+
+    public function discount()
+    {
+        return $this->hasOne(Discount::class, "id");
+    }
+
     public static function getSellByID($id){
-        $val = DB::table('sell')->where('idSell', $id)->first();
-        $state = new SellBuilder($val->idSell, $val->price);
+        $val = DB::table('sell')->where('id', $id)->first();
+        $state = new SellBuilder($val->id, $val->price);
         return $state;
     }
     

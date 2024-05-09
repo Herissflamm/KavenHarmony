@@ -14,7 +14,7 @@ class ProductController extends Controller
 {
     public function showCreate(Request $request){
         $state = DB::table('state')->get();
-        $allType = DB::table('typeinstrument')->get();
+        $allType = DB::table('type_instrument')->get();
         return view('market/createProduct', ['allState' => $state, 'allType' => $allType]);
     }
 

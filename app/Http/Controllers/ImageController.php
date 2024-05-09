@@ -60,12 +60,12 @@ class ImageController extends Controller
 
         $input = $request->input();
         $sell = $storageSell->create($input);
-        $idsell = $sell->idSell;
-        $idTypeInstrument = DB::table('typeInstrument')->where('type', $input['instrumentType'])->first()->idTypeInstrument;
-        $idState  = DB::table('state')->where('state', $input['state'])->first()->idState;
+        $idSell = $sell->id;
+        $idTypeInstrument = DB::table('type_instrument')->where('type', $input['instrumentType'])->first()->id;
+        $idState  = DB::table('state')->where('state', $input['state'])->first()->id;
         $idProduct = null;
         if($idTypeInstrument != null && $idState != null){
-            $idProduct = $storageProduct ->create($input, $idTypeInstrument, $idState, $idUser, $idsell)->idInstrument;
+            $idProduct = $storageProduct ->create($input, $idTypeInstrument, $idState, $idUser, $idSell)->id;
         }
 
         $i = 0;

@@ -2,25 +2,25 @@
 
 namespace App\Builder;
 
-use App\Models\Adress;
+use App\Models\Address;
 
 class UserBuilder
 {
 
     private int $id;
-    private String $firstName;
-    private String $lastName;
+    private String $first_name;
+    private String $last_name;
     private String $username;
     private String $phone;
     private String $email;
     private String $password;
-    private AdressBuilder $address;
+    private AddressBuilder $address;
 
 
-    public function __construct(int $id, String $firstName, String $lastName, String $username, String $phone, String $email, String $password, AdressBuilder $address){
+    public function __construct(int $id, String $first_name, String $last_name, String $username, String $phone, String $email, String $password, AddressBuilder $address){
         $this->id = $id;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
+        $this->first_name = $first_name;
+        $this->last_name = $last_name;
         $this->username = $username;
         $this->phone = $phone;
         $this->email = $email;
@@ -28,11 +28,11 @@ class UserBuilder
         $this->address = $address;
     }
 
-    public function getLastName(){
-        return $this->lastName;
+    public function getlast_name(){
+        return $this->last_name;
     }
 
-    public function getFirstName(){
-        return $this->firstName;
+    public function getfirst_name(){
+        return $this->first_name;
     }
 }
