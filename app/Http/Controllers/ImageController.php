@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use \Validator;
 use App\Actions\Image\CreateNewImage;
+use App\Actions\Image\CreateInstrumentHasImage;
+use App\Actions\Product\CreateNewSell;
 use App\Actions\Product\CreateNewProduct;
+
 
 use Illuminate\Support\Facades\DB;
 
@@ -30,34 +34,49 @@ class ImageController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-        
-        $imageName = time().'.'.$request->image->extension();  
-         
-        $request->image->move(public_path('images'), $imageName);
-      
+        $input_data = $request->all();
         $storageImage = new CreateNewImage();
-        $userController = new UserController();
+        $storageSell = new CreateNewSell();
         $storageProduct = new CreateNewProduct();
-
+        $instrumentHasImage = new CreateInstrumentHasImage();
+        $userController = new UserController();
         $idUser = $userController->getIdUserConnected($request);
-        
-        $image = $storageImage->create($imageName, $idUser);
 
-        $input = $request->input();
-        $idImage = $image -> idImage;
-        $idTypeInstrument = DB::table('typeInstrument')->where('type', $input['instrumentType'])->first()->idTypeInstrument;
-        $idState  = DB::table('state')->where('state', $input['state'])->first()->idState;
-        if($idTypeInstrument != null && $idState != null){
-            $storageProduct ->create($input, $idImage, $idTypeInstrument, $idState, $idUser);
+        $validator = Validator::make(
+            $input_data['images'], [
+            'images.*' => 'required|mimes:jpg,jpeg,png,bmp|max:20000'
+            ],[
+                'images.*.required' => 'Please upload an image',
+                'images.*.mimes' => 'Only jpeg,png and bmp images are allowed',
+                'images.*.max' => 'Sorry! Maximum allowed size for an image is 20MB',
+            ]
+        );
+        if ($validator->fails()) {
+            return response()->json(array(
+                'success' => false,
+                'errors' => $validator->getMessageBag()->toArray()
+            ) , 400);
         }
 
-        if($image==null){
-            if(file_exists(public_path('upload/bio.png'))){
-                unlink(public_path('upload/bio.png'));
+        $input = $request->input();
+        $sell = $storageSell->create($input);
+        $idSell = $sell->id;
+        $idTypeInstrument = DB::table('type_instrument')->where('type', $input['instrumentType'])->first()->id;
+        $idState  = DB::table('state')->where('state', $input['state'])->first()->id;
+        $idProduct = null;
+        if($idTypeInstrument != null && $idState != null){
+            $idProduct = $storageProduct ->create($input, $idTypeInstrument, $idState, $idUser, $idSell)->id;
+        }
+
+        $i = 0;
+        foreach($request['images'] as $image){            
+            $imageName = $i.time().'.'.$image->extension();  
+            $image->move(public_path('images'), $imageName);
+            $imageId = $storageImage->create($imageName, $idUser)->idImage;
+            if($idProduct != null){
+                $instrumentHasImage->create($idProduct, $imageId);
             }
+            $i++;
         }
         
         return back()

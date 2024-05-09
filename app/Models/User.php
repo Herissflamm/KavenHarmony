@@ -3,10 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Builder\UserBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -18,15 +20,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $primaryKey = 'idUsers';
+    protected $primaryKey = 'id';
     protected $fillable = [
-        'firstName',
-        'lastName',
+        'first_name',
+        'last_name',
         'username',
         'phone',
         'email',
         'password',
-        'Adress_idAdress'
+        'id_address',
+        'id_image'
     ];
 
     /**
@@ -51,6 +54,40 @@ class User extends Authenticatable
 
     public function profile()
     {
-        return $this->hasOne(Adress::class, "idAdress");
+        return $this->hasOne(Address::class, "id");
     }
+
+    public function image()
+    {
+        return $this->hasOne(Image::class, "id");
+    }
+
+    public function hasImage()
+    {
+        return $this->belongsTo(Image::class, "id");
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, "id");
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, "id");
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo(Seller::class, "id");
+    }
+
+    
+    public static function getUSerByID($id){
+        $val = DB::table('users')->where('id', $id)->first();
+        $address = Address::getAddressById($val->id_address);
+        $user = new UserBuilder($val->id , $val->first_name, $val->last_name, $val->username, $val->phone, $val->email, $val->password, $address);
+        return $user;
+      }
+    
 }

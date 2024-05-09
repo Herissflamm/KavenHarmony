@@ -10,7 +10,7 @@
 <div class="container flex flex-col items-center row justify-center col-md-8 card">
   <div class="card-header">
     <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-      <span class="font-medium text-gray-600 dark:text-gray-300">{{ $user->firstName[0].$user->lastName[0] }}</span>
+      <span class="font-medium text-gray-600 dark:text-gray-300">{{ $user->first_name[0].$user->last_name[0] }}</span>
     </div>
   </div>
     <div class="card-body">
@@ -18,12 +18,12 @@
           @csrf
           
           <div class="row mb-3">
-              <label for="firstName" class="col-md-4 col-form-label text-md-end">{{ __('Nom de famille') }} : </label>
+              <label for="first_name" class="col-md-4 col-form-label text-md-end">{{ __('Nom de famille') }} : </label>
 
               <div class="col-md-6">
-                  <input id="firstName" type="text" class="form-control @error('firstName') is-invalid @enderror" name="firstName" value="{{ $user->firstName }}" required autocomplete="firstName" autofocus>
+                  <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ $user->first_name }}" required autocomplete="first_name" autofocus>
 
-                  @error('firstName')
+                  @error('first_name')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                       </span>
@@ -31,12 +31,12 @@
               </div>
           </div>
           <div class="row mb-3">
-            <label for="lastName" class="col-md-4 col-form-label text-md-end">{{ __('Prenom') }} : </label>
+            <label for="last_name" class="col-md-4 col-form-label text-md-end">{{ __('Prenom') }} : </label>
 
             <div class="col-md-6">
-                <input id="lastName" type="text" class="form-control @error('lastName') is-invalid @enderror" name="lastName" value="{{ $user->lastName }}" required autocomplete="lastName" autofocus>
+                <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ $user->last_name }}" required autocomplete="last_name" autofocus>
 
-                @error('lastName')
+                @error('last_name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

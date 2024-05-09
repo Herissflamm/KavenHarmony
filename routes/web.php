@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -25,21 +26,31 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/sell', [ProductController::class, 'show']);
+Route::get('/sell', [ProductController::class, 'showCreate']);
 
-    //return view('market/createProduct');
-//});
 
 Route::post('/newProduct', function (Request $request) {
     $productController = new ProductController();
     $imageController = new ImageController();
     $imageController->store($request);
-    return view('home');
+    return redirect('/search');
 });
 
 Route::get('/buy', function () {
     return view('home');
 });
+
+Route::get('/myBasket', [OrderController::class, 'getMyBasket'])->name("myBasket");
+
+Route::get('/addToBasket', [OrderController::class, 'addToBasket'])->name("addToBasket");
+
+Route::get('/boughtProduct', [OrderController::class, 'getAllOrders']);
+
+Route::get('/soldProduct', [ProductController::class, 'showAllMyProduct']);
+
+Route::get('/filterProduct', [ProductController::class,'filterProduct']);
+
+Route::delete('/deleteFromMyOrder', [OrderController::class,'deleteInstrumentFromOrder']);
 
 Route::get('/account', function (Request $request) {
     $userController = new UserController();
@@ -55,13 +66,13 @@ Route::get('/messaging', function () {
     return view('home');
 });
 
-Route::get('/search', function () {
-    return view('market/listIntrument');
-});
 
-Route::get('/product', function () {
-    return view('market/product');
-});
+Route::get('/search', [ProductController::class, 'showSearch']);
+
+Route::get('/product', function (Request $request) {
+    $productController = new ProductController();
+    return $productController->showProduct($request);
+})->name('product');
 
 Route::get('/about', function () {
     return view('home');
