@@ -6,6 +6,10 @@ export default {
     "./resources/**/*.vue",
   ],
   theme: {
+    fontFamily: {
+      'serif': ['DM Serif Display'],
+      'montserrat': ['Montserrat'],
+    },
     extend: {
       colors: {
         blue: {
@@ -15,8 +19,14 @@ export default {
         red: {
           50 : '#974a59',
         },
-        white: {
-          50 : '#fcebe1',
+        black: {
+          50 : '#04050d',
+        },
+        yellow:{
+          400 : '#ffbf00',
+        },
+        purple:{
+          400 : '#9300a0',
         },
       }
     },

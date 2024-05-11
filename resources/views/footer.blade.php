@@ -1,24 +1,27 @@
-<footer class="bg-white rounded-lg shadow dark:bg-red-100 m-4">
-    <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-        <div class="sm:flex sm:items-center sm:justify-between">
-            <a href="{{ url('/home') }}"> <img src="/images/Plan_de_travail_7.png" class="w-24"/> </a>
-            <ul class="flex flex-wrap items-center mb-6 text-sm font-medium sm:mb-0 ">
+<footer class="bg-black-50 border-gray-200">
+    <div class="w-full max-w-screen-xl mx-auto p-4 grid grid-cols-3 gap-2">
+        <div><img src="/logo/Vinyle.png" class="w-48"/></div>
+        <div class="text-center item-center">
+            <a href="{{ url('/home') }}"> <img src="/logo/Icone.png" class="w-24 m-auto"/> </a>
+            <ul class="text-sm font-serif text-white">
                 <li>
-                    <a href="#" class="hover:underline me-4 md:me-6">About</a>
+                    <a href="#" class="hover:underline me-4 md:me-6">Condition Générales de Location</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+                    <a href="#" class="hover:underline me-4 md:me-6">Mentions légales</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+                    <a href="#" class="hover:underline me-4 md:me-6">Condition d'utilisation</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:underline">Contact</a>
+                    <a href="#" class="hover:underline">Contacts</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline">Tous droits réservés - Kaven Harmony - 2024</a>
                 </li>
             </ul>
         </div>
-        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-        <span class="block text-sm  sm:text-center">© 2024 <a href="{{ url('home') }}" class="hover:underline">Kaven Harmony™</a>. All Rights Reserved.</span>
+        <div><img src="/logo/disques.webp" class="w-48"/></div>
     </div>
 </footer>
 
