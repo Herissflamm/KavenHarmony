@@ -74,6 +74,23 @@ class Instrument extends Model
         return $allInstrument;
     }
 
+    public static function getAllInstrumentWithoutOrder(){
+        $instrumentQuery = DB::table('instrument')
+        ->leftJoin('instrument_has_order', 'instrument_has_order.id_instrument', '=', 'instrument.id')
+        ->whereNull('instrument_has_order.id_instrument')
+        ->get();
+        $allInstrument= [];
+        foreach($instrumentQuery as $instrument){
+            $type = Type::getTypeByID($instrument->id);
+            $seller = Seller::getSellerByID($instrument->id_seller);
+            $image = InstrumentHasImage::getAllImageByInstrumentId($instrument->id);
+            $state = State::getStateByID($instrument->id_state);
+            $sell = Sell::getSellByID($instrument->id_sell);
+            $description = $instrument->description == null ? "" : $instrument->description; 
+            $allInstrument[] = new InstrumentBuilder($instrument->id, $instrument->name, $description, $type, $state, $seller, $image, $sell);
+        }
+        return $allInstrument;
+    }
     public static function getInstrumentByID($id){
         $instrumentQuery = DB::table('instrument')->where('id', $id)->first();
         $type = Type::getTypeByID($instrumentQuery->id_type_instrument);
@@ -99,6 +116,8 @@ class Instrument extends Model
         }
         $allInstrument= [];
         $instrumentQuery = DB::table('instrument')->join('sell', 'sell.id', '=', 'instrument.id_sell' );
+        $instrumentQuery = $instrumentQuery->leftJoin('instrument_has_order', 'instrument_has_order.id_instrument', '=', 'instrument.id');
+        $instrumentQuery = $instrumentQuery->whereNull('instrument_has_order.id_instrument');
         if($typeId != null ){      
             $instrumentQuery = $instrumentQuery->where('id_type_instrument', $typeId);
         }
@@ -130,6 +149,8 @@ class Instrument extends Model
         $instrumentQuery = DB::table('instrument')
             ->join('type_instrument', 'instrument.id_type_instrument', '=', 'type_instrument.id')
             ->join('state', 'instrument.id_state', '=', 'state.id')
+            ->leftJoin('instrument_has_order', 'instrument_has_order.id_instrument', '=', 'instrument.id')
+            ->whereNull('instrument_has_order.id_instrument')
             ->whereAny([
                 'type_instrument.type',
                 'state.state',

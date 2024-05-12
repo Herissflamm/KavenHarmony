@@ -97,36 +97,76 @@ function changeView(data){
   for(let i = 0; i<data.length; i++){
     let div = document.createElement("div");
     div.classList.add("rounded", "overflow-hidden", "shadow-lg", "w-60");
+    div.setAttribute("name", data[i].name);
     divInstrument.appendChild(div);
 
-    let pType = document.createElement("p");
-    pType.classList.add("text-center");
-    pType.innerHTML = data[i].type;
-    div.appendChild(pType);
-
-    let pState = document.createElement("p");
-    pState.classList.add("text-center");
-    pState.innerHTML = data[i].state;
-    div.appendChild(pState);
+    let divImage = document.createElement("div");
+    divImage.classList.add("w-52", "h-52");
+    div.appendChild(divImage);
     if(data[i].image !== null){
       let image = document.createElement("img");
-      image.classList.add("w-24");
+      image.classList.add("w-min-auto");
       image.src = "/images/"+data[i].image;
-      div.appendChild(image);
+      divImage.appendChild(image);
     }
 
-    let pPrice = document.createElement("p");
-    pPrice.classList.add("text-center");
-    pPrice.innerHTML = data[i].price + "€";
-    div.appendChild(pPrice);
+    let divGrid = document.createElement("div");
+    divGrid.classList.add("grid", "grid-cols-2", "pb-2");
+    div.appendChild(divGrid);
 
-    let button = document.createElement("a");
-    button.classList.add("block", "px-2", "py-3", "text-center", "rounded-lg", "dark:bg-red-50", "m-auto");
-    button.innerHTML = "Voir l'instrument";
-    let href =route('product', {id : data[i].id});
-    button.href = href;
-    div.appendChild(button);
+    let divAttribute = document.createElement("div");
+    divAttribute.classList.add("text-left");
+    divGrid.appendChild(divAttribute);
+
+    let pName = document.createElement("p");
+    pName.innerHTML = data[i].name;
+    divAttribute.appendChild(pName);
+
+    let pPrice = document.createElement("p");
+    pPrice.innerHTML = data[i].price + "€";
+    divAttribute.appendChild(pPrice);
+
+    let divBasket = document.createElement("div");
+    divBasket.classList.add("rounded-full", "block", "text-purple-400", "bg-white", "flex", "justify-end", "items-center", "p-1");
+    divGrid.appendChild(divBasket);
+
+    let basket = document.createElement("a");
+    let href =route('addToBasket', {id : data[i].id});
+    basket.href = href;
+    divBasket.appendChild(basket);
     
+    let divIconBasket = document.createElement("div");
+    divIconBasket.classList.add("relative");
+    basket.appendChild(divIconBasket);
+
+    let basketIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    basketIcon.classList.add("file:", "h-6", "w-6");
+    basketIcon.setAttribute("fill", "none");
+    basketIcon.setAttribute("viewBox", "0 0 24 24");
+    basketIcon.setAttribute("stroke-width", "1.5");
+    basketIcon.setAttribute("stroke", "currentColor");
+    divIconBasket.appendChild(basketIcon);
+
+    let pathIcon = document.createElementNS("http://www.w3.org/2000/svg","path");
+    pathIcon.setAttribute("stroke-linecap", "round");
+    pathIcon.setAttribute("stroke-linejoin", "round");
+    pathIcon.setAttribute("d", "M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z");
+    basketIcon.appendChild(pathIcon);
+
+    let divButton = document.createElement("div");
+    divButton.classList.add("flex", "justify-center");
+    div.appendChild(divButton);
+
+    let aButton = document.createElement("a");
+    let hrefButton =route('product', {id : data[i].id});
+    aButton.href = hrefButton;
+    divButton.appendChild(aButton);
+
+    let button = document.createElement("button");
+    button.classList.add("rounded-full", "bg-yellow-400", "p-1", "pl-2", "pr-2");
+    button.innerHTML = "Voir l'instrument";
+    aButton.appendChild(button);
+
   }
 }
 

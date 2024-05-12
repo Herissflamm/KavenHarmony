@@ -23,7 +23,7 @@ class ProductController extends Controller
         if($request->searchValue != null){
             $instruments = Instrument::getAllInstrumentWithSearch($request->searchValue);
         }else{
-            $instruments = Instrument::getAllInstrument();
+            $instruments = Instrument::getAllInstrumentWithOutOrder();
         }
         $allState = State::getAllState();
         $allType = Type::getAllType();
@@ -62,6 +62,7 @@ class ProductController extends Controller
         {
             if( $instrument->getImage() === null){
                 $allInstruments[] = [
+                    'name' => $instrument->getName(),
                     'type' => $instrument->getType()->getType(),
                     'state' => $instrument->getState()->getState(),
                     'price' => $instrument->getSell()->getPrice(),
@@ -71,6 +72,7 @@ class ProductController extends Controller
                 ];
             }else{
                 $allInstruments[] = [
+                    'name' => $instrument->getName(),
                     'type' => $instrument->getType()->getType(),
                     'state' => $instrument->getState()->getState(),
                     'price' => $instrument->getSell()->getPrice(),
