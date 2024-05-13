@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Address extends Model
 {
@@ -24,8 +23,4 @@ class Address extends Model
         return $this->belongsTo(User::class, "id");
     }
 
-    public static function getAddressById($id){
-        $val = DB::table('address')->where('id',$id)->first();
-        return $val;
-    }
 }

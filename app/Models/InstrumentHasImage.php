@@ -27,11 +27,5 @@ class InstrumentHasImage extends Pivot
     {
         return $this->belongsTo(Instrument::class, "id");
     }
-
-    public static function getAllImageByInstrumentId($id){
-      $val = self::with('image')->where('id_instrument', $id)->get();
-      return $val;
-      
-    }
     
 }

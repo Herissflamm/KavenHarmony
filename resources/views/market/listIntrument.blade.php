@@ -96,7 +96,7 @@
         <div class="grid grid-cols-2 pb-2">
           <div class="text-left">
             <p class="">{{ $instrument->type_instrument->type }}</p>
-            <p class="">{{ $instrument->type_instrument->type}} €</p>
+            <p class="">{{ $instrument->sell->price}} €</p>
           </div>
           <div class="rounded-full text-purple-400 bg-white flex justify-end items-center p-1">
             <a href="{{ route('addToBasket', ['id' => $instrument->id]) }}">

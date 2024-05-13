@@ -86,11 +86,4 @@ class User extends Authenticatable
         return $this->belongsTo(Seller::class, "id");
     }
     
-
-    
-    public static function getUSerByID($id){
-        $val = self::with('address')->where('id', $id)->first();
-        return $val;
-      }
-    
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
   
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use \Validator;
@@ -39,8 +40,7 @@ class ImageController extends Controller
         $storageSell = new CreateNewSell();
         $storageProduct = new CreateNewProduct();
         $instrumentHasImage = new CreateInstrumentHasImage();
-        $userController = new UserController();
-        $idUser = $userController->getIdUserConnected($request);
+        $userId = Auth::id();
 
         $validator = Validator::make(
             $input_data['images'], [
@@ -65,14 +65,14 @@ class ImageController extends Controller
         $idState  = DB::table('state')->where('state', $input['state'])->first()->id;
         $idProduct = null;
         if($idTypeInstrument != null && $idState != null){
-            $idProduct = $storageProduct ->create($input, $idTypeInstrument, $idState, $idUser, $idSell)->id;
+            $idProduct = $storageProduct ->create($input, $idTypeInstrument, $idState, $userId, $idSell)->id;
         }
 
         $i = 0;
         foreach($request['images'] as $image){            
             $imageName = $i.time().'.'.$image->extension();  
             $image->move(public_path('images'), $imageName);
-            $imageId = $storageImage->create($imageName, $idUser)->idImage;
+            $imageId = $storageImage->create($imageName, $userId)->idImage;
             if($idProduct != null){
                 $instrumentHasImage->create($idProduct, $imageId);
             }

@@ -38,9 +38,4 @@ class Image extends Model
         return $this->hasMany(InstrumentHasImage::class, 'id_image');
     }
 
-
-    public static function getImageByID($id){
-        $val = self::with('user')->where('id', $id)->first();
-        return $val;
-    }
 }
