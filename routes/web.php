@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Middleware\IsConnected;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,10 +53,7 @@ Route::get('/filterProduct', [ProductController::class,'filterProduct']);
 
 Route::delete('/deleteFromMyOrder', [OrderController::class,'deleteInstrumentFromOrder']);
 
-Route::get('/account', function (Request $request) {
-    $userController = new UserController();
-    return $userController->showMyAccount($request);
-});
+Route::get('/account',  [UserController::class, 'showMyAccount'])->middleware(IsConnected::class);
 
 Route::get('/modifyAccount', function (Request $request) {
     $userController = new UserController();

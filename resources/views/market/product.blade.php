@@ -14,12 +14,12 @@
     </p>
   </a> 
 </div>
-<h1 class="font-montserrat font-bold pl-20 text-xl">{{$instrument->getName()}}</h1>
+<h1 class="font-montserrat font-bold pl-20 text-xl">{{$instrument->name}}</h1>
 <div class="grid grid-cols-2 gap-28">
   <div class="bg-purple-400 rounded-r-lg text-white">
     <h1 class="text-xl font-montserrat font-bold pl-20">Description</h1>
     <br>
-    <p class="pl-20 p-5 text-ellipsis overflow-auto max-h-96">{{$instrument->getDescription()}}</p>
+    <p class="pl-20 p-5 text-ellipsis overflow-auto max-h-96">{{$instrument->description}}</p>
   </div>
   <div>
     <div class="rounded border-2 bg-yellow-400 grid grid-cols-2">
@@ -29,9 +29,9 @@
         </svg>
       </div>
       <div>
-        <h1 class="text-white text-6xl font-montserrat">{{$instrument->getSeller()->getlast_name()}} {{$instrument->getSeller()->getfirst_name()[0]}}.</h1>
-        <div class="text-purple-400 border-2 w-24 rounded-full items-center bg-white flex items-center justify-center">
-          <a href="{{ route('addToBasket', ['id' => $instrument->getId()]) }}">
+        <h1 class="text-white text-6xl font-montserrat">{{$instrument->seller->last_name}} {{$instrument->seller->first_name[0]}}.</h1>
+        <div class="text-purple-400 border-2 w-24 rounded-full items-center bg-white flex justify-center">
+          <a href="{{ route('addToBasket', ['id' => $instrument->id]) }}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="file: h-16 w-16">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
@@ -41,24 +41,24 @@
     </div>
   </div>
 </div>
-@foreach ($instrument->getImage() as $image)
+@foreach ($instrument->image as $image)
 <div>
-  <img src="/images/{{$image->getPath()}}"/>
+  <img src="/images/{{$image->path}}"/>
 </div>
 @endforeach
 <div>
   <h2>Description</h2>
-  <p>{{$instrument->getDescription()}}</p>
+  <p>{{$instrument->description}}</p>
 </div>
 <div>
   Etat
   <br>
-  {{$instrument->getState()->getState()}}
+  {{$instrument->state->state}}
 </div>
 <div>
   Prix : 
   <br>
-  {{$instrument->getSell()->getPrice()}}
+  {{$instrument->sell->price}}
 </div>
 @include('footer')
 </body>

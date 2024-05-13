@@ -65,8 +65,8 @@
         <li>
           <ul role="list" class="px-2 py-3">Type
           @foreach ($allType as $type)
-            <li class="font-normal" id="{{ $type->getType() }}" name="Type">
-              {{$type->getType()}}
+            <li class="font-normal" id="{{ $type->type }}" name="Type">
+              {{$type->type}}
             </li>
           @endforeach
           </ul>
@@ -74,8 +74,8 @@
         <li>
           <ul role="list" class="px-2 py-3">Etat
           @foreach ($allState as $state)
-            <li class="font-normal" id="{{ $state->getState() }}" name="State">
-              {{$state->getState()}}
+            <li class="font-normal" id="{{ $state->state }}" name="State">
+              {{$state->state}}
             </li>
           @endforeach
           </ul>
@@ -87,19 +87,19 @@
     <h1 class="text-xl p-10">Derniers ajouts</h1>
     <div class="grid grid-cols-4 gap-2 object-center" id="allInstrument">
       @foreach ($instruments as $instrument)
-      <div class="rounded overflow-hidden shadow-lg w-60" name="{{ $instrument->getName() }}">
+      <div class="rounded overflow-hidden shadow-lg w-60" name="{{ $instrument->name }}">
         <div class="w-52 h-52">
-        @if($instrument->getImage()!=null)
-            <img src="/images/{{$instrument->getImage()[0]->getPath()}}" class="w-min-auto"/>
+        @if($instrument->image!=null)
+            <img src="/images/{{$instrument->image[0]->path}}" class="w-min-auto"/>
           @endif
         </div>
         <div class="grid grid-cols-2 pb-2">
           <div class="text-left">
-            <p class="">{{ $instrument->getType()->getType() }}</p>
-            <p class="">{{ $instrument->getSell()->getPrice()}} €</p>
+            <p class="">{{ $instrument->type_instrument->type }}</p>
+            <p class="">{{ $instrument->type_instrument->type}} €</p>
           </div>
-          <div class="rounded-full block text-purple-400 bg-white flex justify-end items-center p-1">
-            <a href="{{ route('addToBasket', ['id' => $instrument->getId()]) }}">
+          <div class="rounded-full text-purple-400 bg-white flex justify-end items-center p-1">
+            <a href="{{ route('addToBasket', ['id' => $instrument->id]) }}">
               <div class="relative">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="file: h-6 w-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
@@ -109,7 +109,7 @@
           </div>
         </div>
         <div class="flex justify-center">
-          <a  href="{{ route('product', ['id' => $instrument->getId()]) }}">
+          <a  href="{{ route('product', ['id' => $instrument->id]) }}">
             <button class="rounded-full bg-yellow-400 p-1 pl-2 pr-2">
               Voir l'instrument
             </button>     

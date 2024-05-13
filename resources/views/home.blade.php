@@ -24,15 +24,15 @@
     <div class = "grid grid-cols-2 gap-3 place-items-center font-montserrat">
         <a href="{{ url('/home') }}"> 
             <div class="relative max-w-xl mx-auto mt-20">
-                <img src="/logo/piano.jpeg" class="h-64 w-full object-cover rounded-md"/>
+                <img src="/logo/piano.jpeg" class="h-2/5 w-full object-cover rounded-md"/>
                 <div class="absolute inset-0 flex items-center justify-center">
                     <p class="text-white text-3xl font-bold">Location</p>
                 </div>
             </div>
         </a>
-        <a href="{{ url('/home') }}"> 
+        <a href="{{ url('/search') }}"> 
             <div class="relative max-w-xl mx-auto mt-20">
-                <img src="/logo/piano.jpeg" class="h-64 w-full object-cover rounded-md"/>
+                <img src="/logo/guitare.jpeg" class="h-2/5 w-full object-cover rounded-md"/>
                 <div class="absolute inset-0 flex items-center justify-center">
                     <p class="text-white text-3xl font-bold">Achat</p>
                 </div>
@@ -40,40 +40,40 @@
         </a>
     </div>
     <br>
-    <div class="grid grid-cols-4 gap-2">
+    <div class="grid grid-cols-4 gap-1 ml-20">
         <div>
-            <img src="/logo/ordit.webp" class=""/>
+            <img src="/logo/ordit.webp" class="w-3/5"/>
         </div>
         <div>
-            <img src="/logo/carton.webp" class=""/>
+            <img src="/logo/carton.webp" class="w-3/5"/>
         </div>
         <div>
-            <img src="/logo/louer.webp" class=""/>
+            <img src="/logo/louer.webp" class="w-3/5"/>
         </div>
         <div>
-            <img src="/logo/jouer.webp" class=""/>
+            <img src="/logo/jouer.webp" class="w-3/5"/>
         </div>        
     </div>
-    <div class="">
+    <div class="ml-20">
         <h1 class="font-montserrat font-bold">Nos actualités</h1>
         <div class="grid grid-cols-4 gap-2">
-            <div class="font-serif  m-auto">
-                <img src="/logo/partition.jpeg" class="w-48"/>
+            <div class="font-serif">
+                <img src="/logo/partition.jpeg" class="w-3/5"/>
                 <h2>Lire une tablature</h2>
                 <p clas="text-xs">Date de publication : 01/03/2024</p>
             </div>
             <div class="font-serif  m-auto">
-                <img src="/logo/kazoo.png" class="w-48"/>
+                <img src="/logo/kazoo.png" class="w-3/5"/>
                 <h2>Le Kazoo</h2>
                 <p clas="text-xs">Date de publication : 20/12/2023</p>
             </div>
             <div class="font-serif  m-auto">
-                <img src="/logo/piano.jpeg" class="w-48"/>
+                <img src="/logo/piano.jpeg" class="w-3/5"/>
                 <h2>Le Piano quand t'as pas..</h2>
                 <p clas="text-xs">Date de publication : 06/06/2024</p>
             </div>
             <div class="font-serif  m-auto">
-                <img src="/logo/trompette.jpeg" class="w-48"/>
+                <img src="/logo/trompette.jpeg" class="w-3/5"/>
                 <h2>Saxophone vs Tropett..</h2>
                 <p clas="text-xs">Date de publication : 15/05/2024</p>
             </div>  

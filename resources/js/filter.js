@@ -103,10 +103,10 @@ function changeView(data){
     let divImage = document.createElement("div");
     divImage.classList.add("w-52", "h-52");
     div.appendChild(divImage);
-    if(data[i].image !== null){
+    if(data[i].image[0] !== null){
       let image = document.createElement("img");
       image.classList.add("w-min-auto");
-      image.src = "/images/"+data[i].image;
+      image.src = "/images/"+data[i].image[0].path;
       divImage.appendChild(image);
     }
 
@@ -127,7 +127,7 @@ function changeView(data){
     divAttribute.appendChild(pPrice);
 
     let divBasket = document.createElement("div");
-    divBasket.classList.add("rounded-full", "block", "text-purple-400", "bg-white", "flex", "justify-end", "items-center", "p-1");
+    divBasket.classList.add("rounded-full", "text-purple-400", "bg-white", "flex", "justify-end", "items-center", "p-1");
     divGrid.appendChild(divBasket);
 
     let basket = document.createElement("a");
