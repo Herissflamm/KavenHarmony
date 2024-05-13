@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Builder\InstrumentBuilder;
-use App\Builder\StateBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -24,14 +22,24 @@ class Instrument extends Model
         'id_rent'
     ];
 
+    public function image()
+    {
+        return $this->belongsToMany(Image::class, 'instrument_has_image', 'id_instrument', 'id_image')->using(InstrumentHasImage::class);
+    }
+
     public function instrument_has_image()
     {
-        return $this->belongsTo(InstrumentHasImage::class, "id");
+        return $this->hasMany(InstrumentHasImage::class, 'id_instrument');
+    }
+
+    public function order()
+    {
+        return $this->belongsToMany(Order::class, 'instrument_has_order', 'id_instrument', 'id_order')->using(InstrumentHasOrder::class);
     }
 
     public function instrument_has_order()
     {
-        return $this->belongsTo(InstrumentHasOrder::class, "id");
+        return $this->hasMany(InstrumentHasOrder::class, 'id_instrument');
     }
 
     public function rent()
@@ -60,47 +68,19 @@ class Instrument extends Model
     }
 
     public static function getAllInstrument(){
-        $instrumentQuery = DB::table('instrument')->get();
-        $allInstrument= [];
-        foreach($instrumentQuery as $instrument){
-            $type = Type::getTypeByID($instrument->id);
-            $seller = Seller::getSellerByID($instrument->id_seller);
-            $image = InstrumentHasImage::getAllImageByInstrumentId($instrument->id);
-            $state = State::getStateByID($instrument->id_state);
-            $sell = Sell::getSellByID($instrument->id_sell);
-            $description = $instrument->description == null ? "" : $instrument->description; 
-            $allInstrument[] = new InstrumentBuilder($instrument->id, $instrument->name, $description, $type, $state, $seller, $image, $sell);
-        }
-        return $allInstrument;
+        return self::with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')->get()->first();       
     }
 
     public static function getAllInstrumentWithoutOrder(){
-        $instrumentQuery = DB::table('instrument')
+        $instrumentQuery = self::with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')
         ->leftJoin('instrument_has_order', 'instrument_has_order.id_instrument', '=', 'instrument.id')
         ->whereNull('instrument_has_order.id_instrument')
         ->get();
-        $allInstrument= [];
-        foreach($instrumentQuery as $instrument){
-            $type = Type::getTypeByID($instrument->id);
-            $seller = Seller::getSellerByID($instrument->id_seller);
-            $image = InstrumentHasImage::getAllImageByInstrumentId($instrument->id);
-            $state = State::getStateByID($instrument->id_state);
-            $sell = Sell::getSellByID($instrument->id_sell);
-            $description = $instrument->description == null ? "" : $instrument->description; 
-            $allInstrument[] = new InstrumentBuilder($instrument->id, $instrument->name, $description, $type, $state, $seller, $image, $sell);
-        }
-        return $allInstrument;
+        return $instrumentQuery;
     }
     public static function getInstrumentByID($id){
-        $instrumentQuery = DB::table('instrument')->where('id', $id)->first();
-        $type = Type::getTypeByID($instrumentQuery->id_type_instrument);
-        $seller = Seller::getSellerByID($instrumentQuery->id_seller);
-        $image = InstrumentHasImage::getAllImageByInstrumentId($instrumentQuery->id);
-        $state = State::getStateByID($instrumentQuery->id_state);
-        $sell = Sell::getSellByID($instrumentQuery->id_sell);
-        $description = $instrumentQuery->description == null ? "" : $instrumentQuery->description; 
-        $instrument = new InstrumentBuilder($instrumentQuery->id, $instrumentQuery->name, $description, $type, $state, $seller, $image, $sell);
-        return $instrument;
+        $instrumentQuery = self::with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')->where('id', $id)->first();
+        return $instrumentQuery;
     }
 
     public static function getInstrumentsByFilter($state, $type, $minPrice, $maxPrice){
@@ -108,14 +88,13 @@ class Instrument extends Model
         $typeId = null;
         if($state != null){
             $stateFilter = State::getStateByStateName($state);
-            $stateId = $stateFilter->getId();
+            $stateId = $stateFilter->id;
         }
         if($type != null){
             $typeFilter = Type::getTypeByTypeName($type);
-            $typeId = $typeFilter->getId();
+            $typeId = $typeFilter->id;
         }
-        $allInstrument= [];
-        $instrumentQuery = DB::table('instrument')->join('sell', 'sell.id', '=', 'instrument.id_sell' );
+        $instrumentQuery = self::with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')->join('sell', 'sell.id', '=', 'instrument.id_sell' );
         $instrumentQuery = $instrumentQuery->leftJoin('instrument_has_order', 'instrument_has_order.id_instrument', '=', 'instrument.id');
         $instrumentQuery = $instrumentQuery->whereNull('instrument_has_order.id_instrument');
         if($typeId != null ){      
@@ -128,25 +107,15 @@ class Instrument extends Model
             $instrumentQuery = $instrumentQuery->where('sell.price', '>=', $minPrice)->where('sell.price', '<=', $maxPrice);
         }
         $instrumentQuery = $instrumentQuery->get();
-        if($instrumentQuery!=null){
-            foreach($instrumentQuery as $instrument){
-                $type = Type::getTypeByID($instrument->id_type_instrument);
-                $seller = Seller::getSellerByID($instrument->id_seller);
-                $image = InstrumentHasImage::getAllImageByInstrumentId($instrument->id);
-                $state = State::getStateByID($instrument->id_state);
-                $sell = Sell::getSellByID($instrument->id_sell);
-                $description = $instrument->description == null ? "" : $instrument->description; 
-                $allInstrument[] = new InstrumentBuilder($instrument->id, $instrument->name, $description, $type, $state, $seller, $image, $sell);
-            }
-        }
-        return $allInstrument;
+        
+        return $instrumentQuery;
     }
 
 
     public static function getAllInstrumentWithSearch($value){ 
         $allInstrument= [];
         $instrumentQuery = null;
-        $instrumentQuery = DB::table('instrument')
+        $instrumentQuery = self::with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')
             ->join('type_instrument', 'instrument.id_type_instrument', '=', 'type_instrument.id')
             ->join('state', 'instrument.id_state', '=', 'state.id')
             ->leftJoin('instrument_has_order', 'instrument_has_order.id_instrument', '=', 'instrument.id')
@@ -157,49 +126,21 @@ class Instrument extends Model
                 'instrument.name',
             ], 'LIKE', '%'.$value.'%')
             ->get();
-        if($instrumentQuery!=null){
-            foreach($instrumentQuery as $instrument){
-                $type = Type::getTypeByID($instrument->id_type_instrument);
-                $seller = Seller::getSellerByID($instrument->id_seller);
-                $image = InstrumentHasImage::getAllImageByInstrumentId($instrument->id);
-                $state = State::getStateByID($instrument->id_state);
-                $sell = Sell::getSellByID($instrument->id_sell);
-                $description = $instrument->description == null ? "" : $instrument->description; 
-                $allInstrument[] = new InstrumentBuilder($instrument->id, $instrument->name, $description, $type, $state, $seller, $image, $sell);
-                
-            }
-        }
-        return $allInstrument;
+        return $instrumentQuery;
     }
 
     public static function getInstrumentBySeller($id){
-        $instrumentQuery = DB::table('instrument')->where('id_seller', '=', $id)->get();
-        $allInstrument= [];
-        foreach($instrumentQuery as $instrument){
-            $type = Type::getTypeByID($instrument->id_type_instrument);
-            $seller = Seller::getSellerByID($instrument->id_seller);
-            $image = InstrumentHasImage::getAllImageByInstrumentId($instrument->id);
-            $state = State::getStateByID($instrument->id_state);
-            $sell = Sell::getSellByID($instrument->id_sell);
-            $description = $instrument->description == null ? "" : $instrument->description; 
-            $allInstrument[] = new InstrumentBuilder($instrument->id, $instrument->name, $description, $type, $state, $seller, $image, $sell);
-        }
-        return $allInstrument;
+        $instrumentQuery = self::with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')
+        ->where('id_seller', '=', $id)->get();
+        return $instrumentQuery;
     }
     
     public static function getInstrumentByOrderId($id){
-        $instrumentQuery = DB::table('instrument')
+        $instrumentQuery = self::with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')
         ->join('instrument_has_order', 'instrument_has_order.Instrument_idInstrument', '=', 'instrument.idInstrument')
         ->where('instrument_has_order.Order_idOrder', '=', $id)
         ->get()
         ->first();
-        $type = Type::getTypeByID($instrumentQuery->id_type_instrument);
-        $seller = Seller::getSellerByID($instrumentQuery->id_seller);
-        $image = InstrumentHasImage::getAllImageByInstrumentId($instrumentQuery->id);
-        $state = State::getStateByID($instrumentQuery->id_state);
-        $sell = Sell::getSellByID($instrumentQuery->id_sell);
-        $description = $instrumentQuery->description == null ? "" : $instrumentQuery->description; 
-        $instrument = new InstrumentBuilder($instrumentQuery->id, $instrumentQuery->name, $description, $type, $state, $seller, $image, $sell);
-        return $instrument;
+        return $instrumentQuery;
     }
 }

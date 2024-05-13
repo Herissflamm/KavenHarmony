@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Builder\TypeBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -23,24 +22,18 @@ class Type extends Model
     }
 
     public static function getAllType(){
-        $TypeQuery = DB::table('type_instrument')->get();
-        $allType = [];
-        foreach($TypeQuery as $type){
-            $allType[] = new TypeBuilder($type->id, $type->type);
-        }
-        return $allType;
+        $typeQuery = DB::table('type_instrument')->get();
+        return $typeQuery;
     }
 
     public static function getTypeByID($id){
         $val = DB::table('type_instrument')->where('id', $id)->first();
-        $type = new TypeBuilder($val->id, $val->type);
-        return $type;
+        return $val;
     }
 
     public static function getTypeByTypeName($type){
         $val = DB::table('type_instrument')->where('type', $type)->first();
-        $type = new TypeBuilder($val->id, $val->type);
-        return $type;
+        return $val;
     }
 
 }

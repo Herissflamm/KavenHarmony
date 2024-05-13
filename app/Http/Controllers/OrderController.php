@@ -17,7 +17,7 @@ class OrderController extends Controller
         $userId = $userController->getIdUserConnected($request);
         $orderOpen = Order::getLastOpenOrderOfUser($userId);
         $instrument = Instrument::getInstrumentByID($request->id);
-        $instrumentId = $instrument->getId();
+        $instrumentId = $instrument->id;
         if($orderOpen == null){
             $orderStorage = new CreateNewOrder();
             $order = $orderStorage->create($request->input(), $userId);

@@ -29,8 +29,8 @@ class ProductController extends Controller
         $allType = Type::getAllType();
         $biggestPrice = 0;
         foreach($instruments as $instrument){
-            if($biggestPrice < $instrument->getSell()->getPrice()){
-                $biggestPrice = $instrument->getSell()->getPrice();
+            if($biggestPrice < $instrument->sell->price){
+                $biggestPrice = $instrument->sell->price;
             }
         }
         return view('market/listIntrument', ['allState' => $allState, 'allType' => $allType, 'instruments' => $instruments, 'biggestPrice'=>$biggestPrice]);
@@ -57,33 +57,8 @@ class ProductController extends Controller
 
     public function filterProduct(Request $request){
         $instrumentQuery = Instrument::getInstrumentsByFilter($request->state, $request->type, $request->minPrice, $request->maxPrice);
-        $allInstruments = [];
-        foreach ($instrumentQuery as $instrument)
-        {
-            if( $instrument->getImage() === null){
-                $allInstruments[] = [
-                    'name' => $instrument->getName(),
-                    'type' => $instrument->getType()->getType(),
-                    'state' => $instrument->getState()->getState(),
-                    'price' => $instrument->getSell()->getPrice(),
-                    'description' => $instrument->getDescription(),
-                    'id' => $instrument->getId(),
-                    'image' => null,
-                ];
-            }else{
-                $allInstruments[] = [
-                    'name' => $instrument->getName(),
-                    'type' => $instrument->getType()->getType(),
-                    'state' => $instrument->getState()->getState(),
-                    'price' => $instrument->getSell()->getPrice(),
-                    'description' => $instrument->getDescription(),
-                    'id' => $instrument->getId(),
-                    'image' => $instrument->getImage()[0]->getPath(),
-                ];
-            }
-        }
         if($instrumentQuery != null){
-            return $allInstruments;
+            return $instrumentQuery ;
         }else{
             return "";
         }

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Builder\ImageBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +11,7 @@ class Image extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'idImage';
+    protected $primaryKey = 'id';
     public $table = 'image';
     protected $fillable = [
         'path',
@@ -24,15 +23,24 @@ class Image extends Model
         return $this->belongsTo(Seller::class, "id_users");
     }
 
-    public function instrument_has_image()
+    public function user()
     {
-        return $this->belongsTo(InstrumentHasImage::class, "id");
+        return $this->hasOne(User::class, "id");
     }
 
+    public function instrument()
+    {
+        return $this->belongsToMany(Image::class, 'instrument_has_image', 'id_image', 'id_instrument')->using(InstrumentHasImage::class);
+    }
+
+    public function instrument_has_image()
+    {
+        return $this->hasMany(InstrumentHasImage::class, 'id_image');
+    }
+
+
     public static function getImageByID($id){
-        $val = DB::table('image')->where('id', $id)->first();
-        $user = User::getUSerByID($val->id_user);
-        $type = new ImageBuilder($val->id, $val->path, $user);
-        return $type;
+        $val = self::with('user')->where('id', $id)->first();
+        return $val;
     }
 }
