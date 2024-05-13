@@ -21,15 +21,23 @@
     <br>
     <p class="pl-20 p-5 text-ellipsis overflow-auto max-h-96">{{$instrument->getDescription()}}</p>
   </div>
-  <div class="rounded border-2 bg-yellow-400">
-    <img src="/images/Plan_de_travail_7-100.jpg" class="rounded-full"/>
-    <h1 class="text-white text-6xl font-montserrat">{{$instrument->getSeller()->getlast_name()}} {{$instrument->getSeller()->getfirst_name()}}</h1>
-    <div class="text-purple-400 border-2 w-24 rounded-full items-center bg-white flex items-center justify-center">
-      <a href="{{ route('addToBasket', ['id' => $instrument->getId()]) }}">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="file: h-16 w-16">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+  <div>
+    <div class="rounded border-2 bg-yellow-400 grid grid-cols-2">
+      <div class="relative w-128 h-5/6 m-2 overflow-hidden bg-white rounded-full">
+        <svg class="absolute w-5/6 h-5/6 text-yellow-400 left-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
         </svg>
-      </a>
+      </div>
+      <div>
+        <h1 class="text-white text-6xl font-montserrat">{{$instrument->getSeller()->getlast_name()}} {{$instrument->getSeller()->getfirst_name()[0]}}.</h1>
+        <div class="text-purple-400 border-2 w-24 rounded-full items-center bg-white flex items-center justify-center">
+          <a href="{{ route('addToBasket', ['id' => $instrument->getId()]) }}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="file: h-16 w-16">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+            </svg>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -11,6 +11,9 @@ export default {
       'montserrat': ['Montserrat'],
     },
     extend: {
+      width: {
+        '128': '28%',
+      },
       colors: {
         blue: {
           50 : '#82b8d9',
