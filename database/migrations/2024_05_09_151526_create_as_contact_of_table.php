@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('as_contact_of', function (Blueprint $table) {
-            $table->id();
 
             $table->unsignedBigInteger('id_teacher'); 
             $table->foreign('id_teacher')->references('id_users')->on('teacher');

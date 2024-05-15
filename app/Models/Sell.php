@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use App\Builder\SellBuilder;
 
 
 class Sell extends Model
@@ -32,8 +31,7 @@ class Sell extends Model
 
     public static function getSellByID($id){
         $val = DB::table('sell')->where('id', $id)->first();
-        $state = new SellBuilder($val->id, $val->price);
-        return $state;
+        return $val;
     }
     
 }

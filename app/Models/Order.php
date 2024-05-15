@@ -30,9 +30,9 @@ class Order extends Model
         return $this->hasOne(Customer::class, "id_users");
     }
 
-    public function order()
+    public function instrument()
     {
-        return $this->hasOne(Order::class, "id");
+        return $this->belongsToMany(Order::class, 'instrument_has_order', 'id_order', 'id_instrument')->using(InstrumentHasOrder::class);
     }
 
     public static function getLastOpenOrderOfUser($idUser){

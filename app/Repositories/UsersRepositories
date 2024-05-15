@@ -1,0 +1,13 @@
+<?php
+ 
+namespace App\Repositories;
+ 
+use Illuminate\Support\Facades\DB;
+ 
+class UsersRepositories
+{
+  public static function getUSerByID($id){
+    $val = DB::with('address')->where('id', $id)->first();
+    return $val;
+  }
+}

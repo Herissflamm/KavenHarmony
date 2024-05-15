@@ -5,23 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @vite('resources/css/app.css')
 </head>
-<body class = "dark:bg-white-50">
+<body class = "dark:bg-white-50 overflow-x-hidden">
 @include('navbar')
-    <h1 class="text-center font-bold ">
-        KavenHarmony
-    </h1>
-    
-    <div class = "grid grid-cols-2 gap-3 place-items-center">
-        <div class="max-w-sm rounded overflow-hidden shadow-lg">
-            <p class="text-center px-6 pt-4 pb-2">Classe</p>
-            <p class="text-center px-6 pt-4 pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam posuere dignissim ante id rhoncus. Aliquam quis pulvinar libero. Integer id nibh vitae nisi luctus commodo id at eros. Morbi non nulla eu felis viverra placerat. Vivamus semper felis sit amet egestas egestas. Donec hendrerit mauris eget nisi porttitor imperdiet. Aenean.</p>
-        </div>
-        <div class="max-w-sm rounded overflow-hidden shadow-lg">
-            <p class="text-center px-6 pt-4 pb-2">Achat et revente</p>
-            <p class="text-center px-6 pt-4 pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut sapien vitae elit laoreet ornare ut et eros. Aenean vel magna malesuada, congue nunc vitae, ultrices ipsum. Proin porta felis id tempor feugiat. Nam eu ipsum nisl. Duis dignissim dolor eu metus ultricies, in molestie magna efficitur. Nam ut dapibus.</p>
+<div>
+    <img src="/logo/disquejaune.png" class="absolute top-20 -right-40">
+
+    <img src="/logo/disquerouge.png" class="absolute top-1/3  -left-40">
+
+    <div class="w-2/5 m-auto relative">
+        <h1 class="text-2xl text-center font-bold font-montserrat">
+            Bienvenue sur notre plateforme !
+        </h1>
+        <div class="font-serif text-lg">
+        <p>Kaven Harmony est une platfeforme consacrée au partage de la musique. Vous pourrez ici louer vos instruments de musique ou bien prendre contact avec des professeurs pour apprendre à jouer d'un instrument.</p>
+        <br>
+        <p>Grâce à la location, réservez des instruments à prix moindre pour une durée déterminée.</p>     
+        <p>Vous pouvez également acheter directement des instruments et des accessoires de musique via le catalogue.</p>
+        <br>
+        <p>Si vous souhaitez apprendre à jouer d'un instrument, Kaven Harmony vous propose de prendre contact avec un large éventail de professeurs de tout horizon.</p>
         </div>
     </div>
-    <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a nunc ut nisl porttitor ullamcorper nec eget velit. Aliquam sed diam eget velit vehicula sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur fringilla velit sit amet vehicula volutpat. Curabitur ornare turpis vitae velit consequat, non faucibus quam vestibulum. Ut venenatis eros eget nulla condimentum, sit amet laoreet risus facilisis. Integer elementum, felis eu molestie molestie, nulla eros pretium lectus, euismod pellentesque felis tortor dignissim diam. Proin sapien nulla, malesuada ut arcu in, auctor commodo dolor. Mauris et tortor est. Quisque sodales nulla nec sollicitudin rhoncus. Etiam et quam rutrum, pretium nulla quis, molestie augue. Cras quis blandit ligula. In eget ultrices enim. Maecenas rhoncus urna in lacus ornare, commodo euismod est ultricies. Praesent vehicula arcu vel tellus suscipit, a cursus est congue.</p>
+
+
+    
+    <div class = "relative grid grid-cols-2 gap-3 place-items-center font-montserrat">
+        <a href="{{ url('/home') }}"> 
+            <div class="relative max-w-xl mx-auto mt-20">
+                <img src="/logo/piano.jpeg" class="h-2/5 w-full object-cover rounded-md"/>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <p class="text-white text-3xl font-bold">Location</p>
+                </div>
+            </div>
+        </a>
+        <a href="{{ url('/search') }}"> 
+            <div class="relative max-w-xl mx-auto mt-20">
+                <img src="/logo/guitare.jpeg" class="h-2/5 w-full object-cover rounded-md"/>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <p class="text-white text-3xl font-bold">Achat</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <br>
+    <div class="grid grid-cols-4 gap-1 ml-20">
+        <div>
+            <img src="/logo/ordit.webp" class="w-3/5"/>
+        </div>
+        <div>
+            <img src="/logo/carton.webp" class="w-3/5"/>
+        </div>
+        <div>
+            <img src="/logo/louer.webp" class="w-3/5"/>
+        </div>
+        <div>
+            <img src="/logo/jouer.webp" class="w-3/5"/>
+        </div>        
+    </div>
+    <div class="ml-20">
+        <h1 class="font-montserrat font-bold">Nos actualités</h1>
+        <div class="grid grid-cols-4 gap-2">
+            <div class="font-serif">
+                <img src="/logo/partition.jpeg" class="w-3/5"/>
+                <h2>Lire une tablature</h2>
+                <p clas="text-xs">Date de publication : 01/03/2024</p>
+            </div>
+            <div class="font-serif  m-auto">
+                <img src="/logo/kazoo.png" class="w-3/5"/>
+                <h2>Le Kazoo</h2>
+                <p clas="text-xs">Date de publication : 20/12/2023</p>
+            </div>
+            <div class="font-serif  m-auto">
+                <img src="/logo/piano.jpeg" class="w-3/5"/>
+                <h2>Le Piano quand t'as pas..</h2>
+                <p clas="text-xs">Date de publication : 06/06/2024</p>
+            </div>
+            <div class="font-serif  m-auto">
+                <img src="/logo/trompette.jpeg" class="w-3/5"/>
+                <h2>Saxophone vs Tropett..</h2>
+                <p clas="text-xs">Date de publication : 15/05/2024</p>
+            </div>  
+        </div>
+    </div>
+</div>
 @include('footer')
 </body>
 </html>

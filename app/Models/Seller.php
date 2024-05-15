@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\DB;
-
 class Seller extends User
 {
 
@@ -22,9 +20,5 @@ class Seller extends User
         return $this->hasOne(User::class, "id");
     }
 
-    public static function getSellerByID($id){
-      $val = DB::table('seller')->where('id_users', $id)->first();
-      $userVal = User::getUserById($val->id_users);
-      return $userVal; 
-    }
+    
 }

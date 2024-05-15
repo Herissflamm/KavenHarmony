@@ -7,6 +7,19 @@ export default {
   ],
   theme: {
     extend: {
+      width: {
+        '128': '28%',
+      },
+      rotate: {
+        '270': '270deg',
+      },
+      fontFamily: {
+        'serif': ['DM Serif Display'],
+        'montserrat': ['Montserrat'],
+      },
+      height: {
+        '100': '389px',
+      },
       colors: {
         blue: {
           50 : '#82b8d9',
@@ -15,8 +28,14 @@ export default {
         red: {
           50 : '#974a59',
         },
-        white: {
-          50 : '#fcebe1',
+        black: {
+          50 : '#04050d',
+        },
+        yellow:{
+          400 : '#ffbf00',
+        },
+        purple:{
+          400 : '#9300a0',
         },
       }
     },

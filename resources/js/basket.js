@@ -9,7 +9,6 @@ $( document ).ready(function() {
     if(id === ""){
       id = event.target.parentNode.id;
     }
-    console.log(id);
     await jQuery.ajax({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

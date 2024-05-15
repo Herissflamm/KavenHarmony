@@ -3,7 +3,6 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Builder\UserBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -62,6 +61,11 @@ class User extends Authenticatable
         return $this->hasOne(Image::class, "id");
     }
 
+    public function address()
+    {
+        return $this->hasOne(Address::class, "id");
+    }
+
     public function hasImage()
     {
         return $this->belongsTo(Image::class, "id");
@@ -81,13 +85,5 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Seller::class, "id");
     }
-
-    
-    public static function getUSerByID($id){
-        $val = DB::table('users')->where('id', $id)->first();
-        $address = Address::getAddressById($val->id_address);
-        $user = new UserBuilder($val->id , $val->first_name, $val->last_name, $val->username, $val->phone, $val->email, $val->password, $address);
-        return $user;
-      }
     
 }

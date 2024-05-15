@@ -19,14 +19,14 @@
     <h1 class="text-xl p-10">Mon historique d'achat</h1>
     <div class="grid grid-cols-4 gap-2 object-center" id="allInstrument">
       @foreach ($instruments as $instrument)
-        <div class="rounded overflow-hidden shadow-lg w-60" name="{{ $instrument->getName() }}">
-              <p class="text-center">{{ $instrument->getType()->getType() }}</p>
-              <p class="text-center">{{ $instrument->getState()->getState() }}</p>
-              @if($instrument->getImage()!=null)
-                <img src="/images/{{$instrument->getImage()[0]->getPath()}}" class="w-24"/>
+        <div class="rounded overflow-hidden shadow-lg w-60" name="{{ $instrument->name}}">
+              <p class="text-center">{{ $instrument->type_instrument->type }}</p>
+              <p class="text-center">{{ $instrument->state->state }}</p>
+              @if($instrument->image!=null)
+                <img src="/images/{{$instrument->image[0]->path}}" class="w-24"/>
               @endif
-              <p class="text-center">{{ $instrument->getSell()->getPrice()}} €</p>
-              <a href="{{ route('product', ['id' => $instrument->getId()]) }}" class="block px-2 py-3 text-center rounded-lg dark:bg-red-50 m-auto">Voir l'instrument</a>
+              <p class="text-center">{{ $instrument->sell->price}} €</p>
+              <a href="{{ route('product', ['id' => $instrument->id]) }}" class="block px-2 py-3 text-center rounded-lg dark:bg-red-50 m-auto">Voir l'instrument</a>
         </div>
       @endforeach
     </div>
