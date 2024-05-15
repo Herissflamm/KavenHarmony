@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends User
+class Customer extends Model
 {
-
-    protected $primaryKey = 'User_idUsers';
+    use HasFactory;
+    protected $primaryKey = 'id_users';
     public $table = 'customer';
-    public $timestamps = false;
-
     protected $fillable = [
-      'User_idUsers',
+      'id_users',
     ];
 
     public function profile()
     {
-        return $this->hasOne(User::class, "idUsers");
+        return $this->hasOne(User::class, "id");
     }
 }

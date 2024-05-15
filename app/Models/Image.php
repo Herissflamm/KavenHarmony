@@ -4,22 +4,38 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
 
 class Image extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'idImage';
+    protected $primaryKey = 'id';
     public $table = 'image';
-    public $timestamps = false;
-
     protected $fillable = [
         'path',
-        'createIdUsers'
+        'id_user'
     ];
 
-    public function profile()
+    public function seller()
     {
-        return $this->belongsTo(Seller::class, "User_idUsers");
+        return $this->belongsTo(Seller::class, "id_users");
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, "id");
+    }
+
+    public function instrument()
+    {
+        return $this->belongsToMany(Image::class, 'instrument_has_image', 'id_image', 'id_instrument')->using(InstrumentHasImage::class);
+    }
+
+    public function instrument_has_image()
+    {
+        return $this->hasMany(InstrumentHasImage::class, 'id_image');
+    }
+
 }

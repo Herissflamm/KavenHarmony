@@ -5,21 +5,21 @@ namespace App\Models;
 use App\Models\Instrument;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class State extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'idState';
+    protected $primaryKey = 'id';
     public $table = 'state';
-    public $timestamps = false;
-
     protected $fillable = [
         'state',
     ];
 
-    public function profile()
+    public function instrument()
     {
         return $this->belongsTo(Instrument::class, "idState");
     }
+
 }

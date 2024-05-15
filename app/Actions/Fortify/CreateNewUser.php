@@ -3,7 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
-use App\Models\Adress;
+use App\Models\Address;
 use App\Models\Seller;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
@@ -24,8 +24,8 @@ class CreateNewUser implements CreatesNewUsers
     {
         Validator::make($input, [
             'username' => ['required', 'string', 'max:255'],
-            'firstName' => ['required', 'string', 'max:32'],
-            'lastName' => ['required', 'string', 'max:32'],
+            'first_name' => ['required', 'string', 'max:32'],
+            'last_name' => ['required', 'string', 'max:32'],
             'phone' => ['required', 'string', 'max:11'],
             'email' => [
                 'required',
@@ -35,41 +35,37 @@ class CreateNewUser implements CreatesNewUsers
                 Rule::unique(User::class),
             ],
             'city'=> ['required', 'string', 'max:45'],
-            'postCode'=> ['required', 'string', 'max:5'],
-            'streetNumber'=> ['required', 'int'],
-            'street'=> ['required', 'string', 'max:256'],
+            'post_code'=> ['required', 'string', 'max:5'],
+            'street_number'=> ['required', 'int'],
+            'street_name'=> ['required', 'string', 'max:256'],
             'password' => $this->passwordRules(),
         ])->validate();
         
-        
-        $adress = Adress::create([
+        $address = Address::create([
             'city' => $input['city'],
-            'postCode' => $input['postCode'],
-            'streetNumber' => $input['streetNumber'],
-            'street' => $input['street'],
+            'post_code' => $input['post_code'],
+            'street_number' => $input['street_number'],
+            'street_name' => $input['street_name'],
         ]);
-        
         $user = User::create([
             'username' => $input['username'],
-            'firstName' => $input['firstName'],
-            'lastName' => $input['lastName'],
+            'first_name' => $input['first_name'],
+            'last_name' => $input['last_name'],
             'phone' => $input['phone'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
-            'Adress_idAdress' =>  $adress -> idAdress,
+            'id_address' =>  $address -> id,
         ]);
-
-        
-        if($input['seller']){
-            $seller = Seller::create([
-                'User_idUsers' =>  $user -> idUsers,
+        if(isset($_POST['seller'])){
+            Seller::create([
+                'id_users' =>  $user -> id,
             ]);
         }
-        
-        if($input['customer']){
-            $customer = Customer::create([
-                'User_idUsers' =>  $user -> idUsers,
-            ]);
+            
+        if(isset($_POST['customer'])){
+            Customer::create([
+                'id_users' =>  $user -> id,
+            ]);   
         }
         
         return $user;

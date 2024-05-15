@@ -9,22 +9,61 @@ class Instrument extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'idInstrument';
+    protected $primaryKey = 'id';
     public $table = 'instrument';
-    public $timestamps = false;
-
     protected $fillable = [
         'name',
-        'idTypeInstrument',
-        'idState',
-        'SelleridUser',
-        'idImage',
-        'Sell_idSell',
-        'Rent_idRent'
+        'description',
+        'id_type_instrument',
+        'id_seller',
+        'id_state',
+        'id_sell',
+        'id_rent'
     ];
 
-    public function profile()
+    public function image()
     {
-        return $this->belongsTo(Seller::class, "User_idUsers");
+        return $this->belongsToMany(Image::class, 'instrument_has_image', 'id_instrument', 'id_image')->using(InstrumentHasImage::class);
     }
+
+    public function instrument_has_image()
+    {
+        return $this->hasMany(InstrumentHasImage::class, 'id_instrument');
+    }
+
+    public function order()
+    {
+        return $this->belongsToMany(Order::class, 'instrument_has_order', 'id_instrument', 'id_order')->using(InstrumentHasOrder::class);
+    }
+
+    public function instrument_has_order()
+    {
+        return $this->hasMany(InstrumentHasOrder::class, 'id_instrument');
+    }
+
+    public function rent()
+    {
+        return $this->hasOne(Rent::class, "id");
+    }
+
+    public function sell()
+    {
+        return $this->hasOne(Sell::class, "id");
+    }
+
+    public function seller()
+    {
+        return $this->hasOne(Seller::class, "id_users");
+    }
+
+    public function state()
+    {
+        return $this->hasOne(State::class, "id");
+    }
+
+    public function type_instrument()
+    {
+        return $this->hasOne(Type::class, "id");
+    }
+
 }

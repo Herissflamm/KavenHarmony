@@ -2,22 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
 class Seller extends User
 {
 
-    protected $primaryKey = 'User_idUsers';
+    protected $primaryKey = 'id_users';
     public $table = 'seller';
-    public $timestamps = false;
-
     protected $fillable = [
-      'User_idUsers',
+      'id_users',
     ];
 
-    public function profile()
+    public function instrument()
     {
-        return $this->hasOne(User::class, "idUsers");
+        return $this->belongsTo(Instrument::class, "id");
     }
+    public function users()
+    {
+        return $this->hasOne(User::class, "id");
+    }
+
+    
 }
