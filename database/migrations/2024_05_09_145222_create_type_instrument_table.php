@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('type_instrument', function (Blueprint $table) {
             $table->id();
             $table->string('type', length:45);
+            $table->unsignedBigInteger('id_categories'); 
+            $table->foreign('id_categories')->references('id')->on('categories');
             $table->timestamps();
         });
     }

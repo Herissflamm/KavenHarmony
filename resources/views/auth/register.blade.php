@@ -161,7 +161,7 @@
                     <label for="password-confirm" class="col-md-4 col-form-label text-md-end">Confirmer le mot de passe</label>
 
                     <div class="col-md-6">
-                        <input id="password-confirm" type="password" class="rounded-full shadow-inner border-2 form-control" name="password_confirmation" required autocomplete="new-password">
+                        <input id="password-confirm" type="password" class="pr-1 pl-2 rounded-full shadow-inner border-2 form-control" name="password_confirmation" required autocomplete="new-password">
                     </div>
                 </div>
             </div>

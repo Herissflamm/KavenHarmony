@@ -41,7 +41,6 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
         
-        
         $address = Address::create([
             'city' => $input['city'],
             'post_code' => $input['post_code'],
@@ -58,16 +57,20 @@ class CreateNewUser implements CreatesNewUsers
             'id_address' =>  $address -> id,
         ]);
 
-        if($input['seller']){
-            Seller::create([
-                'id_users' =>  $user -> id,
-            ]);
+        if(in_array('seller',$input)){
+            if($input['seller']){
+                Seller::create([
+                    'id_users' =>  $user -> id,
+                ]);
+            }
         }
         
-        if($input['customer']){
-            Customer::create([
-                'id_users' =>  $user -> id,
-            ]);
+        if(in_array('seller',$input)){
+            if($input['customer']){
+                Customer::create([
+                    'id_users' =>  $user -> id,
+                ]);
+            }
         }
         
         return $user;
