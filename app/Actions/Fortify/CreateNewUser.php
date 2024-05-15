@@ -56,21 +56,16 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
             'id_address' =>  $address -> id,
         ]);
-
-        if(in_array('seller',$input)){
-            if($input['seller']){
-                Seller::create([
-                    'id_users' =>  $user -> id,
-                ]);
-            }
+        if(isset($_POST['seller'])){
+            Seller::create([
+                'id_users' =>  $user -> id,
+            ]);
         }
-        
-        if(in_array('seller',$input)){
-            if($input['customer']){
-                Customer::create([
-                    'id_users' =>  $user -> id,
-                ]);
-            }
+            
+        if(isset($_POST['customer'])){
+            Customer::create([
+                'id_users' =>  $user -> id,
+            ]);   
         }
         
         return $user;

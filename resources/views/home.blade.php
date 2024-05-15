@@ -5,9 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @vite('resources/css/app.css')
 </head>
-<body class = "dark:bg-white-50">
+<body class = "dark:bg-white-50 overflow-x-hidden">
 @include('navbar')
-    <div class="w-2/5 m-auto">
+<div>
+    <img src="/logo/disquejaune.png" class="absolute top-20 -right-40">
+
+    <img src="/logo/disquerouge.png" class="absolute top-1/3  -left-40">
+
+    <div class="w-2/5 m-auto relative">
         <h1 class="text-2xl text-center font-bold font-montserrat">
             Bienvenue sur notre plateforme !
         </h1>
@@ -20,8 +25,10 @@
         <p>Si vous souhaitez apprendre à jouer d'un instrument, Kaven Harmony vous propose de prendre contact avec un large éventail de professeurs de tout horizon.</p>
         </div>
     </div>
+
+
     
-    <div class = "grid grid-cols-2 gap-3 place-items-center font-montserrat">
+    <div class = "relative grid grid-cols-2 gap-3 place-items-center font-montserrat">
         <a href="{{ url('/home') }}"> 
             <div class="relative max-w-xl mx-auto mt-20">
                 <img src="/logo/piano.jpeg" class="h-2/5 w-full object-cover rounded-md"/>
@@ -79,6 +86,7 @@
             </div>  
         </div>
     </div>
+</div>
 @include('footer')
 </body>
 </html>

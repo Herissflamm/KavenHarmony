@@ -1,6 +1,6 @@
-<footer class="bg-black-50 border-gray-200">
+<footer class="bg-black-50 border-gray-200 overflow-hidden">
     <div class="w-full max-w-screen-xl mx-auto p-4 grid grid-cols-3 gap-2">
-        <div><img src="/logo/Vinyle.png" class="w-36"/></div>
+        <div class="relative"><img src="/logo/disquenoiretblanc.png" class="absolute -bottom-10 left-10 w-72 rotate-270"/></div>
         <div class="text-center item-center">
             <a href="{{ url('/home') }}"> <img src="/logo/Icone.png" class="w-24 m-auto"/> </a>
             <ul class="text-sm font-serif text-white">
@@ -21,7 +21,7 @@
                 </li>
             </ul>
         </div>
-        <div><img src="/logo/disques.webp" class="w-36"/></div>
+        <div class="relative"><img src="/logo/disquenoiretblanc.png" class="absolute -bottom-20 -right-24 w-10/12"/></div>
     </div>
 </footer>
 

@@ -89,7 +89,7 @@
       @foreach ($instruments as $instrument)
       <div class="rounded overflow-hidden shadow-lg w-60" name="{{ $instrument->name }}">
         <div class="w-52 h-52">
-        @if($instrument->image!=null)
+        @if($instrument->image)
             <img src="/images/{{$instrument->image[0]->path}}" class="w-min-auto"/>
           @endif
         </div>

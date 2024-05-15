@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @vite('resources/css/app.css')
 </head>
-<body class = "dark:bg-white-50">
+<body class = "dark:bg-white-50 ">
 @include('navbar')
-<div class="flex flex-col items-center place-items-center">
-    <div class="relative w-10 h-10 overflow-hidden rounded-full border-2">
-        <svg class="absolute w-10 h-10 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+<div class="flex flex-col items-center pt-2 pb-2">
+    <div class="w-10 h-10 overflow-hidden">
+        <svg class="w-10 h-10 text-yellow-400 rounded-full border-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
     </div>
     <div class="card-header">
         <h1 class="font-montserrat font-bold text-xl">Inscription</h1>
     </div>
-    <div class="justify-center items-center h-screen">
+    <div class="justify-center items-center">
         <form method="POST" action="{{ route('register') }}">
             @csrf
             <div class="flex flex-col items-center">
@@ -164,30 +164,30 @@
                         <input id="password-confirm" type="password" class="pr-1 pl-2 rounded-full shadow-inner border-2 form-control" name="password_confirmation" required autocomplete="new-password">
                     </div>
                 </div>
-            </div>
-            <div class="flex flex-col items-center">
-                <div class="text-left">  
-                    <label>
-                        <input type="checkbox" name="seller" class="rounded">
-                        Je suis un vendeur
-                    </label>
-                    <br>
-                    <label>
-                        <input type="checkbox" name="customer">
-                        Je suis un acheteur
-                    </label>
-                    <br>
-                    <label>
-                        <input type="checkbox" name="seller" required>
-                        Je déclare être en accord avec les Conditions Générales d'Utilisation de Kaven Harmony
-                    </label>
-                    
-                </div>
-                <div class="row mb-0">
-                    <div class="col-md-6 offset-md-4 flex justify-center">
-                        <button type="submit" class="btn btn-primary bg-yellow-400 rounded-full border-2 border-yellow-400 shadow-inner p-1">
-                            Créer son compte
-                        </button>
+                <div class="flex flex-col items-center">
+                    <div class="text-left">  
+                        <label class="pb-2">
+                            <input type="checkbox" name="seller" class="rounded">
+                            Je suis un vendeur
+                        </label>
+                        <br>
+                        <label class="pb-2">
+                            <input type="checkbox" name="customer" class="rounded"> 
+                            Je suis un acheteur
+                        </label>
+                        <br>
+                        <label class="pb-2">
+                            <input type="checkbox" required>
+                            Je déclare être en accord avec les Conditions Générales d'Utilisation de Kaven Harmony
+                        </label>
+                        
+                    </div>
+                    <div class="row mb-0 p-2 pb-4">
+                        <div class="col-md-6 offset-md-4 flex justify-center">
+                            <button type="submit" class="btn btn-primary bg-yellow-400 rounded-full border-2 border-yellow-400 shadow-inner p-1">
+                                Créer son compte
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

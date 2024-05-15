@@ -6,13 +6,19 @@ export default {
     "./resources/**/*.vue",
   ],
   theme: {
-    fontFamily: {
-      'serif': ['DM Serif Display'],
-      'montserrat': ['Montserrat'],
-    },
     extend: {
       width: {
         '128': '28%',
+      },
+      rotate: {
+        '270': '270deg',
+      },
+      fontFamily: {
+        'serif': ['DM Serif Display'],
+        'montserrat': ['Montserrat'],
+      },
+      height: {
+        '100': '389px',
       },
       colors: {
         blue: {

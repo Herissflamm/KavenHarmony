@@ -7,7 +7,7 @@
 </head>
 <body class = "dark:bg-white-50">
 @include('navbar')
-<div class="">
+<div class="h-100">
     <div class="card justify-center flex">
         <div class="text-center">
             <div class="card-header p-1">
@@ -45,7 +45,7 @@
                         </div>
                     </div>
 
-                    <div class="row mb-3">
+                    <div class="row mt-14 mb-3">
                         <div class="col-md-6 offset-md-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -57,10 +57,10 @@
                         </div>
                     </div>
 
-                    <div class="row mb-0">
+                    <div class="row">
                         <div class="col-md-8 offset-md-4">
                             <ul>
-                                <li>
+                                <li class="mb-3">
                                     <button type="submit" class="btn btn-primary rounded-full bg-purple-400 p-1 px-10">
                                         Se connecter
                                     </button>

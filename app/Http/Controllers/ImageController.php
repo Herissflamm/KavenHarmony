@@ -72,9 +72,11 @@ class ImageController extends Controller
         foreach($request['images'] as $image){            
             $imageName = $i.time().'.'.$image->extension();  
             $image->move(public_path('images'), $imageName);
-            $imageId = $storageImage->create($imageName, $userId)->idImage;
-            if($idProduct != null){
+            $imageVal = $storageImage->create($imageName, $userId);
+            $imageId = $imageVal->id;
+            if($imageId != null){
                 $instrumentHasImage->create($idProduct, $imageId);
+            }else{
             }
             $i++;
         }

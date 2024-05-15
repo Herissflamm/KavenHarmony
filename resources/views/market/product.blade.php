@@ -29,7 +29,7 @@
         </svg>
       </div>
       <div>
-        <h1 class="text-white text-6xl font-montserrat">{{$instrument->seller->last_name}} {{$instrument->seller->first_name[0]}}.</h1>
+        <h1 class="text-white text-6xl font-montserrat">{{$instrument->seller->users->last_name}}{{$instrument->seller->users->first_name[0]}}.</h1>
         <div class="text-purple-400 border-2 w-24 rounded-full items-center bg-white flex justify-center">
           <a href="{{ route('addToBasket', ['id' => $instrument->id]) }}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="file: h-16 w-16">
