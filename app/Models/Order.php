@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
@@ -35,13 +34,5 @@ class Order extends Model
         return $this->belongsToMany(Order::class, 'instrument_has_order', 'id_order', 'id_instrument')->using(InstrumentHasOrder::class);
     }
 
-    public static function getLastOpenOrderOfUser($idUser){
-        $order = DB::table('order')
-        ->join('order_status', 'order_status.id', '=', 'order.id_status')
-        ->where('order_status.status', '=', 'En Cours')
-        ->where('order.id_customer','=',$idUser)
-        ->get()
-        ->first();
-        return $order;
-    }
+    
 }

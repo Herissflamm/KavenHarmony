@@ -53,7 +53,7 @@ class Instrument extends Model
 
     public function seller()
     {
-        return $this->hasOne(Seller::class, "id_users");
+        return $this->hasOne(Seller::class, "id_users", "id_seller");
     }
 
     public function state()

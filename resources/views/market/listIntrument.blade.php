@@ -17,7 +17,7 @@
       <h3 class="bg-purple-400 text-center text-xl rounded-tr-lg">Filtre</h3>
       <ul role="list" class="px-2 py-3 font-medium text-gray-900">
         <li>
-          <a href="#" class="block px-2 py-3" id="clearFilter">Retirer les filtres selectionné</a>
+          <a href="#" class="block px-2 py-3 cursor-pointer" id="clearFilter">Retirer les filtres selectionné</a>
         </li>
         <li>
         <div class="flex justify-center items-center">
@@ -63,18 +63,23 @@
           </div>
         </li>
         <li>
-          <ul role="list" class="px-2 py-3">Type
-          @foreach ($allType as $type)
-            <li class="font-normal" id="{{ $type->type }}" name="Type">
-              {{$type->type}}
-            </li>
-          @endforeach
+          Categories
+          @foreach ($allCategories as $categories)
+            <ul role="list" class="px-2 py-2" id="{{$categories->categories}}">{{$categories->categories}}
+            @foreach ($allType as $type)
+              @if ($type->id_categories == $categories->id)
+                <li class="font-normal pl-2 hidden cursor-pointer" id="{{ $type->type }}" name="Type">
+                  {{$type->type}}
+                </li>
+              @endif
+            @endforeach
           </ul>
+          @endforeach
         </li>
         <li>
           <ul role="list" class="px-2 py-3">Etat
           @foreach ($allState as $state)
-            <li class="font-normal" id="{{ $state->state }}" name="State">
+            <li class="font-normal pl-3 cursor-pointer" id="{{ $state->state }}" name="State">
               {{$state->state}}
             </li>
           @endforeach

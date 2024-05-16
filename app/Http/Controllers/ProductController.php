@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Repositories\CategoriesRepositories;
 use App\Repositories\InstrumentRepositories;
 use App\Repositories\TypeRepositories;
 use App\Repositories\StateRepositories;
@@ -27,6 +28,7 @@ class ProductController extends Controller
             $instruments = InstrumentRepositories::getAllInstrumentWithOutOrder();
         }
         $allState = StateRepositories::getAllState();
+        $allCategories = CategoriesRepositories::getAllCategories();
         $allType = TypeRepositories::getAllType();
         $biggestPrice = 0;
         foreach($instruments as $instrument){
@@ -34,7 +36,7 @@ class ProductController extends Controller
                 $biggestPrice = $instrument->sell->price;
             }
         }
-        return view('market/listIntrument', ['allState' => $allState, 'allType' => $allType, 'instruments' => $instruments, 'biggestPrice'=>$biggestPrice]);
+        return view('market/listIntrument', ['allState' => $allState, 'instruments' => $instruments, 'biggestPrice'=>$biggestPrice, 'allCategories'=>$allCategories, 'allType'=>$allType]);
     }
 
     public function showProduct(Request $request){

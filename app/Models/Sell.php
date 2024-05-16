@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 
 class Sell extends Model
@@ -27,11 +26,6 @@ class Sell extends Model
     public function discount()
     {
         return $this->hasOne(Discount::class, "id");
-    }
-
-    public static function getSellByID($id){
-        $val = DB::table('sell')->where('id', $id)->first();
-        return $val;
     }
     
 }

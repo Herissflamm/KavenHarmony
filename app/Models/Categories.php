@@ -17,7 +17,8 @@ class Categories extends Model
     ];
     public function type()
     {
-        return $this->belongsTo(Type::class, "id");
+        return $this->belongsTo(Type::class, 'id');
+
     }
 
 }
