@@ -7,6 +7,9 @@ $( document ).ready(function() {
   let maxPrice = document.getElementById("maxPrice");
   let minInput = document.getElementById("minPriceInput");
   let maxInput = document.getElementById("maxPriceInput");
+  let corde = document.getElementById("Cordes");
+  let vent = document.getElementById("Vent");
+  let percussions = document.getElementById("Percussions");
   
   //creation des EventListener
   minInput.addEventListener("change", inputMinTrigger);
@@ -27,7 +30,23 @@ $( document ).ready(function() {
     allState[i].addEventListener("click", getAllInstrumentWithFilter);
   }
   clearFilter.addEventListener("click", deleteSelectFilter);
+
+  corde.addEventListener("click", openCategory);
+  vent.addEventListener("click", openCategory);
+  percussions.addEventListener("click", openCategory);
 });
+
+function openCategory(event){
+  let childs = event.target.children;
+  for(let i = 0; i<childs.length; i++ ){
+    if(childs[i].classList.contains('hidden')){
+      childs[i].classList.remove('hidden');
+    }else{
+      childs[i].classList.add('hidden');
+    }
+    
+  }
+}
 
 async function getAllInstrumentWithPrice(event){
   let allSelectedFilter = getSelectedFilter(event);

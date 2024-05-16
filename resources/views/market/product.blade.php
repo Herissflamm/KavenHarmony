@@ -16,49 +16,45 @@
 </div>
 <h1 class="font-montserrat font-bold pl-20 text-xl">{{$instrument->name}}</h1>
 <div class="grid grid-cols-2 gap-28">
-  <div class="bg-purple-400 rounded-r-lg text-white">
-    <h1 class="text-xl font-montserrat font-bold pl-20">Description</h1>
+  <div class="bg-purple-400 rounded-r-lg text-white min-h-60">
+    <h1 class="text-xl font-montserrat font-bold pl-10">Description</h1>
     <br>
-    <p class="pl-20 p-5 text-ellipsis overflow-auto max-h-96">{{$instrument->description}}</p>
+    <p class="pl-10 p-5 text-ellipsis overflow-auto max-h-96">{{$instrument->description}}</p>
   </div>
-  <div>
-    <div class="rounded border-2 bg-yellow-400 grid grid-cols-2">
-      <div class="relative w-128 h-5/6 m-2 overflow-hidden bg-white rounded-full">
+  <div class="">
+    <div class="rounded-lg border-2 border-yellow-400 bg-yellow-400 grid grid-cols-2 w-5/12 h-1/2">
+      <div class="relative w-24 h-5/6 m-2 overflow-hidden bg-white rounded-full">
         <svg class="absolute w-5/6 h-5/6 text-yellow-400 left-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
         </svg>
       </div>
       <div>
-        <h1 class="text-white text-6xl font-montserrat">{{$instrument->seller->users->last_name}}{{$instrument->seller->users->first_name[0]}}.</h1>
-        <div class="text-purple-400 border-2 w-24 rounded-full items-center bg-white flex justify-center">
+        <h1 class="text-white text-4xl font-montserrat pb-5">{{$instrument->seller->users->last_name}} {{$instrument->seller->users->first_name[0]}}.</h1>
+        <div class="text-purple-400 border-2 w-14 rounded-full items-center bg-white flex justify-center">
           <a href="{{ route('addToBasket', ['id' => $instrument->id]) }}">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="file: h-16 w-16">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="file: h-8 w-8">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
           </a>
         </div>
       </div>
     </div>
+    <p class="pl-14">Publié depuis le {{$instrument->created_at}}</p>
+    <div>
+      <p class="font-bold">{{$instrument->sell->price}} €</p>
+    </div>
+    <div>
+      Etat : 
+      {{$instrument->state->state}}
+    </div>
   </div>
 </div>
-@foreach ($instrument->image as $image)
-<div>
-  <img src="/images/{{$image->path}}"/>
-</div>
-@endforeach
-<div>
-  <h2>Description</h2>
-  <p>{{$instrument->description}}</p>
-</div>
-<div>
-  Etat
-  <br>
-  {{$instrument->state->state}}
-</div>
-<div>
-  Prix : 
-  <br>
-  {{$instrument->sell->price}}
+<div class="flex items-center pt-2">
+  @foreach ($instrument->image as $image)
+  <div>
+    <img src="/images/{{$image->path}}" class="w-48 h-48 pr-2"/>
+  </div>
+  @endforeach
 </div>
 @include('footer')
 </body>

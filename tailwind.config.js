@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundPosition: {
+        'left-arrow': ' left 0.5rem center',
+      },
       width: {
         '128': '28%',
       },
@@ -35,8 +38,13 @@ export default {
           400 : '#ffbf00',
         },
         purple:{
+          50 : '#E2BAE5',
           400 : '#9300a0',
         },
+        yellow:{
+          50 : '#FFF3CF',
+          400 : '#ffbf00'
+        }
       }
     },
   },

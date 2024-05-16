@@ -26,7 +26,7 @@ class Type extends Model
 
     public function categories()
     {
-        return $this->hasOne(Categories::class, "id");
+        return $this->hasMany(Categories::class);
     }
 
 }

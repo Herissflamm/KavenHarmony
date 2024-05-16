@@ -13,7 +13,7 @@ class Seller extends User
 
     public function instrument()
     {
-        return $this->belongsTo(Instrument::class, "id");
+        return $this->belongsTo(Instrument::class, "id_seller");
     }
     public function users()
     {
