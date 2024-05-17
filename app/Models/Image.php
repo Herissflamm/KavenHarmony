@@ -30,7 +30,7 @@ class Image extends Model
 
     public function instrument()
     {
-        return $this->belongsToMany(Image::class, 'instrument_has_image', 'id_image', 'id_instrument')->using(InstrumentHasImage::class);
+        return $this->belongsToMany(Instrument::class, 'instrument_has_image', 'id_image', 'id_instrument')->using(InstrumentHasImage::class);
     }
 
     public function instrument_has_image()

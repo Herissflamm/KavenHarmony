@@ -31,7 +31,7 @@ class Order extends Model
 
     public function instrument()
     {
-        return $this->belongsToMany(Order::class, 'instrument_has_order', 'id_order', 'id_instrument')->using(InstrumentHasOrder::class);
+        return $this->belongsToMany(Instrument::class, 'instrument_has_order', 'id_order', 'id_instrument')->using(InstrumentHasOrder::class);
     }
 
     

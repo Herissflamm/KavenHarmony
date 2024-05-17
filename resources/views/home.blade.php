@@ -12,11 +12,11 @@
 
     <img src="/logo/disquerouge.png" class="absolute top-1/3  -left-40">
 
-    <div class="w-2/5 m-auto relative">
+    <div class="pt-5 w-2/5 m-auto relative">
         <h1 class="text-2xl text-center font-bold font-montserrat">
             Bienvenue sur notre plateforme !
         </h1>
-        <div class="font-serif text-lg">
+        <div class="pt-2 font-serif text-lg">
         <p>Kaven Harmony est une platfeforme consacrée au partage de la musique. Vous pourrez ici louer vos instruments de musique ou bien prendre contact avec des professeurs pour apprendre à jouer d'un instrument.</p>
         <br>
         <p>Grâce à la location, réservez des instruments à prix moindre pour une durée déterminée.</p>     
@@ -29,22 +29,24 @@
 
     
     <div class = "relative grid grid-cols-2 gap-3 place-items-center font-montserrat">
-        <a href="{{ url('/home') }}"> 
-            <div class="relative max-w-xl mx-auto mt-20">
+        <div class="relative max-w-xl mx-auto mt-20">
+            <a href="{{ url('/home') }}"> 
                 <img src="/logo/piano.jpeg" class="h-2/5 w-full object-cover rounded-md"/>
                 <div class="absolute inset-0 flex items-center justify-center">
                     <p class="text-white text-3xl font-bold">Location</p>
                 </div>
-            </div>
-        </a>
-        <a href="{{ url('/search') }}"> 
-            <div class="relative max-w-xl mx-auto mt-20">
+            </a>
+        </div>
+        
+        
+        <div class="relative max-w-xl mx-auto mt-20">
+            <a href="{{ url('/search') }}"> 
                 <img src="/logo/guitare.jpeg" class="h-2/5 w-full object-cover rounded-md"/>
                 <div class="absolute inset-0 flex items-center justify-center">
                     <p class="text-white text-3xl font-bold">Achat</p>
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
     </div>
     <br>
     <div class="grid grid-cols-4 gap-1 ml-20">
