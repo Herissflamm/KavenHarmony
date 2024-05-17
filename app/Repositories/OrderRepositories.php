@@ -2,12 +2,13 @@
  
  namespace App\Repositories;
   
+ use App\Models\Order;
  use Illuminate\Support\Facades\DB;
  
  class OrderRepositories{
    
   public static function getOrderByUserId($userId){
-    $orders = DB::table('order')->get()->where('Customer_User_idUser', $userId);
+    $orders = Order::with('instrument')->where('id_customer', $userId)->get();
     return $orders;
   }
   public static function getLastOpenOrderOfUser($idUser){
@@ -19,4 +20,5 @@
     ->first();
     return $order;
   }
+  
  }

@@ -21,6 +21,7 @@ class OrderController extends Controller
         $instrument = InstrumentRepositories::getInstrumentByID($request->id);
         $instrumentId = $instrument->id;
         if($orderOpen == null){
+            dd($orderOpen);
             $orderStorage = new CreateNewOrder();
             $order = $orderStorage->create($request->input(), $userId);
             $orderId = $order->id;
@@ -37,7 +38,7 @@ class OrderController extends Controller
 
     public function getMyBasket(Request $request){
         $userId = Auth::id();
-        $instruments = InstrumentHasOrderRepositories::getAllInstrumentOfOrderByUserId($userId);
+        $instruments = OrderRepositories::getOrderByUserId($userId)->first();
         return view('account/myBasket', ['instruments' => $instruments]);
     }
 

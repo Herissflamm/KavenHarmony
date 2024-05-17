@@ -57,11 +57,11 @@
                 </li>
             @else
                 <li>    
-                    <a href="{{ route('login') }}" class="block text-white py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0">Log in</a>
+                    <a href="{{ route('login') }}" class="block text-white py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0">Se connecter</a>
                 </li>
                 @if (Route::has('register'))
                     <li>
-                        <a href="{{ route('register') }}" class="block text-white py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0">Register</a>
+                        <a href="{{ route('register') }}" class="block text-white py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0">S'inscrire</a>
                     </li>
                 @endif
             @endauth

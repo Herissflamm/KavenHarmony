@@ -15,7 +15,8 @@
   <div class="m-auto">
     <h1 class="text-xl p-10">Mon Panier</h1>
     <div class="grid grid-cols-4 gap-2 object-center" id="allInstrument">
-      @foreach ($instruments as $instrument)
+      @foreach ($instruments->instrument as $instrument)
+        
         <div class="rounded overflow-hidden shadow-lg w-60" name="{{ $instrument->name }}">
           <svg class="h-8 w-8 float-right" id="{{ $instrument->id}}" name="cross" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="18" y1="6" x2="6" y2="18" />  
             <line x1="6" y1="6" x2="18" y2="18" />
