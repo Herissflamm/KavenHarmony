@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      lineClamp: {
+        7: '7',
+      },
       backgroundPosition: {
         'left-arrow': ' left 0.5rem center',
       },

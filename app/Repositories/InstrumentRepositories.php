@@ -68,17 +68,17 @@
   }
 
   public static function getInstrumentBySeller($id){
-      $instrumentQuery = Instrument::with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')
-      ->where('id_seller', '=', $id)->get();
-      return $instrumentQuery;
+    $instrumentQuery = Instrument::with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')
+    ->where('id_seller', '=', $id)->get();
+    return $instrumentQuery;
   }
 
   public static function getInstrumentByOrderId($id){
-      $instrumentQuery = Instrument::with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')
-      ->join('instrument_has_order', 'instrument_has_order.Instrument_idInstrument', '=', 'instrument.idInstrument')
-      ->where('instrument_has_order.Order_idOrder', '=', $id)
-      ->get()
-      ->first();
-      return $instrumentQuery;
+    $instrumentQuery = Instrument::with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')
+    ->join('instrument_has_order', 'instrument_has_order.id_instrument', '=', 'instrument.id')
+    ->where('instrument_has_order.id_order', '=', $id)
+    ->get()
+    ->first();
+    return $instrumentQuery;
   }
 }

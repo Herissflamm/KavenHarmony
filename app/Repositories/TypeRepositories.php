@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 class TypeRepositories
 {
   public static function getAllType(){
-    $typeQuery = DB::table('type_instrument')->get();
+    $typeQuery = DB::table('type_instrument')->orderBy('type', 'asc')->get();
     return $typeQuery;
   }
 

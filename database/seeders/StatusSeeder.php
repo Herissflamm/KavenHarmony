@@ -19,5 +19,8 @@ class StatusSeeder extends Seeder
         DB::table('order_status')->insert([
             'status' => 'Terminé',
         ]);
+        DB::table('order_status')->insert([
+            'status' => 'Panier',
+        ]);
     }
 }

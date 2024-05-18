@@ -29,6 +29,11 @@ class Order extends Model
         return $this->hasOne(Customer::class, "id_users");
     }
 
+    public function status()
+    {
+        return $this->hasOne(OrderStatus::class, "id");
+    }
+
     public function instrument()
     {
         return $this->belongsToMany(Instrument::class, 'instrument_has_order', 'id_order', 'id_instrument')->using(InstrumentHasOrder::class);
