@@ -41,24 +41,26 @@ Route::get('/buy', function () {
     return view('home');
 });
 
-Route::get('/myBasket', [OrderController::class, 'getMyBasket'])->name("myBasket");
+Route::get('/myBasket', [OrderController::class, 'getMyBasket'])->name("myBasket")->middleware(IsConnected::class);
 
-Route::get('/addToBasket', [OrderController::class, 'addToBasket'])->name("addToBasket");
+Route::get('/addToBasket', [OrderController::class, 'addToBasket'])->name("addToBasket")->middleware(IsConnected::class);
 
-Route::get('/boughtProduct', [OrderController::class, 'getAllOrders']);
+Route::get('/boughtProduct', [OrderController::class, 'getAllOrders'])->middleware(IsConnected::class);
 
-Route::get('/soldProduct', [ProductController::class, 'showAllMyProduct']);
+Route::get('/soldProduct', [ProductController::class, 'showAllMyProduct'])->middleware(IsConnected::class);
 
 Route::get('/filterProduct', [ProductController::class,'filterProduct']);
 
-Route::delete('/deleteFromMyOrder', [OrderController::class,'deleteInstrumentFromOrder']);
+Route::delete('/deleteFromMyOrder', [OrderController::class,'deleteInstrumentFromOrder'])->middleware(IsConnected::class);
 
 Route::get('/account',  [UserController::class, 'showMyAccount'])->middleware(IsConnected::class);
+
+Route::post('/modifyAccount', [UserController::class, 'modifyAccount'])->name("modifyAccount")->middleware(IsConnected::class);
 
 Route::get('/modifyAccount', function (Request $request) {
     $userController = new UserController();
     return $userController->showModifyAccount($request);
-});
+})->middleware(IsConnected::class);;
 
 Route::get('/messaging', function () {
     return view('home');

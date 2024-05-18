@@ -18,7 +18,7 @@
                     </form>
                 </div>
             </div>
-            <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
+            <ul class="font-medium flex flex-row  mt-4 border border-gray-100 rounded-lg space-x-8 mt-0 border-0">
             @auth
                 <li>
                     <a href="{{ url('/sell') }}" class="bg-white text-sm block font-medium py-1 px-3 text-gray-900 rounded-xl pr-16">+ Annonces</a>
@@ -42,18 +42,24 @@
                         </a>
                     </div>
                 </li>
-                    <div class="rounded-full  bg-white flex justify-center items-center">
+                    <div class="rounded-full w-8 h-8 flex justify-center items-center">
                         <a href="{{ url('/account') }}" >
-                            <div class="relative w-8 h-8 overflow-hidden bg-white rounded-full">
-                                <svg class="w-8 h-8 text-yellow-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
+                            @if (Auth::user()->image != null)
+                                <div class="relative w-8 h-8 overflow-hidden bg-white rounded-full">
+                                    <img src="/images/{{Auth::user()->image->path}}" class="w-full h-full rounded">
+                                </div>
+                            @else
+                                <div class="relative w-8 h-8 overflow-hidden bg-white rounded-full">
+                                    <svg class="w-8 h-8 text-yellow-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                            @endif
                         </a>
                     </div>
                 </li>                
                 <li>
-                    <a href="{{ url('/logout') }}" class="block text-white py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0  md:p-0">Déconnexion</a>
+                    <a href="{{ url('/logout') }}" class="block text-white py-2 px-3 rounded">Déconnexion</a>
                 </li>
             @else
                 <li>    
