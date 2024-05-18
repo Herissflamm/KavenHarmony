@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     public function showCreate(Request $request){
-        $state = DB::table('state')->get();
-        $allType = DB::table('type_instrument')->get();
+        $state = StateRepositories::getAllState();
+        $allType = TypeRepositories::getAllType();
         return view('market/createProduct', ['allState' => $state, 'allType' => $allType]);
     }
 

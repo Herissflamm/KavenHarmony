@@ -20,10 +20,10 @@ class OrderController extends Controller
         $orderOpen = OrderRepositories::getLastOpenOrderOfUser($userId);
         $instrument = InstrumentRepositories::getInstrumentByID($request->id);
         $instrumentId = $instrument->id;
+        $price = $instrument->sell->price;
         if($orderOpen == null){
-            dd($orderOpen);
             $orderStorage = new CreateNewOrder();
-            $order = $orderStorage->create($request->input(), $userId);
+            $order = $orderStorage->create($price, $userId);
             $orderId = $order->id;
             $instrumentHasOrderStorage = new CreateInstrumentHasOrder();
             $instrumentHasOrderStorage->create($instrumentId, $orderId);
@@ -38,18 +38,20 @@ class OrderController extends Controller
 
     public function getMyBasket(Request $request){
         $userId = Auth::id();
-        $instruments = OrderRepositories::getOrderByUserId($userId)->first();
-        return view('account/myBasket', ['instruments' => $instruments]);
+        $order = OrderRepositories::getBasket($userId)->first();
+        return view('account/myBasket', ['order' => $order]);
+    }
+
+    public function getOrder(Request $request){
+        $orderId = $request['id'];
+        $order = OrderRepositories::getOrderbyId($orderId);
+        return view('account/myBasket', ['order' => $order]);
     }
 
     public function getAllOrders(Request $request){
         $userId = Auth::id();
         $orders = OrderRepositories::getOrderByUserId($userId);
-        $instruments =[];
-        foreach($orders as $order){
-            $instruments[] = InstrumentRepositories::getInstrumentByOrderId($order->idOrder);
-        }
-        return view('account/boughtProduct', ['instruments' => $instruments]);
+        return view('account/boughtProduct', ['orders' => $orders]);
     }
 
     public function deleteInstrumentFromOrder(Request $request){

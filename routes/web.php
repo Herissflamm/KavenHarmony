@@ -41,6 +41,8 @@ Route::get('/buy', function () {
     return view('home');
 });
 
+Route::get('/getOrder', [OrderController::class, 'getOrder'])->name("getOrder")->middleware(IsConnected::class);
+
 Route::get('/myBasket', [OrderController::class, 'getMyBasket'])->name("myBasket")->middleware(IsConnected::class);
 
 Route::get('/addToBasket', [OrderController::class, 'addToBasket'])->name("addToBasket")->middleware(IsConnected::class);
