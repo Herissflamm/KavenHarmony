@@ -2,10 +2,12 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Image;
 use App\Models\User;
 use App\Models\Address;
 use App\Models\Seller;
 use App\Models\Customer;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -20,7 +22,7 @@ class CreateNewUser implements CreatesNewUsers
      *
      * @param  array<string, string>  $input
      */
-    public function create(array $input): User
+    public function create(array $input, Request $request): User
     {
         Validator::make($input, [
             'username' => ['required', 'string', 'max:255'],
@@ -47,6 +49,8 @@ class CreateNewUser implements CreatesNewUsers
             'street_number' => $input['street_number'],
             'street_name' => $input['street_name'],
         ]);
+
+
         $user = User::create([
             'username' => $input['username'],
             'first_name' => $input['first_name'],
@@ -56,6 +60,37 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
             'id_address' =>  $address -> id,
         ]);
+        if($input["images"] != null ){
+            $validator = Validator::make(
+                $input, [
+                'images.*' => 'required|mimes:jpg,jpeg,png,bmp|max:20000'
+                ],[
+                    'images.*.required' => 'Please upload an image',
+                    'images.*.mimes' => 'Only jpeg,png and bmp images are allowed',
+                    'images.*.max' => 'Sorry! Maximum allowed size for an image is 20MB',
+                ]
+            );
+            if ($validator->fails()) {
+                return response()->json(array(
+                    'success' => false,
+                    'errors' => $validator->getMessageBag()->toArray()
+                ) , 400);
+            }
+
+            
+            $i=0;
+            $imageName = $i.time().'.'.$request["images"]->extension();  
+            $request["images"]->move(public_path('images'), $imageName);
+
+            $image = Image::create([
+                'path' => $imageName,
+                'id_user' => $user -> id,
+            ]);
+            $user->id_image = $image->id;
+            $user->save();
+            
+        }
+        
         if(isset($_POST['seller'])){
             Seller::create([
                 'id_users' =>  $user -> id,

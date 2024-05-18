@@ -12,8 +12,7 @@ class CreateInstrumentHasImage
      * @param  array<string, string>  $input
      */
     public function create($idInstrument, $idImage): InstrumentHasImage
-    {   
-                  
+    {          
         
         $instrumentHasImage = InstrumentHasImage::create([
             'id_instrument' => $idInstrument,

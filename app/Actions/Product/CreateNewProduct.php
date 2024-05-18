@@ -3,15 +3,13 @@
 namespace App\Actions\Product;
 
 use App\Models\Instrument;
-use App\Models\Address;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
+
 
 class CreateNewProduct
 {
     /**
-     * Validate and create a newly registered user.
+     * Validate and create a new product.
      *
      * @param  array<string, string>  $input
      */

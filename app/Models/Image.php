@@ -23,9 +23,14 @@ class Image extends Model
         return $this->belongsTo(Seller::class, "id_users");
     }
 
-    public function user()
+    public function userAuthor()
     {
         return $this->hasOne(User::class, "id");
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, "id_image");
     }
 
     public function instrument()
