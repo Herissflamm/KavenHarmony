@@ -16,6 +16,13 @@ class UserController extends Controller
         return view('account/myAccount', ['user' => $user]);
     }
 
+    public function showAccount(Request $request)
+    {
+        $userId = $request["id"];
+        $user = UsersRepositories::getUserByID($userId);
+        return view('account/myAccount', ['user' => $user]);
+    }
+
     public function showModifyAccount(Request $request)
     {
         $user = $request->user();

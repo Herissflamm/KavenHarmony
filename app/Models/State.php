@@ -19,7 +19,7 @@ class State extends Model
 
     public function instrument()
     {
-        return $this->belongsTo(Instrument::class, "idState");
+        return $this->belongsTo(Instrument::class, "id");
     }
 
 }

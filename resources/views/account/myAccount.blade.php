@@ -21,12 +21,14 @@
     <h1>{{ $user->first_name." ".$user->last_name[0]."." }} </h1>
     <div class="flex items-center">
       <h2>Information personnelles</h2>
-      @if(Auth::user()->id == $user->id)
-        <a href="{{ url('/modifyAccount') }}" class="block py-2 px-3 text-gray-900 rounded">
-          <svg class="w-4 h-4"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
-          </svg>
-        </a>
+      @if(Auth::user() != null)
+        @if(Auth::user()->id == $user->id)
+          <a href="{{ url('/modifyAccount') }}" class="block py-2 px-3 text-gray-900 rounded">
+            <svg class="w-4 h-4"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+            </svg>
+          </a>
+        @endif
       @endif
     </div>
   </div>
@@ -68,15 +70,28 @@
     </div>    
   </div>
 </div>
-<div class="flex justify-center pb-3 pt-2">
-  <div class="grid grid-cols-2 gap-4 w-1/4">
-    <a href="{{ url('/soldProduct') }}" class="text-center bg-purple-400 rounded-full border-2 border-purple-400 shadow-inner pl-2 pr-2">Espace Propriétaire</a>
-    <a href="{{ url('/boughtProduct') }}" class=" text-center bg-yellow-400 rounded-full border-2 border-yellow-400 shadow-inner pl-2 pr-2">Espace Client</a>
+@if(Auth::user() != null)
+  @if(Auth::user()->id == $user->id)
+  <div class="flex justify-center pb-3 pt-2">
+    <div class="grid grid-cols-2 gap-4 w-1/4">
+      <a href="{{ url('/soldProduct') }}" class="text-center bg-purple-400 rounded-full border-2 border-purple-400 shadow-inner pl-2 pr-2">Espace Propriétaire</a>
+      <a href="{{ url('/boughtProduct') }}" class=" text-center bg-yellow-400 rounded-full border-2 border-yellow-400 shadow-inner pl-2 pr-2">Espace Client</a>
+    </div>
   </div>
-</div>
-<div class="flex justify-center pb-5 pt-2">
-  <a href="{{ url('/logout') }}" class="text-center bg-red-400 rounded-full border-2 border-red-400 shadow-inner pl-7 pr-7">Déconnexion</a>
-</div>
+    <div class="flex justify-center pb-5 pt-2">
+      <a href="{{ url('/logout') }}" class="text-center bg-red-400 rounded-full border-2 border-red-400 shadow-inner pl-7 pr-7">Déconnexion</a>
+    </div>
+  @else
+    <div class="flex justify-center pb-5 pt-2">
+      <a href="{{ url('/soldProduct') }}" class="text-center bg-purple-400 rounded-full border-2 border-purple-400 shadow-inner pl-2 pr-2">Espace Propriétaire</a>
+    </div>
+  @endif
+
+@else
+  <div class="flex justify-center pb-5 pt-2">
+    <a href="{{ url('/soldProduct') }}" class="text-center bg-purple-400 rounded-full border-2 border-purple-400 shadow-inner pl-2 pr-2">Espace Propriétaire</a>
+  </div>
+@endif
 @include('footer')
 </body>
 </html>
