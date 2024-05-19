@@ -95,7 +95,7 @@
       <div class="rounded overflow-hidden shadow-lg w-60" name="{{ $instrument->name }}">
         <div class="w-52 h-52">
         @if($instrument->image)
-            <img src="/images/{{$instrument->image[0]->path}}" class="w-min-auto"/>
+            <img src="/images/{{$instrument->image[0]->path}}" class="object-fill w-52 h-52"/>
           @endif
         </div>
         <div class="grid grid-cols-2 pb-2">

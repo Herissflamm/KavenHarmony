@@ -57,7 +57,14 @@ Route::delete('/deleteFromMyOrder', [OrderController::class,'deleteInstrumentFro
 
 Route::get('/account',  [UserController::class, 'showMyAccount'])->middleware(IsConnected::class);
 
+Route::get('/accountSeller',  [UserController::class, 'showAccount'])->name("accountSeller");
+
 Route::post('/modifyAccount', [UserController::class, 'modifyAccount'])->name("modifyAccount")->middleware(IsConnected::class);
+
+Route::get('/modifyProduct', [ProductController::class, 'showModifyProduct'])->name("modifyProduct")->middleware(IsConnected::class);
+
+Route::post('/modifyProduct', [ProductController::class, 'modifyProduct'])->name("modifyProduct")->middleware(IsConnected::class);
+
 
 Route::get('/modifyAccount', function (Request $request) {
     $userController = new UserController();
@@ -71,10 +78,8 @@ Route::get('/messaging', function () {
 
 Route::get('/search', [ProductController::class, 'showSearch']);
 
-Route::get('/product', function (Request $request) {
-    $productController = new ProductController();
-    return $productController->showProduct($request);
-})->name('product');
+
+Route::get('/product', [ProductController::class,'showProduct'])->name('product');
 
 Route::get('/about', function () {
     return view('home');

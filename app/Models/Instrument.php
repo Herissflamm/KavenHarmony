@@ -58,12 +58,12 @@ class Instrument extends Model
 
     public function state()
     {
-        return $this->hasOne(State::class, "id");
+        return $this->hasOne(State::class, "id", "id_state");
     }
 
     public function type_instrument()
     {
-        return $this->hasOne(Type::class, "id");
+        return $this->hasOne(Type::class, "id", "id_type_instrument");
     }
 
 }

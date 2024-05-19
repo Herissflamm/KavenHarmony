@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @vite('resources/css/app.css')
 </head>
-<body class = "dark:bg-white-50 overflow-x-hidden">
+<body class="overflow-x-hidden">
 @include('navbar')
 <div>
     <img src="/logo/disquejaune.png" class="absolute top-20 -right-40">
 
-    <img src="/logo/disquerouge.png" class="absolute top-1/3  -left-40">
+    <img src="/logo/disquerouge.png" class="absolute top-1/3 -left-40">
 
     <div class="pt-5 w-2/5 m-auto relative">
         <h1 class="text-2xl text-center font-bold font-montserrat">
