@@ -22,8 +22,9 @@ class CreateNewUser implements CreatesNewUsers
      *
      * @param  array<string, string>  $input
      */
-    public function create(array $input, Request $request): User
+    public function create(array $input): User
     {
+        
         Validator::make($input, [
             'username' => ['required', 'string', 'max:255'],
             'first_name' => ['required', 'string', 'max:32'],
@@ -79,8 +80,8 @@ class CreateNewUser implements CreatesNewUsers
 
             
             $i=0;
-            $imageName = $i.time().'.'.$request["images"]->extension();  
-            $request["images"]->move(public_path('images'), $imageName);
+            $imageName = $i.time().'.'.$input["images"]->extension();  
+            $input["images"]->move(public_path('images'), $imageName);
 
             $image = Image::create([
                 'path' => $imageName,
