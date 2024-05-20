@@ -19,7 +19,9 @@
   </a> 
   <div class="font-montserrat  pl-15 pb-10 text-center">
     <h1 class="font-bold text-xl">Mon Panier</h1>
-    <h2 class="text-lg">Prix total : {{$order->total_price}} €</h2>
+    @if($order != null)
+      <h2 class="text-lg">Prix total : {{$order->total_price}} €</h2>
+    @endif
   </div>
 </div>
 <div class="flex">
