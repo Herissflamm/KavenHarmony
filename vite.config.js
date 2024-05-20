@@ -8,7 +8,7 @@ export default defineConfig({
             'resources/js/app.js',
             'resources/js/annonce.js',
             'resources/js/basket.js',
-            'resources/js/boostrap.js',
+            'resources/js/bootstrap.js',
             'resources/js/filter.js',
             ],
             refresh: true,
