@@ -3,7 +3,7 @@
         @if (Route::has('login'))
         <div class="flex flex-wrap items-center justify-between mx-auto p-4">
             <div class="flex justify-between items-center">
-                <a href="{{ url('/home') }}"> <img src="/logo/Logoytpeblanc.png" class="w-24"/></a>
+                <a href="{{ url('/home') }}"> <img src="/logo/logoytpeblanc.png" class="w-24"/></a>
                 <div class="ml-56">
                     <form method="get" action="{{ url('/search') }}">   
                         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Rechercher</label>
