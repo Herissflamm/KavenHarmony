@@ -189,9 +189,11 @@
                     <label for="images" class="col-md-4 col-form-label text-md-end">Photo de profil : </label>
 
                     <div class="flex items-center pt-2">
-                        <div id="image-preview" class="flex items-center">                    
-                            <img src="/images/{{$user->image->path}}" class="rounded-full h-48 w-48">
-                        </div>
+                        @if ($user->image != null)
+                            <div id="image-preview" class="flex items-center">                    
+                                <img src="/images/{{$user->image->path}}" class="rounded-full h-48 w-48">
+                            </div>
+                        @endif
                         <label class="pl-5 cursor-pointer inline-block items-center flex">
                             <input id="images" type="file" accept=".jpeg, .jpg, .png, .gif" class="hidden form-control @error('images') is-invalid @enderror" name="images" value="{{ old('images') }}">
                             <p class="flex items-center justify-center text-5xl border-2 rounded-full w-11 h-11 pb-3 bg-yellow-400 border-yellow-400 text-white">+</p>

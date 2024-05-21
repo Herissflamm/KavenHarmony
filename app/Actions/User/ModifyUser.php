@@ -50,38 +50,39 @@ class ModifyUser
             'current_password.current_password' => __('The provided password does not match your current password.'),
       ])->validate();
       
+      if(isset($_POST["images"])){
+        if($request["images"] != null){
+          $validator = Validator::make(
+              $input, [
+              'images.*' => 'required|mimes:jpg,jpeg,png,bmp|max:20000'
+              ],[
+                  'images.*.required' => 'Please upload an image',
+                  'images.*.mimes' => 'Only jpeg,png and bmp images are allowed',
+                  'images.*.max' => 'Sorry! Maximum allowed size for an image is 20MB',
+              ]
+          );
+          if ($validator->fails()) {
+              return response()->json(array(
+                  'success' => false,
+                  'errors' => $validator->getMessageBag()->toArray()
+              ) , 400);
+          }
 
-      if($request["images"] != null){
-        $validator = Validator::make(
-            $input, [
-            'images.*' => 'required|mimes:jpg,jpeg,png,bmp|max:20000'
-            ],[
-                'images.*.required' => 'Please upload an image',
-                'images.*.mimes' => 'Only jpeg,png and bmp images are allowed',
-                'images.*.max' => 'Sorry! Maximum allowed size for an image is 20MB',
-            ]
-        );
-        if ($validator->fails()) {
-            return response()->json(array(
-                'success' => false,
-                'errors' => $validator->getMessageBag()->toArray()
-            ) , 400);
+          
+          $i=0;
+          $imageName = $i.time().'.'.$request["images"]->extension();  
+          $request["images"]->move(public_path('images'), $imageName);
+          if($image == null){
+            $image = Image::create([
+              'path' => $imageName,
+              'id_user' => $user -> id,
+            ]);
+          }else{
+            $image->path = $imageName;
+            $image->save();
+          }
+          $user->id_image = $image->id;      
         }
-
-        
-        $i=0;
-        $imageName = $i.time().'.'.$request["images"]->extension();  
-        $request["images"]->move(public_path('images'), $imageName);
-        if($image == null){
-          $image = Image::create([
-            'path' => $imageName,
-            'id_user' => $user -> id,
-          ]);
-        }else{
-          $image->path = $imageName;
-          $image->save();
-        }
-        $user->id_image = $image->id;      
       }
 
       $address->city = $input['city'];
