@@ -67,22 +67,22 @@
             <div class="md:ml-20">
                 <h1 class="font-montserrat font-bold md:pb-0 pb-2">Nos actualités</h1>
                 <div class="md:grid md:grid-cols-4 md:gap-2">
-                    <div class="font-serif m-auto text-center">
+                    <div class="font-serif m-auto md:text-start text-center">
                         <img src="/logo/partition.jpeg" class="md:w-3/5"/>
                         <h2>Lire une tablature</h2>
                         <p clas="text-xs">Date de publication : 01/03/2024</p>
                     </div>
-                    <div class="font-serif m-auto text-center">
+                    <div class="font-serif m-auto md:text-start text-center">
                         <img src="/logo/kazoo.png" class="md:w-3/5"/>
                         <h2>Le Kazoo</h2>
                         <p clas="text-xs">Date de publication : 20/12/2023</p>
                     </div>
-                    <div class="font-serif m-auto text-center">
+                    <div class="font-serif m-auto md:text-start text-center">
                         <img src="/logo/piano.jpeg" class="md:w-3/5"/>
                         <h2>Le Piano quand t'as pas..</h2>
                         <p clas="text-xs">Date de publication : 06/06/2024</p>
                     </div>
-                    <div class="font-serif m-auto text-center">
+                    <div class="font-serif m-auto md:text-start text-center">
                         <img src="/logo/trompette.jpeg" class="md:w-3/5"/>
                         <h2>Saxophone vs Tropett..</h2>
                         <p clas="text-xs">Date de publication : 15/05/2024</p>
