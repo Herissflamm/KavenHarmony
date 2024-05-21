@@ -61,36 +61,39 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
             'id_address' =>  $address -> id,
         ]);
-        if($input["images"] != null ){
-            $validator = Validator::make(
-                $input, [
-                'images.*' => 'required|mimes:jpg,jpeg,png,bmp|max:20000'
-                ],[
-                    'images.*.required' => 'Please upload an image',
-                    'images.*.mimes' => 'Only jpeg,png and bmp images are allowed',
-                    'images.*.max' => 'Sorry! Maximum allowed size for an image is 20MB',
-                ]
-            );
-            if ($validator->fails()) {
-                return response()->json(array(
-                    'success' => false,
-                    'errors' => $validator->getMessageBag()->toArray()
-                ) , 400);
+        if(isset($_POST["images"])){
+            if($input["images"] != null ){
+                $validator = Validator::make(
+                    $input, [
+                    'images.*' => 'required|mimes:jpg,jpeg,png,bmp|max:20000'
+                    ],[
+                        'images.*.required' => 'Please upload an image',
+                        'images.*.mimes' => 'Only jpeg,png and bmp images are allowed',
+                        'images.*.max' => 'Sorry! Maximum allowed size for an image is 20MB',
+                    ]
+                );
+                if ($validator->fails()) {
+                    return response()->json(array(
+                        'success' => false,
+                        'errors' => $validator->getMessageBag()->toArray()
+                    ) , 400);
+                }
+    
+                
+                $i=0;
+                $imageName = $i.time().'.'.$input["images"]->extension();  
+                $input["images"]->move(public_path('images'), $imageName);
+    
+                $image = Image::create([
+                    'path' => $imageName,
+                    'id_user' => $user -> id,
+                ]);
+                $user->id_image = $image->id;
+                $user->save();
+                
             }
-
-            
-            $i=0;
-            $imageName = $i.time().'.'.$input["images"]->extension();  
-            $input["images"]->move(public_path('images'), $imageName);
-
-            $image = Image::create([
-                'path' => $imageName,
-                'id_user' => $user -> id,
-            ]);
-            $user->id_image = $image->id;
-            $user->save();
-            
         }
+        
         
         if(isset($_POST['seller'])){
             Seller::create([

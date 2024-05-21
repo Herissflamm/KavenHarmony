@@ -1,12 +1,12 @@
 <header>
     <nav class="bg-black-50 border-gray-200">
         @if (Route::has('login'))
-        <div class="flex flex-wrap items-center justify-between mx-auto p-4">
-            <div class="flex justify-between items-center">
-                <a href="{{ url('/home') }}"> <img src="/logo/logoytpeblanc.png" class="w-24"/></a>
-                <div class="ml-56">
+        <div class="md:flex md:flex-wrap md:items-center md:justify-between md:mx-auto md:p-4">
+            <div class="md:flex md:justify-between md:items-center">
+                <a href="{{ url('/home') }}"> <img src="/logo/logoytpeblanc.png" class="w-24 m-auto md:m-0"/></a>
+                <div class="pl-1 md:pl-0 md:ml-56">
                     <form method="get" action="{{ url('/search') }}">   
-                        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Rechercher</label>
+                        <label for="default-search" class="md:mb-2 md:text-sm md:font-medium text-gray-900 sr-only">Rechercher</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                 <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -18,14 +18,14 @@
                     </form>
                 </div>
             </div>
-            <ul class="font-medium flex flex-row  mt-4 border border-gray-100 rounded-lg space-x-8 mt-0 border-0">
+            <ul class="pl-1 md:pl-0 font-medium flex flex-row border border-gray-100 rounded-lg md:space-x-8 space-x-2 border-0 md:pb-0 pb-2 md:pt-0 pt-2">
             @auth
                 <li>
-                    <a href="{{ url('/sell') }}" class="bg-white text-sm block font-medium py-1 px-3 text-gray-900 rounded-xl pr-16">+ Annonces</a>
+                    <a href="{{ url('/sell') }}" class="bg-white text-sm block font-medium py-1 md:px-3 px-2 pr-2 text-gray-900 rounded-xl md:pr-16">+Annonces</a>
                 </li>
                 <li>
-                    <a href="{{ url('/partition') }}" class="bg-white text-sm flex items-center font-medium py-1 px-3 text-gray-900 rounded-xl pr-16">
-                        <svg class="w-[24px] h-[24px] text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <a href="{{ url('/partition') }}" class="bg-white text-sm flex items-center font-medium py-1 px-2 pr-2 md:px-3 text-gray-900 rounded-xl md:pr-16">
+                        <svg class="w-[22px] h-[20px] text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd" d="M11 4.7C8.7 4.1 6.8 4 4 4a2 2 0 0 0-2 2v11c0 1.1 1 2 2 2 2.8 0 4.5.2 7 .8v-15Zm2 15.1c2.5-.6 4.2-.8 7-.8a2 2 0 0 0 2-2V6c0-1-.9-2-2-2-2.8 0-4.7.1-7 .7v15.1Z" clip-rule="evenodd"/>
                         </svg>
                         <p class="pl-2">Cours</p>
@@ -57,19 +57,21 @@
                             @endif
                         </a>
                     </div>
-                </li>                
+                </li>              
                 <li>
-                    <a href="{{ url('/logout') }}" class="block text-white py-2 px-3 rounded">Déconnexion</a>
+                    <a href="{{ url('/logout') }}" class="rounded-full flex justify-center items-center text-white">
+                        <svg class="h-8 w-8 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                        </svg>
+                    </a>
                 </li>
             @else
-                <li>    
-                    <a href="{{ route('login') }}" class="block text-white py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0">Se connecter</a>
-                </li>
-                @if (Route::has('register'))
-                    <li>
-                        <a href="{{ route('register') }}" class="block text-white py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0">S'inscrire</a>
-                    </li>
-                @endif
+                <li class="m-auto flex items-center">    
+                    <a href="{{ route('login') }}" class="rounded-full flex justify-center items-center text-white">Se connecter</a>
+                    @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="pl-5 rounded-full flex justify-center items-center text-white">S'inscrire</a>
+                    @endif
+                </li>                
             @endauth
             </ul>
         </div>
