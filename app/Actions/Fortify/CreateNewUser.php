@@ -61,7 +61,7 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
             'id_address' =>  $address -> id,
         ]);
-        if(isset($_POST["images"])){
+        if(isset($input["images"])){
             if($input["images"] != null ){
                 $validator = Validator::make(
                     $input, [

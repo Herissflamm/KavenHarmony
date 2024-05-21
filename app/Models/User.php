@@ -58,7 +58,7 @@ class User extends Authenticatable
 
     public function image()
     {
-        return $this->hasOne(Image::class, "id");
+        return $this->hasOne(Image::class, "id", "id_image");
     }
 
     public function address()
