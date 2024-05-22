@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('instrument', function (Blueprint $table) {
             $table->id();
             $table->string('name', length:45);
-            $table->text('description');
+            $table->text('description')->nullable();
 
             $table->unsignedBigInteger('id_type_instrument'); 
             $table->foreign('id_type_instrument')->references('id')->on('type_instrument');

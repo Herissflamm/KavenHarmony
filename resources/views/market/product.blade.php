@@ -35,7 +35,7 @@
   </div>
   <div class="pl-40">
     <div class="rounded-lg border-2 border-yellow-400 bg-yellow-400 grid grid-cols-2 w-9/12 h-44">
-      @if ($instrument->seller->users->image->path != null)
+      @if ($instrument->seller->users->image != null)
         <div class="relative w-40 h-40 m-2 overflow-hidden bg-white rounded-full">
           <img src="/images/{{$instrument->seller->users->image->path}}" class="w-full h-full object-fill rounded">
         </div>

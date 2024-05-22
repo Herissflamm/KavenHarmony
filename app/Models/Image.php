@@ -25,7 +25,7 @@ class Image extends Model
 
     public function userAuthor()
     {
-        return $this->hasOne(User::class, "id");
+        return $this->hasOne(User::class, "id", "id_user");
     }
 
     public function user()
