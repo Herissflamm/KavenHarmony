@@ -72,12 +72,26 @@
 </div>
 @if(Auth::user() != null)
   @if(Auth::user()->id == $user->id)
-  <div class="flex justify-center pb-3 pt-2">
-    <div class="grid grid-cols-2 gap-4 w-1/4">
-      <a href="{{ url('/soldProduct') }}" class="text-center bg-purple-400 rounded-full border-2 border-purple-400 shadow-inner pl-2 pr-2 text-white"> Espace Propriétaire</a>
-      <a href="{{ url('/boughtProduct') }}" class=" text-center bg-yellow-400 rounded-full border-2 border-yellow-400 shadow-inner pl-2 pr-2 text-white">Espace Client</a>
-    </div>
-  </div>
+    @if(Auth::user()->seller != null && Auth::user()->customer != null)
+      <div class="flex justify-center pb-3 pt-2">
+        <div class="grid grid-cols-2 gap-4 w-1/4">
+            <a href="{{ url('/soldProduct') }}" class="text-center bg-purple-400 rounded-full border-2 border-purple-400 shadow-inner pl-2 pr-2 text-white"> Espace Propriétaire</a>
+            <a href="{{ url('/boughtProduct') }}" class=" text-center bg-yellow-400 rounded-full border-2 border-yellow-400 shadow-inner pl-2 pr-2 text-white">Espace Client</a>
+        </div>
+      </div>
+    @elseif (Auth::user()->customer != null && Auth::user()->seller == null)
+      <div class="flex justify-center pb-3 pt-2">
+        <div class="grid grid-cols-1 gap-4 w-1/4">
+            <a href="{{ url('/boughtProduct') }}" class=" text-center bg-yellow-400 rounded-full border-2 border-yellow-400 shadow-inner pl-2 pr-2 text-white w-1/2 m-auto">Espace Client</a>
+        </div>
+      </div>
+    @elseif (Auth::user()->seller != null && Auth::user()->customer == null)
+      <div class="flex justify-center pb-3 pt-2">
+        <div class="grid grid-cols-1 gap-4 w-1/4">
+            <a href="{{ url('/soldProduct') }}" class=" text-center bg-purple-400 rounded-full border-2 border-purple-400 shadow-inner pl-2 pr-2 text-white w-1/2 m-auto">Espace Propriétaire</a>
+        </div>
+      </div>
+    @endif
     <div class="flex justify-center pb-5 pt-2">
       <a href="{{ url('/logout') }}" class="text-center bg-red-400 rounded-full border-2 border-red-400 shadow-inner pl-7 pr-7 text-white">Déconnexion</a>
     </div>

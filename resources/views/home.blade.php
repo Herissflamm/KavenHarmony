@@ -31,7 +31,7 @@
             
             <div class = "relative md:grid md:grid-cols-2 md:gap-3 md:place-items-center font-Montserrat">
                 <div class="relative max-w-xl mx-auto md:mt-20 mt-5">
-                    <a href="{{ url('/home') }}"> 
+                    <a href="{{ url('/search') }}"> 
                         <img src="/logo/piano.jpeg" class="h-2/5 w-full object-cover rounded-md"/>
                         <div class="absolute inset-0 flex items-center justify-center">
                             <p class="text-white text-3xl font-bold">Location</p>
