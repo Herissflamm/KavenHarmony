@@ -35,20 +35,37 @@ class ModifyUser
           Rule::unique(User::class),
         ]])->validate();
       }
-      Validator::make($input, [
-        'username' => ['required', 'string', 'max:255'],
-        'first_name' => ['required', 'string', 'max:32'],
-        'last_name' => ['required', 'string', 'max:32'],
-        'phone' => ['required', 'string', 'max:11'],
-        'city'=> ['required', 'string', 'max:45'],
-        'post_code'=> ['required', 'string', 'max:5'],
-        'street_number'=> ['required', 'int'],
-        'street_name'=> ['required', 'string', 'max:256'],
-        'current_password' => ['required', 'string', 'current_password:web'],
-            'password' => $this->passwordRules(),
-        ], [
-            'current_password.current_password' => __('The provided password does not match your current password.'),
-      ])->validate();
+      if(isset($input['password'])){
+        Validator::make($input, [
+          'username' => ['required', 'string', 'max:255'],
+          'first_name' => ['required', 'string', 'max:32'],
+          'last_name' => ['required', 'string', 'max:32'],
+          'phone' => ['required', 'string', 'max:11'],
+          'city'=> ['required', 'string', 'max:45'],
+          'post_code'=> ['required', 'string', 'max:5'],
+          'street_number'=> ['required', 'int'],
+          'street_name'=> ['required', 'string', 'max:256'],
+          'current_password' => ['required', 'string', 'current_password:web'],
+              'password' => $this->passwordRules(),
+          ], [
+              'current_password.current_password' => __('The provided password does not match your current password.'),
+          ])->validate();
+
+          $user->forceFill([
+            'password' => Hash::make($input['password']),
+          ])->save();
+      }else{
+        Validator::make($input, [
+          'username' => ['required', 'string', 'max:255'],
+          'first_name' => ['required', 'string', 'max:32'],
+          'last_name' => ['required', 'string', 'max:32'],
+          'phone' => ['required', 'string', 'max:11'],
+          'city'=> ['required', 'string', 'max:45'],
+          'post_code'=> ['required', 'string', 'max:5'],
+          'street_number'=> ['required', 'int'],
+          'street_name'=> ['required', 'string', 'max:256'],
+          ])->validate();
+      }
       
       if(isset($input["images"])){
         if($request["images"] != null){
@@ -97,9 +114,7 @@ class ModifyUser
       $user->last_name = $input['last_name'];
       $user->phone = $input['phone'];
       $user->email = $input['email'];
-      $user->forceFill([
-        'password' => Hash::make($input['password']),
-      ])->save();
+      
       $user->save();             
       return $user;
     }
