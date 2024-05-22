@@ -33,7 +33,7 @@
                 <h2 class="font-bold font-montserrat text-lg">{{$order->instrument->first()->name}} (Etat de la commande : {{$order->status->status}})</h2>
               </div>
               <div class="h-4/5">
-                <p class="font-serif">{{ $order->total_price}} €</p>
+                <p class="font-serif text-white">{{ $order->total_price}} €</p>
                 <p class="text-ellipsis overflow-hidden line-clamp-7 font-serif">{{ $order->instrument->first()->description }}</p>
               </div>
               <div class="w-2/5 m-auto">

@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+
 class ProductController extends Controller
 {
     public function showCreate(Request $request){
@@ -38,6 +39,10 @@ class ProductController extends Controller
             if($biggestPrice < $instrument->sell->price){
                 $biggestPrice = $instrument->sell->price;
             }
+        }
+        $user = Auth::user();
+        if($user != null){
+            \JavaScript::put([ 'customer' => $user->customer ]);
         }
         return view('market/listIntrument', ['allState' => $allState, 'instruments' => $instruments, 'biggestPrice'=>$biggestPrice, 'allCategories'=>$allCategories, 'allType'=>$allType]);
     }

@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+  console.log(customer);
   //Déclaration des variables
   let allType = document.getElementsByName("Type");
   let allState = document.getElementsByName("State");
@@ -124,7 +125,7 @@ function changeView(data){
     div.appendChild(divImage);
     if(data[i].image[0] !== null){
       let image = document.createElement("img");
-      image.classList.add("w-min-auto");
+      image.classList.add("object-fill", "w-52", "h-52");
       image.src = "/images/"+data[i].image[0].path;
       divImage.appendChild(image);
     }
@@ -142,6 +143,7 @@ function changeView(data){
     divAttribute.appendChild(pName);
 
     let pPrice = document.createElement("p");
+    pPrice.classList.add("text-white");
     pPrice.innerHTML = data[i].price + "€";
     divAttribute.appendChild(pPrice);
 
@@ -165,12 +167,13 @@ function changeView(data){
     basketIcon.setAttribute("stroke-width", "1.5");
     basketIcon.setAttribute("stroke", "currentColor");
     divIconBasket.appendChild(basketIcon);
-
-    let pathIcon = document.createElementNS("http://www.w3.org/2000/svg","path");
-    pathIcon.setAttribute("stroke-linecap", "round");
-    pathIcon.setAttribute("stroke-linejoin", "round");
-    pathIcon.setAttribute("d", "M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z");
-    basketIcon.appendChild(pathIcon);
+    if(customer != null){
+      let pathIcon = document.createElementNS("http://www.w3.org/2000/svg","path");
+      pathIcon.setAttribute("stroke-linecap", "round");
+      pathIcon.setAttribute("stroke-linejoin", "round");
+      pathIcon.setAttribute("d", "M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z");
+      basketIcon.appendChild(pathIcon);
+    }
 
     let divButton = document.createElement("div");
     divButton.classList.add("flex", "justify-center");
@@ -182,7 +185,7 @@ function changeView(data){
     divButton.appendChild(aButton);
 
     let button = document.createElement("button");
-    button.classList.add("rounded-full", "bg-yellow-400", "p-1", "pl-2", "pr-2");
+    button.classList.add("rounded-full", "bg-yellow-400", "p-1", "pl-2", "pr-2", "mb-2", "text-white");
     button.innerHTML = "Voir l'instrument";
     aButton.appendChild(button);
 

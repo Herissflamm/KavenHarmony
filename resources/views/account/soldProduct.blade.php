@@ -34,11 +34,11 @@
             </div>
             
             <div class="h-4/5">
-              <p class="">{{ $instrument->sell->price}} €</p>
+              <p class="text-white">{{ $instrument->sell->price}} €</p>
               <p class="text-ellipsis overflow-hidden line-clamp-7">{{ $instrument->description }}</p>
             </div>
             <div class="w-2/5 m-auto">
-              <a href="{{ route('product', ['id' => $instrument->id]) }}" class="self-end block px-2 py-2 text-center rounded-lg bg-purple-400 m-auto">Voir l'instrument</a>
+              <a href="{{ route('product', ['id' => $instrument->id]) }}" class="self-end block px-2 py-2 text-center rounded-lg bg-purple-400 m-auto text-white">Voir l'instrument</a>
             </div>
           </div>
         </div>

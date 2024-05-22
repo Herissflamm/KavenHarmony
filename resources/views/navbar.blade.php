@@ -20,9 +20,12 @@
             </div>
             <ul class="pl-1 md:pl-0 font-medium flex flex-row border border-gray-100 rounded-lg md:space-x-8 space-x-2 border-0 md:pb-0 pb-2 md:pt-0 pt-2">
             @auth
-                <li>
-                    <a href="{{ url('/sell') }}" class="bg-white text-sm block font-medium py-1 md:px-3 px-2 pr-2 text-gray-900 rounded-xl md:pr-16">+Annonces</a>
-                </li>
+                @if(Auth::user()->seller != null)
+                    <li>
+                        <a href="{{ url('/sell') }}" class="bg-white text-sm block font-medium py-1 md:px-3 px-2 pr-2 text-gray-900 rounded-xl md:pr-16">+Annonces</a>
+                    </li>
+                @endif
+                
                 <li>
                     <a href="{{ url('/partition') }}" class="bg-white text-sm flex items-center font-medium py-1 px-2 pr-2 md:px-3 text-gray-900 rounded-xl md:pr-16">
                         <svg class="w-[22px] h-[20px] text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
