@@ -204,7 +204,7 @@
                     </div>
                     <div class="row mb-0 p-2 pb-4">
                         <div class="col-md-6 offset-md-4 flex justify-center">
-                            <button type="submit" class="btn btn-primary bg-yellow-400 rounded-full border-2 border-yellow-400 shadow-inner p-1">
+                            <button type="submit" class="text-white btn btn-primary bg-yellow-400 rounded-full border-2 border-yellow-400 shadow-inner p-1">
                                 Créer son compte
                             </button>
                         </div>

@@ -57,7 +57,7 @@
 
                 <div class="col-md-6 pl-7 pt-2 flex align-center">
                     <input id="price" type="text" class="pr-7 pl-2 rounded-r-lg rounded-full shadow-inner border-2 form-control @error('price') is-invalid @enderror" name="price" value="{{ $instrument->sell->price  }}" required autocomplete="price" autofocus> 
-                    <p class="rounded-l-lg rounded-full border-2 bg-purple-400 border-purple-400 pr-2 pl-1">€</p>
+                    <p class="rounded-l-lg rounded-full border-2 bg-purple-400 border-purple-400 pr-2 pl-1 text-white">€</p>
 
                     @error('price')
                         <span class="invalid-feedback" role="alert">

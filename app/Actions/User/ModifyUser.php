@@ -50,7 +50,7 @@ class ModifyUser
             'current_password.current_password' => __('The provided password does not match your current password.'),
       ])->validate();
       
-      if(isset($_POST["images"])){
+      if(isset($input["images"])){
         if($request["images"] != null){
           $validator = Validator::make(
               $input, [
@@ -101,6 +101,6 @@ class ModifyUser
         'password' => Hash::make($input['password']),
       ])->save();
       $user->save();             
-        return $user;
+      return $user;
     }
 }

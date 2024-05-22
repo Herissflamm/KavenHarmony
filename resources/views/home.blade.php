@@ -17,7 +17,7 @@
                 <h1 class="md:text-2xl text-center font-bold font-montserrat pb-2">
                     Bienvenue sur notre plateforme !
                 </h1>
-                <div class="md:pt-2 font-serif text-lg text-center">
+                <div class="md:pt-2 font-montserrat text-lg text-center">
                     <p>Kaven Harmony est une platfeforme consacrée au partage de la musique. Vous pourrez ici louer vos instruments de musique ou bien prendre contact avec des professeurs pour apprendre à jouer d'un instrument.</p>
                 <br>
                     <p>Grâce à la location, réservez des instruments à prix moindre pour une durée déterminée.</p>     
@@ -29,7 +29,7 @@
 
 
             
-            <div class = "relative md:grid md:grid-cols-2 md:gap-3 md:place-items-center font-montserrat">
+            <div class = "relative md:grid md:grid-cols-2 md:gap-3 md:place-items-center font-Montserrat">
                 <div class="relative max-w-xl mx-auto md:mt-20 mt-5">
                     <a href="{{ url('/home') }}"> 
                         <img src="/logo/piano.jpeg" class="h-2/5 w-full object-cover rounded-md"/>

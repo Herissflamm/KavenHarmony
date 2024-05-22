@@ -20,7 +20,7 @@
   <div class="font-montserrat  pl-15 pb-10 text-center">
     <h1 class="font-bold text-xl">Mon Panier</h1>
     @if($order != null)
-      <h2 class="text-lg">Prix total : {{$order->total_price}} €</h2>
+      <h2 class="text-lg text-white">Prix total : {{$order->total_price}} €</h2>
     @endif
   </div>
 </div>
@@ -43,11 +43,11 @@
               </div>
               
               <div class="h-4/5">
-                <p class="">{{ $instrument->sell->price}} €</p>
+                <p class="text-white">{{ $instrument->sell->price}} €</p>
                 <p class="text-ellipsis overflow-hidden line-clamp-7">{{ $instrument->description }}</p>
               </div>
               <div class="w-2/5 m-auto">
-                <a href="{{ route('product', ['id' => $instrument->id]) }}" class="self-end block px-2 py-2 text-center rounded-lg bg-yellow-400 m-auto">Voir l'instrument</a>
+                <a href="{{ route('product', ['id' => $instrument->id]) }}" class="self-end block px-2 py-2 text-center rounded-lg bg-yellow-400 m-auto text-white">Voir l'instrument</a>
               </div>
             </div>
           </div>

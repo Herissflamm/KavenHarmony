@@ -62,7 +62,7 @@
                         <div class="col-md-8 offset-md-4">
                             <ul>
                                 <li class="mb-3">
-                                    <button type="submit" class="btn btn-primary rounded-full bg-purple-400 p-1 px-10">
+                                    <button type="submit" class="btn btn-primary rounded-full bg-purple-400 p-1 px-10 text-white">
                                         Se connecter
                                     </button>
                                 </li>
