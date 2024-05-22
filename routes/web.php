@@ -23,7 +23,7 @@ use App\Http\Middleware\IsConnected;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::get('/home', function () {
     return view('home');
@@ -57,7 +57,7 @@ Route::get('/filterProduct', [ProductController::class,'filterProduct']);
 
 Route::delete('/deleteFromMyOrder', [OrderController::class,'deleteInstrumentFromOrder'])->middleware(IsConnected::class)->middleware(IsCustomer::class);
 
-Route::get('/account',  [UserController::class, 'showMyAccount'])->middleware(IsConnected::class);
+Route::get('/account',  [UserController::class, 'showMyAccount'])->name('account')->middleware(IsConnected::class);
 
 Route::get('/accountSeller',  [UserController::class, 'showAccount'])->name("accountSeller");
 
@@ -75,7 +75,6 @@ Route::get('/messaging', function () {
 
 
 Route::get('/search', [ProductController::class, 'showSearch']);
-
 
 Route::get('/product', [ProductController::class,'showProduct'])->name('product');
 
