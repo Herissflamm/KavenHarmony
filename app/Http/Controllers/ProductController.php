@@ -49,7 +49,7 @@ class ProductController extends Controller
 
     public function showProduct(Request $request){
         $instrument = InstrumentRepositories::getInstrumentByID($request->id);
-        $suggestInstrument = InstrumentRepositories::getInstrumentSuggest($instrument->type_instrument->id, $instrument->seller->id_users);
+        $suggestInstrument = InstrumentRepositories::getInstrumentSuggest($instrument->type_instrument->id, $instrument->seller->id_users, $instrument->id);
         return view('market/product', ['instrument' => $instrument, 'suggestInstrument' => $suggestInstrument]);
     }
 
@@ -89,7 +89,7 @@ class ProductController extends Controller
         $updateSell->update($request, $sell);
         $updateProduct = new UpdateProduct();
         $instrument = $updateProduct->update($request, $instrument, $id_state, $id_type);
-        $suggestInstrument = InstrumentRepositories::getInstrumentSuggest($instrument->type_instrument->id, $instrument->seller->id_users);
+        $suggestInstrument = InstrumentRepositories::getInstrumentSuggest($instrument->type_instrument->id, $instrument->seller->id_users, $instrument->id);
         $instrument = InstrumentRepositories::getInstrumentByID($instrument->id);
         return view('market/product', ['instrument' => $instrument, 'suggestInstrument' => $suggestInstrument]);
         
