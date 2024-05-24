@@ -68,7 +68,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Descritpion</label>
+                <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
                 <div class="pl-7 pt-2">
                     <textarea id="description" name="description" rows="4" class="pl-2 pt-1 rounded-xl shadow-inner border-2 block w-full text-sm resize-none" placeholder="Decrivez votre produit.....">{{$instrument->description}}</textarea>
                 </div>
