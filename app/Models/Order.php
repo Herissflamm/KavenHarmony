@@ -21,12 +21,12 @@ class Order extends Model
 
     public function instrument_has_order()
     {
-        return $this->belongsTo(InstrumentHasOrder::class, "id");
+        return $this->belongsTo(InstrumentHasOrder::class, "id", "id_order");
     }
 
     public function customer()
     {
-        return $this->hasOne(Customer::class, "id_users");
+        return $this->hasOne(Customer::class, "id_users", "id");
     }
 
     public function status()

@@ -53,9 +53,9 @@
   public static function getAllInstrumentWithSearch($value){ 
     $allInstrument= [];
     $instrumentQuery = null;
-    $instrumentQuery = Instrument::with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')
-        ->join('type_instrument', 'instrument.id_type_instrument', '=', 'type_instrument.id')
-        ->join('state', 'instrument.id_state', '=', 'state.id')
+    $instrumentQuery = Instrument::select('instrument.*')->with('state', 'type_instrument', 'seller', 'sell', 'image', 'order')
+        ->join('type_instrument', 'type_instrument.id', '=', 'instrument.id_type_instrument')
+        ->join('state', 'state.id', '=', 'instrument.id_state')
         ->leftJoin('instrument_has_order', 'instrument_has_order.id_instrument', '=', 'instrument.id')
         ->whereNull('instrument_has_order.id_instrument')
         ->whereAny([

@@ -20,12 +20,12 @@ class InstrumentHasOrder extends Pivot
 
     public function order()
     {
-        return $this->hasOne(Order::class, "id");
+        return $this->hasOne(Order::class, "id", "id_order");
     }
 
     public function instrument()
     {
-        return $this->hasOne(Instrument::class, "id");
+        return $this->hasOne(Instrument::class, "id", "id_instrument");
     }
     
 }
