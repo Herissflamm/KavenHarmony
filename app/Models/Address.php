@@ -20,7 +20,7 @@ class Address extends Model
 
     public function users()
     {
-        return $this->belongsTo(User::class, "id");
+        return $this->belongsTo(User::class, "id", "id_address");
     }
 
 }

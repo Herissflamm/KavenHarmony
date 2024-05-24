@@ -20,7 +20,7 @@ class Sell extends Model
 
     public function instrument()
     {
-        return $this->belongsTo(Instrument::class, "id");
+        return $this->belongsTo(Instrument::class, "id", "id_sell");
     }
 
     public function discount()

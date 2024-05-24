@@ -20,7 +20,7 @@ class Image extends Model
 
     public function seller()
     {
-        return $this->belongsTo(Seller::class, "id_users");
+        return $this->belongsTo(Seller::class, "id_users", "id");
     }
 
     public function userAuthor()
@@ -30,7 +30,7 @@ class Image extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, "id_image");
+        return $this->belongsTo(User::class, "id_image", "id");
     }
 
     public function instrument()
@@ -40,7 +40,7 @@ class Image extends Model
 
     public function instrument_has_image()
     {
-        return $this->hasMany(InstrumentHasImage::class, 'id_image');
+        return $this->hasMany(InstrumentHasImage::class, 'id_image', 'id');
     }
 
 }

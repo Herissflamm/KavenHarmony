@@ -20,12 +20,12 @@ class InstrumentHasImage extends Pivot
 
     public function image()
     {
-        return $this->belongsTo(Image::class, "id");
+        return $this->belongsTo(Image::class, "id", "id_image");
     }
 
     public function instrument()
     {
-        return $this->belongsTo(Instrument::class, "id");
+        return $this->belongsTo(Instrument::class, "id", "id_instrument");
     }
     
 }

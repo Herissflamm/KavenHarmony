@@ -20,12 +20,12 @@ class Rent extends Model
 
     public function instrument()
     {
-        return $this->belongsTo(Instrument::class, "id");
+        return $this->belongsTo(Instrument::class, "id", "id_rent");
     }
 
     public function discount()
     {
-        return $this->hasOne(Discount::class, "id");
+        return $this->hasOne(Discount::class, "id", "id_discount");
     }
 
 }

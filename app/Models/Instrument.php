@@ -28,7 +28,7 @@ class Instrument extends Model
 
     public function instrument_has_image()
     {
-        return $this->hasMany(InstrumentHasImage::class, 'id_instrument');
+        return $this->hasMany(InstrumentHasImage::class, 'id_instrument', 'id');
     }
 
     public function order()
@@ -38,17 +38,17 @@ class Instrument extends Model
 
     public function instrument_has_order()
     {
-        return $this->hasMany(InstrumentHasOrder::class, 'id_instrument');
+        return $this->hasMany(InstrumentHasOrder::class, 'id_instrument', 'id');
     }
 
     public function rent()
     {
-        return $this->hasOne(Rent::class, "id");
+        return $this->hasOne(Rent::class, "id", "id_rent");
     }
 
     public function sell()
     {
-        return $this->hasOne(Sell::class, "id");
+        return $this->hasOne(Sell::class, "id", "id_sell");
     }
 
     public function seller()
