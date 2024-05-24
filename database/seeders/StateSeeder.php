@@ -17,7 +17,7 @@ class StateSeeder extends Seeder
             'state' => 'Mauvais etat',
         ]);
         DB::table('state')->insert([
-            'state' => 'En bonne etat',
+            'state' => 'En bon etat',
         ]);
         DB::table('state')->insert([
             'state' => 'Etat correct',
