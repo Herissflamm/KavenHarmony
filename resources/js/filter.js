@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-  console.log(customer);
   //Déclaration des variables
   let allType = document.getElementsByName("Type");
   let allState = document.getElementsByName("State");
