@@ -9,7 +9,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Home page">
     <meta property="og:description" content="Kaven Harmony : site d'achat et revente d'instrument de musique d'occasion">
-    <meta property="og:image" content="/logo/logoytpeblanc.png">
+    <meta property="og:image" content="/logo/logotypenoir.png">
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
@@ -17,7 +17,7 @@
     <meta property="twitter:url" content="https://kavenharmony.eu">
     <meta name="twitter:title" content="Home page">
     <meta name="twitter:description" content="Kaven Harmony : site d'achat et revente d'instrument de musique d'occasion">
-    <meta name="twitter:image" content="/logo/logoytpeblanc.png">
+    <meta name="twitter:image" content="/logo/logotypenoir.png">
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
