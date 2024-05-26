@@ -23,7 +23,8 @@ class Instrument extends Model
 
     public function image()
     {
-        return $this->belongsToMany(Image::class, 'instrument_has_image', 'id_instrument', 'id_image')->using(InstrumentHasImage::class);
+        return $this->belongsToMany(Image::class, 'instrument_has_image', 'id_instrument', 'id_image')
+        ->using(InstrumentHasImage::class);
     }
 
     public function instrument_has_image()
@@ -33,7 +34,8 @@ class Instrument extends Model
 
     public function order()
     {
-        return $this->belongsToMany(Order::class, 'instrument_has_order', 'id_instrument', 'id_order')->using(InstrumentHasOrder::class);
+        return $this->belongsToMany(Order::class, 'instrument_has_order', 'id_instrument', 'id_order')
+        ->using(InstrumentHasOrder::class);
     }
 
     public function instrument_has_order()

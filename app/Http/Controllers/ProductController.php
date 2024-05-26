@@ -4,16 +4,14 @@ namespace App\Http\Controllers;
 
 
 use App\Actions\Product\UpdateProduct;
+use App\Actions\Product\UpdateRent;
 use App\Actions\Product\UpdateSell;
 use App\Repositories\CategoriesRepositories;
 use App\Repositories\InstrumentRepositories;
-use App\Repositories\SellRepositories;
 use App\Repositories\TypeRepositories;
 use App\Repositories\StateRepositories;
-use App\Models\Instrument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 
 class ProductController extends Controller
@@ -80,19 +78,25 @@ class ProductController extends Controller
         return view('market/modifyProduct', ['allState' => $state, 'allType' => $allType,'instrument' => $instrument]);
     }
 
+    //Modifie un produit et affiche sa page
     public function modifyProduct(Request $request){
         $instrument = InstrumentRepositories::getInstrumentByID($request['id']);
         $id_type = TypeRepositories::getTypeByTypeName($request['instrumentType'])->id;
         $id_state = StateRepositories::getStateByStateName($request['state'])->id;
         $sell = $instrument->sell;
-        $updateSell = new UpdateSell();
-        $updateSell->update($request, $sell);
+        $rent = $instrument->rent;
+        if($sell != null){
+            $updateSell = new UpdateSell();
+            $updateSell->update($request, $sell);
+        }
+        if($rent != null){
+            $updateRent = new UpdateRent();
+            $updateRent->update($request, $rent);
+        }
         $updateProduct = new UpdateProduct();
         $instrument = $updateProduct->update($request, $instrument, $id_state, $id_type);
-        $suggestInstrument = InstrumentRepositories::getInstrumentSuggest($instrument->type_instrument->id, $instrument->seller->id_users, $instrument->id);
-        $instrument = InstrumentRepositories::getInstrumentByID($instrument->id);
-        return view('market/product', ['instrument' => $instrument, 'suggestInstrument' => $suggestInstrument]);
-        
-       
+        $suggestInstrument = InstrumentRepositories::getInstrumentSuggest($instrument->type_instrument->id,
+        $instrument->seller->id_users, $instrument->id);
+        return view('market/product', ['instrument' => $instrument, 'suggestInstrument' => $suggestInstrument]); 
     }
 }

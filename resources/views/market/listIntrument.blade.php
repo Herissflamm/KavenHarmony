@@ -1,6 +1,7 @@
 <!doctype html>
-<html>
+<html lang="fr">
 <head>
+  <title>Liste instrument</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -94,14 +95,14 @@
       @foreach ($instruments as $instrument)
       <div class="rounded overflow-hidden shadow-lg w-60" name="{{ $instrument->name }}">
         <div class="w-52 h-52">
-        @if($instrument->image)
-            <img src="/images/{{$instrument->image[0]->path}}" class="object-fill w-52 h-52"/>
+          @if($instrument->image)
+            <img src="/images/{{$instrument->image[0]->path}}" class="object-fill w-52 h-52" alt="{{$instrument->name}}"/>
           @endif
         </div>
         <div class="grid grid-cols-2 pb-2">
           <div class="text-left">
-            <p class="">{{ $instrument->name }}</p>
-            <p class="text-white">{{ $instrument->sell->price}} €</p>
+            <p class="font-montserrat text-lg">{{ $instrument->name }}</p>
+            <p class="font-serif">{{ $instrument->sell->price}} €</p>
           </div>
           <div class="rounded-full text-purple-400 bg-white flex justify-end items-center p-1">
             @if(Auth::user())

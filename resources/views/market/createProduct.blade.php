@@ -1,10 +1,11 @@
 <!doctype html>
-<html>
+<html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  @vite('resources/css/app.css')
-  @vite(['resources/js/annonce.js'])
+    <title>Créer un produit</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite('resources/css/app.css')
+    @vite(['resources/js/annonce.js'])
 </head>
 <body class = "">
 @include('navbar')

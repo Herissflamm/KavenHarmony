@@ -124,6 +124,7 @@ function changeView(data){
     div.appendChild(divImage);
     if(data[i].image[0] !== null){
       let image = document.createElement("img");
+      image.setAttribute("alt", "Photo du produit")
       image.classList.add("object-fill", "w-52", "h-52");
       image.src = "/images/"+data[i].image[0].path;
       divImage.appendChild(image);

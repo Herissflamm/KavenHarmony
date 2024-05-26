@@ -7,13 +7,13 @@
  
  class InstrumentHasOrderRepositories{
   public static function getAllInstrumentByOrderId($id){
-    $val = InstrumentHasOrder::with('instrument')->where('Order_idOrder', $id)->get();
+    $val = InstrumentHasOrder::select('instrument_has_Order.*')->with('instrument')->where('Order_idOrder', $id)->get();
     return $val;
     
   }
 
   public static function getAllInstrumentOfOrderByUserId($id){
-    $val = InstrumentHasOrder::with('instrument' )
+    $val = InstrumentHasOrder::select('instrument_has_Order.*')->with('instrument' )
     ->join('order', 'order.id', '=', 'instrument_has_order.id_order')
     ->join('customer', 'customer.id_users', '=', 'order.id_customer')
     ->where('customer.id_users', $id)->get();

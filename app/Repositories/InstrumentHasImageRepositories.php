@@ -2,12 +2,12 @@
  
  namespace App\Repositories;
   
- use App\Models\InstrumentHasOrder;
- use Illuminate\Support\Facades\DB;
+ use App\Models\InstrumentHasImage;
+
  
  class InstrumentHasImageRepositories{
   public static function getAllImageByInstrumentId($id){
-    $val = InstrumentHasOrder::with('image')->where('id_instrument', $id)->get();
+    $val = InstrumentHasImage::select('instrument_has_image.*')->with('image')->where('id_instrument', $id)->get();
     return $val;
   }
 }
