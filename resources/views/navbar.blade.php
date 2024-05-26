@@ -3,7 +3,7 @@
         @if (Route::has('login'))
         <div class="md:flex md:flex-wrap md:items-center md:justify-between md:mx-auto md:p-4">
             <div class="md:flex md:justify-between md:items-center">
-                <a href="{{ url('/home') }}"> <img src="/logo/logoytpeblanc.png" class="w-24 m-auto md:m-0" alt="Logo"/></a>
+                <a href="{{ url('/home') }}"> <img src="/logo/logoytpeblanc.png" class="w-24 m-auto md:m-0" alt="KavenHarmony Logo"/></a>
                 <div class="pl-1 md:pl-0 md:ml-56">
                     <form method="get" action="{{ url('/search') }}">   
                         <label for="default-search" class="md:mb-2 md:text-sm md:font-medium text-gray-900 sr-only">Rechercher</label>
