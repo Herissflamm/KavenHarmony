@@ -2,6 +2,23 @@
 <html lang="fr">
 <head>
     <title>Home page</title>
+    <meta name="description" content="Kaven Harmony est un site d'achat et revente d'instrument de musique d'occasion">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://kavenharmony.eu">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Home page">
+    <meta property="og:description" content="Kaven Harmony : site d'achat et revente d'instrument de musique d'occasion">
+    <meta property="og:image" content="/logo/logoytpeblanc.png">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="kavenharmony.eu">
+    <meta property="twitter:url" content="https://kavenharmony.eu">
+    <meta name="twitter:title" content="Home page">
+    <meta name="twitter:description" content="Kaven Harmony : site d'achat et revente d'instrument de musique d'occasion">
+    <meta name="twitter:image" content="/logo/logoytpeblanc.png">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
