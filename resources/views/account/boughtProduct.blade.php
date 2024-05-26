@@ -1,6 +1,7 @@
 <!doctype html>
-<html>
+<html lang="fr">
 <head>
+  <title>Mes historique de commande</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -26,7 +27,7 @@
         <div class="rounded-lg overflow-hidden mb-5 max-h-68 w-5/6 border-2 border-yellow-400" name="{{ $order->instrument->first()->name }}">
           <div class="grid grid-cols-2">
             @if($order->instrument->first()->image!=null)
-              <img src="/images/{{$order->instrument->first()->image[0]->path}}" class="w-72"/>
+              <img src="/images/{{$order->instrument->first()->image[0]->path}}" class="w-72" alt="{{$order->instrument->first()->name}}"/>
             @endif
             <div class="-ml-16 flex items-stretch flex-col">
               <div class="flex items-center">

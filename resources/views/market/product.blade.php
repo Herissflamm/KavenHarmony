@@ -1,13 +1,14 @@
 <!doctype html>
-<html>
+<html lang="fr">
 <head>
+  <title>Page produit</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @vite('resources/css/app.css')
 </head>
 <body class="overflow-x-hidden">
 @include('navbar')
-<img src="/logo/disquerouge.png" class="absolute top-96 right-10">
+<img src="/logo/disquerouge.png" class="absolute top-96 right-10" alt="Disque rouge">
 <div class="pl-20">
   <a href="{{url('/search') }}"> 
     <p class="font-montserrat">
@@ -37,7 +38,7 @@
     <div class="rounded-lg border-2 border-yellow-400 bg-yellow-400 grid grid-cols-2 w-9/12 h-44">
       @if ($instrument->seller->users->image != null)
         <div class="relative w-40 h-40 m-2 overflow-hidden bg-white rounded-full">
-          <img src="/images/{{$instrument->seller->users->image->path}}" class="w-full h-full object-fill rounded">
+          <img src="/images/{{$instrument->seller->users->image->path}}" class="w-full h-full object-fill rounded" src="Photo de profil">
         </div>
       @else
         <div class="relative w-44 h-5/6 m-2 overflow-hidden bg-white rounded-full">
@@ -71,7 +72,7 @@
     </div>
     <p class="pl-14">Publié depuis le {{$instrument->created_at}}</p>
     <div>
-      <p class="font-bold text-white">{{$instrument->sell->price}} €</p>
+      <p class="font-bold">{{$instrument->sell->price}} €</p>
     </div>
     <div>
       Etat : 
@@ -84,7 +85,7 @@
   
   @foreach ($instrument->image as $image)
   <div>
-    <img src="/images/{{$image->path}}" class="w-48 h-48 object-fill pr-5"/>
+    <img src="/images/{{$image->path}}" class="w-48 h-48 object-fill pr-5" alt="{{$instrument->name}}"/>
   </div>
   @endforeach
 </div>
@@ -95,13 +96,13 @@
     <div class="rounded overflow-hidden shadow-lg w-60" name="{{ $instrument->name }}">
         <div class="w-52 h-52">
           @if($instrument->image)
-            <img src="/images/{{$instrument->image[0]->path}}" class="object-fill w-52 h-52"/>
+            <img src="/images/{{$instrument->image[0]->path}}" class="object-fill w-52 h-52" alt="{{$instrument->name}}"/>
           @endif
         </div>
         <div class="grid grid-cols-2 pb-2">
           <div class="text-left">
             <p class="">{{ $instrument->type_instrument->type }}</p>
-            <p class="text-white">{{ $instrument->sell->price}} €</p>
+            <p class="">{{ $instrument->sell->price}} €</p>
           </div>
           @if(Auth::user() != null)
             @if(Auth::user()->customer != null)

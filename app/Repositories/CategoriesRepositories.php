@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\DB;
 class CategoriesRepositories
 {
   public static function getAllCategories(){
-    $categories = Categories::with('type')->get();
+    $categories = Categories::select('categories.*')->with('type')->get();
     return $categories;
   }
 
 public static function getTypeByID($id){
-    $val = Categories::with('type')->where('id', $id)->first();
+    $val = Categories::select('categories.*')->with('type')->where('id', $id)->first();
     return $val;
   }
 
   public static function getTypeByCategoriesName($categories){
-      $val = Categories::with('type')->where('categories', $categories)->first();
+      $val = Categories::select('categories.*')->with('type')->where('categories', $categories)->first();
       return $val;
   }
 }

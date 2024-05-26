@@ -1,6 +1,7 @@
 <!doctype html>
-<html>
+<html lang="fr">
 <head>
+  <title>Mon compte</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @vite('resources/css/app.css')
@@ -11,7 +12,7 @@
   <div class="card-header flex flex-col items-center">
     @if ($user->image != null)
       <div class="relative w-12 h-12 overflow-hidden bg-white rounded-full">
-          <img src="/images/{{$user->image->path}}" class="w-full h-full rounded">
+          <img src="/images/{{$user->image->path}}" class="w-full h-full rounded" alt="Photo de profil">
       </div>
     @else
       <div class="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">

@@ -83,7 +83,8 @@
   }
 
   public static function getInstrumentSuggest($id_type_instrument, $id_seller, $id_instrument){
-    $instrumentQuery = Instrument::select('instrument.*')->with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')
+    $instrumentQuery = Instrument::select('instrument.*')
+    ->with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')
     ->where('id', '!=', $id_instrument)
     ->where(
       function($query) use($id_type_instrument, $id_seller){
