@@ -88,22 +88,22 @@
                     <div class="font-serif m-auto md:text-start text-center">
                         <img src="/logo/partition.jpeg" class="md:w-3/5" alt="Partition"/>
                         <h2>Lire une tablature</h2>
-                        <p clas="text-xs">Date de publication : 01/03/2024</p>
+                        <p>Date de publication : 01/03/2024</p>
                     </div>
                     <div class="font-serif m-auto md:text-start text-center">
                         <img src="/logo/kazoo.png" class="md:w-3/5" alt="Garçon jouant du kazoo"/>
                         <h2>Le Kazoo</h2>
-                        <p clas="text-xs">Date de publication : 20/12/2023</p>
+                        <p>Date de publication : 20/12/2023</p>
                     </div>
                     <div class="font-serif m-auto md:text-start text-center">
                         <img src="/logo/piano.jpeg" class="md:w-3/5" alt="Piano"/>
                         <h2>Le Piano quand t'as pas..</h2>
-                        <p clas="text-xs">Date de publication : 06/06/2024</p>
+                        <p>Date de publication : 06/06/2024</p>
                     </div>
                     <div class="font-serif m-auto md:text-start text-center">
                         <img src="/logo/trompette.jpeg" class="md:w-3/5" alt="Trompette"/>
                         <h2>Saxophone vs Tropett..</h2>
-                        <p clas="text-xs">Date de publication : 15/05/2024</p>
+                        <p>Date de publication : 15/05/2024</p>
                     </div>  
                 </div>
             </div>
