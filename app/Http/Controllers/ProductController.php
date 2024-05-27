@@ -43,7 +43,7 @@ class ProductController extends Controller
         if($user != null){
             $customer = $user->customer;
         }
-        return view('market/listIntrument', ['customer' => $user->customer, 'allState' => $allState, 'instruments' => $instruments, 'biggestPrice'=>$biggestPrice, 'allCategories'=>$allCategories, 'allType'=>$allType]);
+        return view('market/listIntrument', ['customer' => $customer, 'allState' => $allState, 'instruments' => $instruments, 'biggestPrice'=>$biggestPrice, 'allCategories'=>$allCategories, 'allType'=>$allType]);
     }
 
     public function showProduct(Request $request){
