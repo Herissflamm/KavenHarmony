@@ -40,7 +40,7 @@ class ProductController extends Controller
         }
         $user = Auth::user();
         if($user != null){
-            \JavaScript::put([ 'customer' => $user->customer ]);
+            return view('market/listIntrument', ['customer' => $user->customer, 'allState' => $allState, 'instruments' => $instruments, 'biggestPrice'=>$biggestPrice, 'allCategories'=>$allCategories, 'allType'=>$allType]);
         }
         return view('market/listIntrument', ['allState' => $allState, 'instruments' => $instruments, 'biggestPrice'=>$biggestPrice, 'allCategories'=>$allCategories, 'allType'=>$allType]);
     }
