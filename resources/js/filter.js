@@ -57,7 +57,6 @@ async function getAllInstrumentWithPrice(event){
   let type = "";
   let minPrice = document.getElementById("minPrice").value;
   let maxPrice = document.getElementById("maxPrice").value;
-  console.log(maxPrice);
   for(let i = 0; i < allSelectedFilter.length; i++){
     if(allSelectedFilter[i].getAttribute("Name") == 'State'){
       state = allSelectedFilter[i].id;
@@ -167,7 +166,9 @@ function changeView(data){
     basketIcon.setAttribute("stroke-width", "1.5");
     basketIcon.setAttribute("stroke", "currentColor");
     divIconBasket.appendChild(basketIcon);
-    if(customer != null){
+    let customer = document.getElementById('customer').value;
+    console.log(customer);
+    if(customer != undefined){
       let pathIcon = document.createElementNS("http://www.w3.org/2000/svg","path");
       pathIcon.setAttribute("stroke-linecap", "round");
       pathIcon.setAttribute("stroke-linejoin", "round");

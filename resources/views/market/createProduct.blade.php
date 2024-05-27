@@ -268,9 +268,9 @@
 @include('footer')
 </body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" nonce="{{ Vite::cspNonce() }}"></script>
 
-<script type="text/javascript">
+<script type="text/javascript" nonce="{{ Vite::cspNonce() }}">
      
 $(document).ready(function (e) {
 
