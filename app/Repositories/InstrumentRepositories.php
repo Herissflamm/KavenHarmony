@@ -25,16 +25,18 @@
     $stateId = null;
     $typeId = null;
     if($state != null){
-        $stateFilter = StateRepositories::getStateByStateName($state);
-        $stateId = $stateFilter->id;
+        $stateId = StateRepositories::getStateByStateName($state)->id;
     }
     if($type != null){
-        $typeFilter = TypeRepositories::getTypeByTypeName($type);
-        $typeId = $typeFilter->id;
+        $typeId = TypeRepositories::getTypeByTypeName($type)->id;
     }
-    $instrumentQuery = Instrument::select('instrument.*')->with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')->join('sell', 'sell.id', '=', 'instrument.id_sell' );
-    $instrumentQuery = $instrumentQuery->leftJoin('instrument_has_order', 'instrument_has_order.id_instrument', '=', 'instrument.id');
-    $instrumentQuery = $instrumentQuery->whereNull('instrument_has_order.id_instrument');
+    $instrumentQuery = Instrument::select('instrument.*')
+    ->with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')
+    ->join('sell', 'sell.id', '=', 'instrument.id_sell' );
+    $instrumentQuery = $instrumentQuery
+    ->leftJoin('instrument_has_order', 'instrument_has_order.id_instrument', '=', 'instrument.id');
+    $instrumentQuery = $instrumentQuery
+    ->whereNull('instrument_has_order.id_instrument');
     if($typeId != null ){      
         $instrumentQuery = $instrumentQuery->where('id_type_instrument', $typeId);
     }
@@ -42,7 +44,8 @@
         $instrumentQuery = $instrumentQuery->where('id_state', $stateId);
     }
     if($minPrice != null && $maxPrice != null){
-        $instrumentQuery = $instrumentQuery->where('sell.price', '>=', $minPrice)->where('sell.price', '<=', $maxPrice);
+        $instrumentQuery = $instrumentQuery->where('sell.price', '>=', $minPrice)
+        ->where('sell.price', '<=', $maxPrice);
     }
     $instrumentQuery = $instrumentQuery->get();
     

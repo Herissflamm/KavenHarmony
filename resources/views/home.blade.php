@@ -21,9 +21,8 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="referrer" content="origin-when-cross-origin" />
     @vite('resources/css/app.css')
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="overflow-x-hidden">
@@ -34,7 +33,7 @@
             <img src="/logo/disquerouge.png" class="absolute md:top-[20%] md:-left-40 md:w-auto w-2/3 hidden lg:block" alt="Disque rouge">
 
             <div class="md:pt-5 md:w-2/5 m-auto relative">
-                <h1 class="md:text-2xl text-center font-bold font-montserrat pb-2">
+                <h1 class="md:text-2xl text-center font-bold font-serif pb-2">
                     Bienvenue sur notre plateforme !
                 </h1>
                 <div class="md:pt-2 font-montserrat text-lg text-center">
@@ -49,12 +48,12 @@
 
 
             
-            <div class = "relative md:grid md:grid-cols-2 md:gap-3 md:place-items-center font-Montserrat">
+            <div class = "relative md:grid md:grid-cols-2 md:gap-3 md:place-items-center">
                 <div class="relative max-w-xl mx-auto md:mt-20 mt-5">
                     <a href="{{ url('/search') }}"> 
-                        <img src="/logo/piano.jpeg" class="h-2/5 w-full object-cover rounded-md" alt="Piano"/>
+                        <img src="/logo/piano.jpeg" class="h-2/5 w-full object-cover rounded-md brightness-50" alt="Piano"/>
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <h1 class="text-white text-3xl font-bold">Location</h1>
+                            <h1 class="text-white text-3xl font-bold font-serif">Location</h1>
                         </div>
                     </a>
                 </div>
@@ -62,9 +61,9 @@
                 
                 <div class="relative max-w-xl mx-auto md:mt-20 mt-5">
                     <a href="{{ url('/search') }}"> 
-                        <img src="/logo/guitare.jpeg" class="h-2/5 w-full object-cover rounded-md" alt="Guitare"/>
+                        <img src="/logo/guitare.jpeg" class="h-2/5 w-full object-cover rounded-md brightness-50" alt="Guitare"/>
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <h1 class="text-white text-3xl font-bold">Achat</h1>
+                            <h1 class="text-white text-3xl font-bold font-serif">Achat</h1>
                         </div>
                     </a>
                 </div>
@@ -85,27 +84,27 @@
                 </div>        
             </div>
             <div class="md:ml-20">
-                <h1 class="font-montserrat font-bold md:pb-0 pb-2">Nos actualités</h1>
+                <h1 class="font-serif font-bold md:pb-0 pb-2 text-xl">Nos actualités</h1>
                 <div class="md:grid md:grid-cols-4 md:gap-2">
                     <div class="font-serif m-auto md:text-start text-center">
                         <img src="/logo/partition.jpeg" class="md:w-3/5" alt="Partition"/>
-                        <h2>Lire une tablature</h2>
-                        <p>Date de publication : 01/03/2024</p>
+                        <h2 class="font-serif">Lire une tablature</h2>
+                        <p class="font-montserrat text-xs">Date de publication : 01/03/2024</p>
                     </div>
                     <div class="font-serif m-auto md:text-start text-center">
                         <img src="/logo/kazoo.png" class="md:w-3/5" alt="Garçon jouant du kazoo"/>
-                        <h2>Le Kazoo</h2>
-                        <p>Date de publication : 20/12/2023</p>
+                        <h2 class="font-serif">Le Kazoo</h2>
+                        <p class="font-montserrat text-xs">Date de publication : 20/12/2023</p>
                     </div>
                     <div class="font-serif m-auto md:text-start text-center">
                         <img src="/logo/piano.jpeg" class="md:w-3/5" alt="Piano"/>
-                        <h2>Le Piano quand t'as pas..</h2>
-                        <p>Date de publication : 06/06/2024</p>
+                        <h2 class="font-serif">Le Piano quand t'as pas..</h2>
+                        <p class="font-montserrat text-xs">Date de publication : 06/06/2024</p>
                     </div>
                     <div class="font-serif m-auto md:text-start text-center">
                         <img src="/logo/trompette.jpeg" class="md:w-3/5" alt="Trompette"/>
-                        <h2>Saxophone vs Tropett..</h2>
-                        <p>Date de publication : 15/05/2024</p>
+                        <h2 class="font-serif">Saxophone vs Tropett..</h2>
+                        <p class="font-montserrat text-xs">Date de publication : 15/05/2024</p>
                     </div>  
                 </div>
             </div>

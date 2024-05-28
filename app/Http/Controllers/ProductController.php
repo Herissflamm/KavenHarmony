@@ -65,7 +65,8 @@ class ProductController extends Controller
     }
 
     public function filterProduct(Request $request){
-        $instrumentQuery = InstrumentRepositories::getInstrumentsByFilter($request->state, $request->type, $request->minPrice, $request->maxPrice);
+        $instrumentQuery = InstrumentRepositories::getInstrumentsByFilter($request->state, $request->type, 
+        $request->minPrice, $request->maxPrice);
         if($instrumentQuery != null){
             return $instrumentQuery ;
         }else{
