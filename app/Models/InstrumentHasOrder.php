@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class InstrumentHasOrder extends Pivot
 {
     use HasFactory;
-    public $table = 'instrument_has_Order';
+    public $table = 'instrument_has_order';
 
     protected $fillable = [
       'id_instrument',
