@@ -71,26 +71,20 @@ async function getAllInstrumentWithPrice(event){
 }
 
 async function getAllInstrumentWithFilter(event){
-  if(!event.target.classList.contains("selected")){
-    let allSelectedFilter = getSelectedFilter(event);
-    event.target.classList.add("selected");
-    let state = "";
-    let type = "";
-    let minPrice = document.getElementById("minPrice").value;
-    let maxPrice = document.getElementById("maxPrice").value;
-    for(let i = 0; i < allSelectedFilter.length; i++){
-      if(allSelectedFilter[i].getAttribute("Name") == 'State'){
-        state = allSelectedFilter[i].id;
-      } 
-      if(allSelectedFilter[i].getAttribute("Name") == 'Type'){
-        type = allSelectedFilter[i].id;
-      }
+  let allSelectedFilter = getSelectedFilter(event);
+  let state = null;
+  let type = null;
+  let minPrice = document.getElementById("minPrice").value;
+  let maxPrice = document.getElementById("maxPrice").value;
+  for(let i = 0; i < allSelectedFilter.length; i++){
+    if(allSelectedFilter[i].getAttribute("Name") == 'State'){
+      state = allSelectedFilter[i].id;
+    } 
+    if(allSelectedFilter[i].getAttribute("Name") == 'Type'){
+      type = allSelectedFilter[i].id;
     }
-    await callAjax(state,type,minPrice,maxPrice);
-  }else{
-    event.target.classList.remove("selected");
-    await callAjax(null,null,null,null);
   }
+  await callAjax(state,type,minPrice,maxPrice);
 }
 
 async function callAjax(state, type, minPrice, maxPrice){
@@ -167,7 +161,6 @@ function changeView(data){
     basketIcon.setAttribute("stroke", "currentColor");
     divIconBasket.appendChild(basketIcon);
     let customer = document.getElementById('customer').value;
-    console.log(customer);
     if(customer != undefined){
       let pathIcon = document.createElementNS("http://www.w3.org/2000/svg","path");
       pathIcon.setAttribute("stroke-linecap", "round");
@@ -216,17 +209,24 @@ function getSelectedFilter(event){
   if(allSelectedFilter != null){
     if(name === "State"){
       for(let i = 0; i < allSelectedFilter.length; i++){
-        if(allSelectedFilter[i].getAttribute("Name") == 'State'){
+        if(allSelectedFilter[i].getAttribute("Name") === 'State' && event.target.id !== allSelectedFilter[i].id){
           allSelectedFilter[i].classList.remove("selected");
         } 
       }
     }else if(name === "Type"){
       for(let i = 0; i < allSelectedFilter.length; i++){
-        if(allSelectedFilter[i].getAttribute("Name") == 'Type'){
+        console.log(allSelectedFilter[i]);
+        if(allSelectedFilter[i].getAttribute("Name") === 'Type' && event.target.id !== allSelectedFilter[i].id){
           allSelectedFilter[i].classList.remove("selected");
         } 
       }
     }
+  }
+  
+  if(!event.target.classList.contains("selected")){
+    event.target.classList.add("selected");
+  }else{
+    event.target.classList.remove("selected");
   }
   return allSelectedFilter;
 }

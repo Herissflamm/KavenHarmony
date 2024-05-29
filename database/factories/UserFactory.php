@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'username' => fake()->userName(),
-            'phone' => fake()->numberBetween(8,8),
+            'phone' => '0123456789',
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => 'Password1',
