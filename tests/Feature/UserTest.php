@@ -5,10 +5,11 @@ namespace Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class UserTest extends TestCase
 {
-
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      */
@@ -17,7 +18,6 @@ class UserTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-        ->withSession(['banned' => false])
         ->get('/account');
 
         $response->assertStatus(200);
@@ -46,6 +46,18 @@ class UserTest extends TestCase
         ];
 
         $response = $this->post(route('modifyAccount'), $data);
+
+        $modifyUser = User::find($user->id);
+        $this->assertNotNull($modifyUser);
+        $this->assertEquals($first_name, $modifyUser->first_name);
+        $this->assertEquals($last_name, $modifyUser->last_name);
+        $this->assertEquals($username, $modifyUser->username);
+        $this->assertEquals('0123456789', $modifyUser->phone);
+        $this->assertEquals($email, $modifyUser->email);
+        $this->assertEquals($city, $modifyUser->address->city);
+        $this->assertEquals('14000', $modifyUser->address->post_code);
+        $this->assertEquals($street_number, $modifyUser->address->street_number);
+        $this->assertEquals($street_name, $modifyUser->address->street_name);
 
         $response->assertStatus(200);
     }
