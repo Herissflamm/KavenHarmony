@@ -21,7 +21,7 @@
 </div>
 <div class="flex flex-col items-center row justify-center col-md-8 card bg-purple-50 w-full" id="Vente"> 
     <div class="card-body">
-        <form method="POST" action="{{ route('modifyProduct') }}">
+        <form method="POST" action="{{ route('modifyProductPost') }}">
             @csrf
             <input class="hidden" value="{{$instrument->id}}" name="id">
             <div class="row mb-3">

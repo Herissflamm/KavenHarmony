@@ -63,10 +63,16 @@
             
           </div>
         </li>
+        <li id="sell" class="cursor-pointer selected">
+          A vendre
+        </li>
+        <li id="rent" class="cursor-pointer selected">
+          A louer
+        </li>
         <li>
           Categories
           @foreach ($allCategories as $categories)
-            <ul role="list" class="px-2 py-2" id="{{$categories->categories}}">{{$categories->categories}}
+            <ul role="list" class="px-2 py-1 cursor-pointer" id="{{$categories->categories}}">{{$categories->categories}}
             @foreach ($allType as $type)
               @if ($type->id_categories == $categories->id)
                 <li class="font-normal pl-2 hidden cursor-pointer" id="{{ $type->type }}" name="Type">
@@ -102,7 +108,11 @@
         <div class="grid grid-cols-2 pb-2">
           <div class="text-left">
             <p class="font-montserrat text-lg">{{ $instrument->name }}</p>
-            <p class="font-serif">{{ $instrument->sell->price}} €</p>
+            @if($instrument->sell != null)
+              <p class="font-serif">{{ $instrument->sell->price}} €</p>
+            @elseif($instrument->rent != null)
+              <p class="font-serif">{{ $instrument->rent->price}} € /mois</p>
+            @endif
           </div>
           <div class="rounded-full text-purple-400 bg-white flex justify-end items-center p-1">
             @if(Auth::user())

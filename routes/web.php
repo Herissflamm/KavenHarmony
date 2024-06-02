@@ -32,12 +32,10 @@ Route::get('/home', function () {
 Route::get('/sell', [ProductController::class, 'showCreate'])->middleware(IsConnected::class)->middleware(IsSeller::class);
 
 
-Route::post('/newProduct', function (Request $request) {
-    $productController = new ProductController();
-    $imageController = new ImageController();
-    $imageController->store($request);
-    return redirect('/search');
-})->middleware(IsConnected::class)->middleware(IsSeller::class);
+Route::post('/newProduct', [ProductController::class, 'createNewProduct'])->name('newProduct')->middleware(IsConnected::class)->middleware(IsSeller::class);
+
+Route::post('/newProductLocation', [ProductController::class, 'createNewProductLocation'])->name('newProductLocation')->middleware(IsConnected::class)->middleware(IsSeller::class);
+
 
 Route::get('/buy', function () {
     return view('home');
@@ -61,13 +59,13 @@ Route::get('/account',  [UserController::class, 'showMyAccount'])->name('account
 
 Route::get('/accountSeller',  [UserController::class, 'showAccount'])->name("accountSeller");
 
-Route::post('/modifyAccount', [UserController::class, 'modifyAccount'])->name("modifyAccount")->middleware(IsConnected::class);
+Route::post('/modifyAccountPost', [UserController::class, 'modifyAccount'])->name("modifyAccountPost")->middleware(IsConnected::class);
 
 Route::get('/modifyAccount', [UserController::class, 'showModifyAccount'])->name("modifyAccount")->middleware(IsConnected::class);
 
 Route::get('/modifyProduct', [ProductController::class, 'showModifyProduct'])->name("modifyProduct")->middleware(IsConnected::class)->middleware(IsSeller::class);
 
-Route::post('/modifyProduct', [ProductController::class, 'modifyProduct'])->name("modifyProduct")->middleware(IsConnected::class)->middleware(IsSeller::class);
+Route::post('/modifyProductPost', [ProductController::class, 'modifyProduct'])->name("modifyProductPost")->middleware(IsConnected::class)->middleware(IsSeller::class);
 
 Route::get('/messaging', function () {
     return view('home');
@@ -86,10 +84,17 @@ Route::get('/partition', function () {
     return view('home');
 });
 
-Route::get('logout', function ()
+Route::get('logoutAccount', function ()
 {
     auth()->logout();
     Session()->flush();
 
     return Redirect::to('/');
-})->name('logout');
+})->name('logoutAccount');
+
+
+Route::get('404', function (){
+    return view('404');
+});
+
+Route::get('/500', fn() => abort(500));

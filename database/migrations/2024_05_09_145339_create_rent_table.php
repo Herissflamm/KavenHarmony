@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->decimal('price');
             $table->date('duration_max');
-            $table->unsignedBigInteger('id_discount'); 
+            $table->unsignedBigInteger('id_discount')->nullable(); ; 
             $table->foreign('id_discount')->references('id')->on('discount');
             $table->timestamps();
         });

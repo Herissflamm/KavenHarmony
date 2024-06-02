@@ -47,19 +47,20 @@
           </svg>
         </div>
       @endif
-      
       <div class="relative">
         <h1 class="text-white text-4xl font-montserrat pb-5 text-center m-auto pr-12 pt-5">{{$instrument->seller->users->last_name}} {{$instrument->seller->users->first_name[0]}}.</h1>
         <div class="flex m-auto bottom-0 absolute pb-2">
           @if(Auth::user() != null)
             @if(Auth::user()->customer != null)
-              <div class="mr-3 text-purple-400 border-2 w-14 rounded-full items-center bg-white flex justify-center">
-                <a href="{{ route('addToBasket', ['id' => $instrument->id]) }}">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="file: h-8 w-8">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                  </svg>
-                </a>
-              </div>
+              @if($instrument->order == null)
+                <div class="mr-3 text-purple-400 border-2 w-14 rounded-full items-center bg-white flex justify-center">
+                  <a href="{{ route('addToBasket', ['id' => $instrument->id]) }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="file: h-8 w-8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                    </svg>
+                  </a>
+                </div>
+              @endif
             @endif
           @endif
           <div class="text-purple-400 border-2 rounded-full items-center bg-white flex justify-center pl-1 pr-1">
@@ -70,17 +71,25 @@
         </div> 
       </div>
     </div>
-    <p class="pl-14">Publié depuis le {{$instrument->created_at}}</p>
+    <p class="pl-14 text-xs">Publié depuis le {{$instrument->created_at}}</p>
     <div>
-      <p class="font-bold">{{$instrument->sell->price}} €</p>
+      @if($instrument->sell != null)
+        <h2>A vendre</h2>
+        <p class="font-bold font-montserrat">{{$instrument->sell->price}} €</p>
+      @elseif($instrument->rent != null)
+        <h2 class="font-bold font-serif">A louer</h2>
+        <p class="font-bold font-montserrat">{{$instrument->rent->price}} €</p>
+        <p class="font-montserrat">Date de fin de location : {{$instrument->rent->duration_max}}</p>
+      @endif
+      
     </div>
-    <div>
+    <div class="font-montserrat">
       Etat : 
       {{$instrument->state->state}}
     </div>
   </div>
 </div>
-<h1 class="font-montserrat font-bold pl-20 text-xl pb-5">Images du produit</h1>
+<h1 class="font-serif font-bold pl-20 text-xl pb-5">Images du produit</h1>
 <div class="flex items-center pt-2 pb-5 pl-20">
   
   @foreach ($instrument->image as $image)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Actions\Product\CreateNewRent;
 use App\Actions\Product\UpdateProduct;
 use App\Actions\Product\UpdateRent;
 use App\Actions\Product\UpdateSell;
@@ -12,6 +13,14 @@ use App\Repositories\TypeRepositories;
 use App\Repositories\StateRepositories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
+use \Validator;
+use App\Actions\Image\CreateNewImage;
+use App\Actions\Image\CreateInstrumentHasImage;
+use App\Actions\Product\CreateNewSell;
+use App\Actions\Product\CreateNewProduct;
+
 
 
 class ProductController extends Controller
@@ -34,9 +43,16 @@ class ProductController extends Controller
         $allType = TypeRepositories::getAllType();
         $biggestPrice = 0;
         foreach($instruments as $instrument){
-            if($biggestPrice < $instrument->sell->price){
-                $biggestPrice = $instrument->sell->price;
+            if($instrument->sell != null){
+                if($biggestPrice < $instrument->sell->price){
+                    $biggestPrice = $instrument->sell->price;
+                }
+            }else{
+                if($biggestPrice < $instrument->rent->price){
+                    $biggestPrice = $instrument->rent->price;
+                }
             }
+            
         }
         $user = Auth::user();
         $customer = null;
@@ -66,7 +82,8 @@ class ProductController extends Controller
 
     public function filterProduct(Request $request){
         $instrumentQuery = InstrumentRepositories::getInstrumentsByFilter($request->state, $request->type, 
-        $request->minPrice, $request->maxPrice);
+        $request->minPrice, $request->maxPrice, $request->rentSearch, $request->sellSearch);
+
         if($instrumentQuery != null){
             return $instrumentQuery ;
         }else{
@@ -101,4 +118,41 @@ class ProductController extends Controller
         $instrument->seller->id_users, $instrument->id);
         return view('market/product', ['instrument' => $instrument, 'suggestInstrument' => $suggestInstrument]); 
     }
+
+    public function createNewProduct(Request $request)
+    {       
+        $storageSell = new CreateNewSell();
+        $storageProduct = new CreateNewProduct();
+        $userId = Auth::id();        
+
+        $input = $request->input();
+        $sell = $storageSell->create($input);
+        $idSell = $sell->id;
+        $idTypeInstrument = TypeRepositories::getTypeByTypeName($input['instrumentType'])->id;
+        $idState  = StateRepositories::getStateByStateName($input['state'])->id;
+        if($idTypeInstrument != null && $idState != null){
+            $storageProduct ->create($request, $idTypeInstrument, $idState, $userId, $idSell, null)->id;
+        }
+
+        return redirect('search'); 
+    }
+
+    public function createNewProductLocation(Request $request)
+    {       
+        $storageRent = new CreateNewRent();
+        $storageProduct = new CreateNewProduct();
+        $userId = Auth::id();        
+
+        $input = $request->input();
+        $rent = $storageRent->create($input);
+        $idRent = $rent->id;
+        $idTypeInstrument = TypeRepositories::getTypeByTypeName($input['instrumentType'])->id;
+        $idState  = StateRepositories::getStateByStateName($input['state'])->id;
+        if($idTypeInstrument != null && $idState != null){
+            $storageProduct ->create($request, $idTypeInstrument, $idState, $userId, null, $idRent)->id;
+        }
+
+        return redirect('search'); 
+    }
+    
 }

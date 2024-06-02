@@ -43,6 +43,20 @@ class CreateNewUser implements CreatesNewUsers
             'street_name'=> ['required', 'string', 'max:256'],
             'password' => $this->passwordRules(),
         ])->validate();
+
+        if(isset($input["images"])){
+            if($input["images"] != null ){
+                Validator::make(
+                    $input, [
+                    'images' => 'required|mimes:jpg,jpeg,png,bmp|max:10240'
+                    ],[
+                        'images.required' => 'Please upload an image',
+                        'images.mimes' => 'Only jpeg,png and bmp images are allowed',
+                        'images.max' => 'Sorry! Maximum allowed size for an image is 10MB',
+                    ]
+                )->validate();
+            }
+        }
         
         $address = Address::create([
             'city' => $input['city'],
@@ -50,7 +64,7 @@ class CreateNewUser implements CreatesNewUsers
             'street_number' => $input['street_number'],
             'street_name' => $input['street_name'],
         ]);
-
+        
 
         $user = User::create([
             'username' => $input['username'],
@@ -61,28 +75,13 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
             'id_address' =>  $address -> id,
         ]);
+        
         if(isset($input["images"])){
-            if($input["images"] != null ){
-                $validator = Validator::make(
-                    $input, [
-                    'images.*' => 'required|mimes:jpg,jpeg,png,bmp|max:20000'
-                    ],[
-                        'images.*.required' => 'Please upload an image',
-                        'images.*.mimes' => 'Only jpeg,png and bmp images are allowed',
-                        'images.*.max' => 'Sorry! Maximum allowed size for an image is 20MB',
-                    ]
-                );
-                if ($validator->fails()) {
-                    return response()->json(array(
-                        'success' => false,
-                        'errors' => $validator->getMessageBag()->toArray()
-                    ) , 400);
-                }
-    
-                
+            if($input["images"] != null ){                
+                $image =$input["images"];
                 $i=0;
-                $imageName = $i.time().'.'.$input["images"]->extension();  
-                $input["images"]->move(public_path('images'), $imageName);
+                $imageName = $i.time().'.'.\File::extension($image->getClientOriginalName());  
+                $image->move(public_path('images'), $imageName);
     
                 $image = Image::create([
                     'path' => $imageName,
@@ -90,7 +89,6 @@ class CreateNewUser implements CreatesNewUsers
                 ]);
                 $user->id_image = $image->id;
                 $user->save();
-                
             }
         }
         

@@ -45,7 +45,7 @@ class UserTest extends TestCase
             'street_name' => $street_name,
         ];
 
-        $response = $this->post(route('modifyAccount'), $data);
+        $response = $this->post(route('modifyAccountPost'), $data);
 
         $modifyUser = User::find($user->id);
         $this->assertNotNull($modifyUser);

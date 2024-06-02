@@ -168,6 +168,7 @@
 
                 <div class="-ml-20 row mb-3">
                     <label for="images" class="col-md-4 col-form-label text-md-end">Photo de profil : </label>
+                    
 
                     <div class="flex items-center pt-2">
                         <div id="image-preview" class="flex items-center">                    
@@ -183,6 +184,7 @@
                             </span>
                         @enderror
                     </div>
+                    <span class="text-xs">Taille maximum : 10 Mo</span>
                 </div>
 
                 <div class="flex flex-col items-center">
