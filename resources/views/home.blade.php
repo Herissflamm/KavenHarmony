@@ -28,9 +28,9 @@
     <div class="overflow-x-hidden">
         @include('navbar')
         <div class="relative">
-            <img src="/logo/disquejaune.png" class="md:absolute md:top-20 md:-right-40 md:w-auto w-2/3 m-auto" alt="Disque jaune">
+            <img src="/logo/disquejaune.png" class="md:absolute md:top-20 md:-right-45 md:w-auto w-2/3 m-auto" alt="Disque jaune">
 
-            <img src="/logo/disquerouge.png" class="absolute md:top-[20%] md:-left-40 md:w-auto w-2/3 hidden lg:block" alt="Disque rouge">
+            <img src="/logo/disquerouge.png" class="absolute md:top-[20%] md:-left-45 md:w-auto w-2/3 hidden lg:block" alt="Disque rouge">
 
             <div class="md:pt-5 md:w-2/5 m-auto relative">
                 <h1 class="md:text-2xl text-center font-bold font-serif pb-2">

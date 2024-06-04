@@ -15,12 +15,18 @@ class Rent extends Model
     protected $fillable = [
         'price',
         'duration_max',
+        'id_frequency',
         'id_discount'
     ];
 
     public function instrument()
     {
         return $this->belongsTo(Instrument::class, "id", "id_rent");
+    }
+
+    public function frequency()
+    {
+        return $this->hasOne(Frequency::class, "id", "id_frequency");
     }
 
     public function discount()

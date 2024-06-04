@@ -8,6 +8,7 @@ use App\Actions\Product\UpdateProduct;
 use App\Actions\Product\UpdateRent;
 use App\Actions\Product\UpdateSell;
 use App\Repositories\CategoriesRepositories;
+use App\Repositories\FrequencyRepositories;
 use App\Repositories\InstrumentRepositories;
 use App\Repositories\TypeRepositories;
 use App\Repositories\StateRepositories;
@@ -26,9 +27,10 @@ use App\Actions\Product\CreateNewProduct;
 class ProductController extends Controller
 {
     public function showCreate(Request $request){
+        $frequencies = FrequencyRepositories::getAllFrequency();
         $state = StateRepositories::getAllState();
         $allType = TypeRepositories::getAllType();
-        return view('market/createProduct', ['allState' => $state, 'allType' => $allType]);
+        return view('market/createProduct', ['allState' => $state, 'allType' => $allType, 'frequencies' => $frequencies]);
     }
 
     public function showSearch(Request $request){
@@ -91,10 +93,11 @@ class ProductController extends Controller
         }
     }
     public function showModifyProduct(Request $request){
+        $frequencies = FrequencyRepositories::getAllFrequency();
         $state = StateRepositories::getAllState();
         $allType = TypeRepositories::getAllType();
         $instrument = InstrumentRepositories::getInstrumentByID($request["instrument"]);
-        return view('market/modifyProduct', ['allState' => $state, 'allType' => $allType,'instrument' => $instrument]);
+        return view('market/modifyProduct', ['allState' => $state, 'allType' => $allType,'instrument' => $instrument, 'frequencies' => $frequencies]);
     }
 
     //Modifie un produit et affiche sa page
@@ -109,8 +112,9 @@ class ProductController extends Controller
             $updateSell->update($request, $sell);
         }
         if($rent != null){
+            $id_frequency = FrequencyRepositories::getFrequencyByName($request['frequency'])->id;
             $updateRent = new UpdateRent();
-            $updateRent->update($request, $rent);
+            $updateRent->update($request, $rent, $id_frequency);
         }
         $updateProduct = new UpdateProduct();
         $instrument = $updateProduct->update($request, $instrument, $id_state, $id_type);
@@ -141,10 +145,11 @@ class ProductController extends Controller
     {       
         $storageRent = new CreateNewRent();
         $storageProduct = new CreateNewProduct();
-        $userId = Auth::id();        
+        $userId = Auth::id();
 
+        $id_frequency = FrequencyRepositories::getFrequencyByName($request['frequency'])->id;
         $input = $request->input();
-        $rent = $storageRent->create($input);
+        $rent = $storageRent->create($input, $id_frequency);
         $idRent = $rent->id;
         $idTypeInstrument = TypeRepositories::getTypeByTypeName($input['instrumentType'])->id;
         $idState  = StateRepositories::getStateByStateName($input['state'])->id;

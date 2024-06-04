@@ -13,7 +13,7 @@ class CreateNewRent
      *
      * @param  array<string, string>  $input
      */
-    public function create(array $input): Rent
+    public function create(array $input, $id_frequency): Rent
     {
                       
         Validator::make($input, [
@@ -24,6 +24,7 @@ class CreateNewRent
         $rent = Rent::create([
             'price' => $input['price'],
             'duration_max' => $input['date_max'],
+            'id_frequency' => $id_frequency,
         ]);
 
 

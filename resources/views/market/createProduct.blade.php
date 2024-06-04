@@ -30,7 +30,7 @@
                     <label for="name" class="col-md-4 col-form-label text-md-end">Nom de l'instrument: </label>
 
                     <div class="col-md-6 pl-7 pt-2">
-                        <input id="name" type="text" class="pr-14 pl-2 rounded-full shadow-inner border-2 form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                        <input id="name" type="text" class="pr-14 pl-2 rounded-full shadow-inner border-2 form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autofocus>
 
                         @error('name')
                             <span class="invalid-feedback" role="alert">
@@ -52,7 +52,6 @@
                             @endforeach
                         </select>
                     </div>
-                    
                 </div>
 
                 <div class="row mb-3">
@@ -138,7 +137,7 @@
                     <label for="name" class="col-md-4 col-form-label text-md-end">Nom de l'instrument: </label>
 
                     <div class="col-md-6 pl-7 pt-2">
-                        <input id="name" type="text" class="pr-14 pl-2 rounded-full shadow-inner border-2 form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                        <input id="name" type="text" class="pr-14 pl-2 rounded-full shadow-inner border-2 form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autofocus>
 
                         @error('name')
                             <span class="invalid-feedback" role="alert">
@@ -151,7 +150,7 @@
                 <div class="row mb-3">
                     <label for="name" class="col-md-4 col-form-label text-md-end">Type d'instrument : </label>
                     <div class="col-md-6 pl-7 pt-2">
-                        <select name="instrumentType" id="instrumentType" class="text-gray-400 italic pr-11 pl-2 rounded-full shadow-inner border-2">
+                        <select name="instrumentType" id="instrumentType" class="pr-11 pl-2 rounded-full shadow-inner border-2">
                             <option value="" selected disabled hidden class="">
                                 Choisissez une catégorie  
                             </option>
@@ -160,7 +159,6 @@
                             @endforeach
                         </select>
                     </div>
-                    
                 </div>
 
                 <div class="row mb-3">
@@ -189,6 +187,20 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="name" class="col-md-4 col-form-label text-md-end">Quel fréquence : </label>
+                    <div class="col-md-6 pl-7 pt-2">
+                        <select name="frequency" id="frequency" class="pr-11 pl-2 rounded-full shadow-inner border-2">
+                            <option value="" selected disabled hidden class="">
+                                Choisissez une fréquence  
+                            </option>
+                            @foreach ($frequencies as $frequency)
+                                <option value="{{$frequency->frequency}}" class="text-black-50 not-italic">{{$frequency->frequency}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 

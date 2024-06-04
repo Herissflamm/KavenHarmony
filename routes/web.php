@@ -47,6 +47,10 @@ Route::get('/myBasket', [OrderController::class, 'getMyBasket'])->name("myBasket
 
 Route::get('/addToBasket', [OrderController::class, 'addToBasket'])->name("addToBasket")->middleware(IsConnected::class)->middleware(IsCustomer::class);
 
+Route::post('/addToBasketRent', [OrderController::class, 'addToBasketRent'])->name("addToBasketRent")->middleware(IsConnected::class);
+
+Route::get('/validate', [OrderController::class, 'validateOrder'])->name("validate")->middleware(IsConnected::class)->middleware(IsCustomer::class);
+
 Route::get('/boughtProduct', [OrderController::class, 'getAllOrders'])->middleware(IsConnected::class)->middleware(IsCustomer::class);
 
 Route::get('/soldProduct', [ProductController::class, 'showAllMyProduct'])->middleware(IsConnected::class)->middleware(IsSeller::class);

@@ -21,7 +21,7 @@
     
   }
 
-  public static function deleteInstrumentFromOrder($id){
-    InstrumentHasOrder::where('id_instrument', $id)->delete();        
+  public static function deleteInstrumentFromOrder($id_instrument, $id_order){
+    InstrumentHasOrder::where('id_instrument', $id_instrument)->where('id_order', $id_order)->delete();        
   }
 }

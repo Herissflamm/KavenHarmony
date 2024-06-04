@@ -111,6 +111,14 @@
     return $instrumentQuery;
   }
 
+  public static function getAllInstrumentByOrderId($id){
+    $instrumentQuery = Instrument::select('instrument.*')->with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')
+    ->join('instrument_has_order', 'instrument_has_order.id_instrument', '=', 'instrument.id')
+    ->where('instrument_has_order.id_order', '=', $id)
+    ->get();
+    return $instrumentQuery;
+  }
+
   public static function getInstrumentSuggest($id_type_instrument, $id_seller, $id_instrument){
     $instrumentQuery = Instrument::select('instrument.*')
     ->with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')

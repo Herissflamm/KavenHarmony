@@ -165,7 +165,19 @@ function changeView(data){
     if(data[i].sell != undefined){
       pPrice.innerHTML = data[i].sell.price + " €";
     }else{
-      pPrice.innerHTML = data[i].rent.price + " €/mois";
+      let id = data[i].rent.id_frequency
+      switch(id){
+        case 1 : 
+          pPrice.innerHTML = data[i].rent.price + " €/jour";
+          break;
+        case 2 :
+          pPrice.innerHTML = data[i].rent.price + " €/semaine";
+          break;
+        case 3 :
+          pPrice.innerHTML = data[i].rent.price + " €/mois";
+          break;
+      }
+      
     }
     pPrice.classList.add("font-serif");
     divAttribute.appendChild(pPrice);
