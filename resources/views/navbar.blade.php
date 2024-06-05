@@ -66,7 +66,7 @@
                     </div>
                 </li>              
                 <li>
-                    <a href="{{ url('/logout') }}" class="rounded-full flex justify-center items-center text-white">
+                    <a href="{{ url('/logoutAccount') }}" class="rounded-full flex justify-center items-center text-white">
                         <svg class="h-8 w-8 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
                         </svg>

@@ -3,6 +3,8 @@
  namespace App\Repositories;
   
  use App\Models\Instrument;
+ use Illuminate\Support\Facades\Log;
+
  
  class InstrumentRepositories{
   public static function getAllInstrument(){
@@ -12,7 +14,11 @@
   public static function getAllInstrumentWithoutOrder(){
     $instrumentQuery = Instrument::select('instrument.*')->with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')
     ->leftJoin('instrument_has_order', 'instrument_has_order.id_instrument', '=', 'instrument.id')
+    ->leftjoin('sell', 'sell.id', '=', 'instrument.id_sell' )
+    ->leftjoin('rent', 'rent.id', '=', 'instrument.id_rent' )
     ->whereNull('instrument_has_order.id_instrument')
+    ->orderBy('rent.price')
+    ->orderBy('sell.price')
     ->get();
     return $instrumentQuery;
   }
@@ -21,7 +27,7 @@
     return $instrumentQuery;
   }
 
-  public static function getInstrumentsByFilter($state, $type, $minPrice, $maxPrice){
+  public static function getInstrumentsByFilter($state, $type, $minPrice, $maxPrice, $rentSearch, $sellSearch){
     $stateId = null;
     $typeId = null;
     if($state != null){
@@ -32,20 +38,38 @@
     }
     $instrumentQuery = Instrument::select('instrument.*')
     ->with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')
-    ->join('sell', 'sell.id', '=', 'instrument.id_sell' );
-    $instrumentQuery = $instrumentQuery
     ->leftJoin('instrument_has_order', 'instrument_has_order.id_instrument', '=', 'instrument.id');
+    if(($rentSearch == "true") && ($sellSearch == "true")){      
+      $instrumentQuery->leftJoin('rent', 'rent.id', '=', 'instrument.id_rent' )
+      ->leftJoin('sell', 'sell.id', '=', 'instrument.id_sell' );
+    }else if($rentSearch == "true"){
+      $instrumentQuery->join('rent', 'rent.id', '=', 'instrument.id_rent' );
+    }else if($sellSearch == "true"){
+      $instrumentQuery->join('sell', 'sell.id', '=', 'instrument.id_sell' );
+    }
+    
     $instrumentQuery = $instrumentQuery
     ->whereNull('instrument_has_order.id_instrument');
     if($typeId != null ){      
-        $instrumentQuery = $instrumentQuery->where('id_type_instrument', $typeId);
+      $instrumentQuery = $instrumentQuery->where('id_type_instrument', $typeId);
     }
     if($stateId != null){
-        $instrumentQuery = $instrumentQuery->where('id_state', $stateId);
+      $instrumentQuery = $instrumentQuery->where('id_state', $stateId);
     }
     if($minPrice != null && $maxPrice != null){
-        $instrumentQuery = $instrumentQuery->where('sell.price', '>=', $minPrice)
-        ->where('sell.price', '<=', $maxPrice);
+      if($rentSearch == "true" && $sellSearch == "true"){      
+        $instrumentQuery = $instrumentQuery->whereAny(['sell.price', 'rent.price'], '>=', $minPrice)
+        ->whereAny(['sell.price', 'rent.price'], '<=', $maxPrice)
+        ->orderBy('rent.price')
+        ->orderBy('sell.price');
+      }else if($rentSearch == "true"){
+        $instrumentQuery->where('rent.price', '>=', $minPrice )
+        ->orderBy('rent.price');
+      }else if($sellSearch == "true"){
+        $instrumentQuery->where('sell.price', '>=', $minPrice )
+        ->orderBy('sell.price');
+      }
+        
     }
     $instrumentQuery = $instrumentQuery->get();
     
@@ -54,19 +78,21 @@
 
 
   public static function getAllInstrumentWithSearch($value){ 
-    $allInstrument= [];
-    $instrumentQuery = null;
-    $instrumentQuery = Instrument::select('instrument.*')->with('state', 'type_instrument', 'seller', 'sell', 'image', 'order')
-        ->join('type_instrument', 'type_instrument.id', '=', 'instrument.id_type_instrument')
-        ->join('state', 'state.id', '=', 'instrument.id_state')
-        ->leftJoin('instrument_has_order', 'instrument_has_order.id_instrument', '=', 'instrument.id')
-        ->whereNull('instrument_has_order.id_instrument')
-        ->whereAny([
-            'type_instrument.type',
-            'state.state',
-            'instrument.name',
-        ], 'LIKE', '%'.$value.'%')
-        ->get();
+    $instrumentQuery = Instrument::select('instrument.*')->with('state', 'type_instrument', 'seller', 'sell',  'image', 'order', 'rent')
+    ->leftjoin('sell', 'sell.id', '=', 'instrument.id_sell' )
+    ->leftjoin('rent', 'rent.id', '=', 'instrument.id_rent' )
+    ->join('type_instrument', 'type_instrument.id', '=', 'instrument.id_type_instrument')
+    ->join('state', 'state.id', '=', 'instrument.id_state')
+    ->leftJoin('instrument_has_order', 'instrument_has_order.id_instrument', '=', 'instrument.id')
+    ->whereNull('instrument_has_order.id_instrument')
+    ->whereAny([
+        'type_instrument.type',
+        'state.state',
+        'instrument.name'
+    ], 'LIKE',"%{$value}%")
+    ->orderBy('rent.price')
+    ->orderBy('sell.price')
+    ->get();
     return $instrumentQuery;
   }
 
@@ -82,6 +108,14 @@
     ->where('instrument_has_order.id_order', '=', $id)
     ->get()
     ->first();
+    return $instrumentQuery;
+  }
+
+  public static function getAllInstrumentByOrderId($id){
+    $instrumentQuery = Instrument::select('instrument.*')->with('state', 'type_instrument', 'seller', 'sell', 'rent', 'image', 'order')
+    ->join('instrument_has_order', 'instrument_has_order.id_instrument', '=', 'instrument.id')
+    ->where('instrument_has_order.id_order', '=', $id)
+    ->get();
     return $instrumentQuery;
   }
 

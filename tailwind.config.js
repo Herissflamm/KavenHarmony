@@ -7,6 +7,13 @@ export default {
   ],
   theme: {
     extend: {
+      inset: {
+        '100':'26rem',
+        '40':'40%',
+        '50':'50%',
+        '30':'30%',
+        '45': '10rem',
+      },
       lineClamp: {
         7: '7',
       },

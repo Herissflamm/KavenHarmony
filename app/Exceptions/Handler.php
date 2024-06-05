@@ -3,6 +3,10 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Client\Request;
+use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\Log;
+use Mockery\Matcher\Closure;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -26,5 +30,29 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+
+        if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException ||
+            $exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+            return response()->view('error.404', [], 404); 
+        }
+        
+        if ($this->isHttpException($exception) && $exception->getStatusCode() === 413) {
+            return redirect()
+                ->back()
+                ->withErrors(['error'=> 'Le fichier téléchargé est trop volumineux. La taille maximale autorisée est de 10 Mo.']);
+        }
+
+        if ($this->isHttpException($exception) && $exception->getStatusCode() == 500) {
+            return response()->view('error.500', [], 500);  
+            
+        }
+
+        
+
+        return parent::render($request, $exception);
     }
 }

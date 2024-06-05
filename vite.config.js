@@ -10,6 +10,7 @@ export default defineConfig({
             'resources/js/basket.js',
             'resources/js/bootstrap.js',
             'resources/js/filter.js',
+            'resources/js/modal.js',
             ],
             refresh: true,
         }),

@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             StateSeeder::class,
             StatusSeeder::class,
             TypeSeeder::class,
+            FrequencySeeder::class,
         ]);
     }
 }

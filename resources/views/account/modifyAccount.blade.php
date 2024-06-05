@@ -22,7 +22,7 @@
         <h1 class="font-montserrat font-bold text-xl">Modifier mon compte</h1>
     </div>
     <div class="justify-center items-center">
-        <form method="POST" action="{{ route('modifyAccount') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('modifyAccountPost') }}" enctype="multipart/form-data">
             @csrf
             <div class="flex flex-col items-center">
                 <div class="row mb-3">

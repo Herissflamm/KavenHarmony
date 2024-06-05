@@ -1,5 +1,7 @@
 $( document ).ready(function() {
   //Déclaration des variables
+  let sell = document.getElementById("sell");
+  let rent = document.getElementById("rent");
   let allType = document.getElementsByName("Type");
   let allState = document.getElementsByName("State");
   let clearFilter = document.getElementById("clearFilter");
@@ -20,6 +22,9 @@ $( document ).ready(function() {
 
   minPrice.addEventListener("input", mintrigger);
   maxPrice.addEventListener("input", maxtrigger);
+
+  sell.addEventListener("click", getAllInstrumentWithFilter);
+  rent.addEventListener("click", getAllInstrumentWithFilter);
 
   minPrice.addEventListener("change", getAllInstrumentWithPrice);
   maxPrice.addEventListener("change", getAllInstrumentWithPrice);
@@ -50,13 +55,23 @@ function openCategory(event){
 
 async function getAllInstrumentWithPrice(event){
   let allSelectedFilter = getSelectedFilter(event);
-  if(event.target.tagName !== 'INPUT'){
-    event.target.classList.add("selected");
+  if(event.target.tagName === 'INPUT'){
+    event.target.classList.remove("selected");
   }
   let state = "";
   let type = "";
   let minPrice = document.getElementById("minPrice").value;
   let maxPrice = document.getElementById("maxPrice").value;
+  let sell = document.getElementById("sell");
+  let rent = document.getElementById("rent");
+  let rentSearch = false;
+  let sellSearch = false;
+  if(rent.classList.contains("selected")){
+    rentSearch = true;
+  }
+  if(sell.classList.contains("selected")){
+    sellSearch = true;
+  }
   for(let i = 0; i < allSelectedFilter.length; i++){
     if(allSelectedFilter[i].getAttribute("Name") == 'State'){
       state = allSelectedFilter[i].id;
@@ -66,7 +81,7 @@ async function getAllInstrumentWithPrice(event){
       type = allSelectedFilter[i].id;
     }
   }
-  await callAjax(state,type,minPrice,maxPrice);
+  await callAjax(state,type,minPrice,maxPrice, rentSearch, sellSearch);
   
 }
 
@@ -76,6 +91,16 @@ async function getAllInstrumentWithFilter(event){
   let type = null;
   let minPrice = document.getElementById("minPrice").value;
   let maxPrice = document.getElementById("maxPrice").value;
+  let sell = document.getElementById("sell");
+  let rent = document.getElementById("rent");
+  let rentSearch = false;
+  let sellSearch = false;
+  if(rent.classList.contains("selected")){
+    rentSearch = true;
+  }
+  if(sell.classList.contains("selected")){
+    sellSearch = true;
+  }
   for(let i = 0; i < allSelectedFilter.length; i++){
     if(allSelectedFilter[i].getAttribute("Name") == 'State'){
       state = allSelectedFilter[i].id;
@@ -84,17 +109,17 @@ async function getAllInstrumentWithFilter(event){
       type = allSelectedFilter[i].id;
     }
   }
-  await callAjax(state,type,minPrice,maxPrice);
+  await callAjax(state,type,minPrice,maxPrice, rentSearch, sellSearch);
 }
 
-async function callAjax(state, type, minPrice, maxPrice){
+async function callAjax(state, type, minPrice, maxPrice, rentSearch, sellSearch){
   await jQuery.ajax({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       url: '/filterProduct',
       method : "GET",
-      data: {state: state, type: type, minPrice:minPrice, maxPrice:maxPrice},
+      data: {state: state, type: type, minPrice:minPrice, maxPrice:maxPrice, rentSearch:rentSearch, sellSearch:sellSearch},
       success: function (data) {
         changeView(data);
       }
@@ -132,36 +157,54 @@ function changeView(data){
     divGrid.appendChild(divAttribute);
 
     let pName = document.createElement("p");
+    pName.classList.add("font-montserrat", "text-lg");
     pName.innerHTML = data[i].name;
     divAttribute.appendChild(pName);
 
     let pPrice = document.createElement("p");
-    pPrice.classList.add("text-white");
-    pPrice.innerHTML = data[i].price + "€";
+    if(data[i].sell != undefined){
+      pPrice.innerHTML = data[i].sell.price + " €";
+    }else{
+      let id = data[i].rent.id_frequency
+      switch(id){
+        case 1 : 
+          pPrice.innerHTML = data[i].rent.price + " €/jour";
+          break;
+        case 2 :
+          pPrice.innerHTML = data[i].rent.price + " €/semaine";
+          break;
+        case 3 :
+          pPrice.innerHTML = data[i].rent.price + " €/mois";
+          break;
+      }
+      
+    }
+    pPrice.classList.add("font-serif");
     divAttribute.appendChild(pPrice);
 
     let divBasket = document.createElement("div");
     divBasket.classList.add("rounded-full", "text-purple-400", "bg-white", "flex", "justify-end", "items-center", "p-1");
     divGrid.appendChild(divBasket);
 
-    let basket = document.createElement("a");
-    let href =route('addToBasket', {id : data[i].id});
-    basket.href = href;
-    divBasket.appendChild(basket);
-    
-    let divIconBasket = document.createElement("div");
-    divIconBasket.classList.add("relative");
-    basket.appendChild(divIconBasket);
-
-    let basketIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    basketIcon.classList.add("file:", "h-6", "w-6");
-    basketIcon.setAttribute("fill", "none");
-    basketIcon.setAttribute("viewBox", "0 0 24 24");
-    basketIcon.setAttribute("stroke-width", "1.5");
-    basketIcon.setAttribute("stroke", "currentColor");
-    divIconBasket.appendChild(basketIcon);
-    let customer = document.getElementById('customer').value;
+    let customer = document.getElementById('customer');
     if(customer != undefined){
+      let basket = document.createElement("a");
+      let href =route('addToBasket', {id : data[i].id});
+      basket.href = href;
+      divBasket.appendChild(basket);
+      
+      let divIconBasket = document.createElement("div");
+      divIconBasket.classList.add("relative");
+      basket.appendChild(divIconBasket);
+
+      let basketIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      basketIcon.classList.add("file:", "h-6", "w-6");
+      basketIcon.setAttribute("fill", "none");
+      basketIcon.setAttribute("viewBox", "0 0 24 24");
+      basketIcon.setAttribute("stroke-width", "1.5");
+      basketIcon.setAttribute("stroke", "currentColor");
+      basketIcon.classList.add("file:", "h-6", "w-6");
+      divIconBasket.appendChild(basketIcon);
       let pathIcon = document.createElementNS("http://www.w3.org/2000/svg","path");
       pathIcon.setAttribute("stroke-linecap", "round");
       pathIcon.setAttribute("stroke-linejoin", "round");
@@ -179,7 +222,7 @@ function changeView(data){
     divButton.appendChild(aButton);
 
     let button = document.createElement("button");
-    button.classList.add("rounded-full", "bg-yellow-400", "p-1", "pl-2", "pr-2", "mb-2", "text-white");
+    button.classList.add("rounded-full", "bg-yellow-400", "p-1", "pl-2", "pr-2","text-white","mb-1");
     button.innerHTML = "Voir l'instrument";
     aButton.appendChild(button);
 
@@ -200,7 +243,7 @@ async function deleteSelectFilter(){
   document.getElementById("minthumb").style = "left:0%";
   document.getElementById("maxthumb").style = "right:0%";
   document.getElementById("barthumb").style = "right:0%; left:0%";
-  callAjax(null, null, null, null);
+  callAjax(null, null, null, null, true, true);
 }
 
 function getSelectedFilter(event){
@@ -215,14 +258,12 @@ function getSelectedFilter(event){
       }
     }else if(name === "Type"){
       for(let i = 0; i < allSelectedFilter.length; i++){
-        console.log(allSelectedFilter[i]);
         if(allSelectedFilter[i].getAttribute("Name") === 'Type' && event.target.id !== allSelectedFilter[i].id){
           allSelectedFilter[i].classList.remove("selected");
         } 
       }
     }
   }
-  
   if(!event.target.classList.contains("selected")){
     event.target.classList.add("selected");
   }else{

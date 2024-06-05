@@ -94,7 +94,7 @@
       </div>
     @endif
     <div class="flex justify-center pb-5 pt-2">
-      <a href="{{ url('/logout') }}" class="text-center bg-red-400 rounded-full border-2 border-red-400 shadow-inner pl-7 pr-7 text-white">Déconnexion</a>
+      <a href="{{ url('/logoutAccount') }}" class="text-center bg-red-400 rounded-full border-2 border-red-400 shadow-inner pl-7 pr-7 text-white">Déconnexion</a>
     </div>
   @else
     <div class="flex justify-center pb-5 pt-2">

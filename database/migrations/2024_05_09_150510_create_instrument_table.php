@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_state'); 
             $table->foreign('id_state')->references('id')->on('state');
 
-            $table->unsignedBigInteger('id_sell'); 
+            $table->unsignedBigInteger('id_sell')->nullable(); 
             $table->foreign('id_sell')->references('id')->on('sell');
 
             $table->unsignedBigInteger('id_rent')->nullable(); 
