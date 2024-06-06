@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      brightness: {
+        25: '.25',
+      },
       inset: {
         '100':'26rem',
         '40':'40%',
