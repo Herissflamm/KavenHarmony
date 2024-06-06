@@ -75,6 +75,13 @@ Route::get('/messaging', function () {
     return view('home');
 });
 
+Route::get('/mention', function () {
+    return view('/right/legalMention');
+});
+
+Route::get('/mention', function () {
+    return view('/right/conditionSell');
+});
 
 Route::get('/search', [ProductController::class, 'showSearch']);
 
