@@ -53,7 +53,7 @@
                     <a href="{{ url('/search') }}"> 
                         <img src="/logo/piano.jpeg" class="h-2/5 w-full object-cover rounded-md brightness-50" alt="Piano"/>
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <h1 class="text-white text-3xl font-bold font-serif">Location</h1>
+                            <h1 class="text-white text-5xl font-bold font-serif">Location</h1>
                         </div>
                     </a>
                 </div>
@@ -63,7 +63,7 @@
                     <a href="{{ url('/search') }}"> 
                         <img src="/logo/guitare.jpeg" class="h-2/5 w-full object-cover rounded-md brightness-50" alt="Guitare"/>
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <h1 class="text-white text-3xl font-bold font-serif">Achat</h1>
+                            <h1 class="text-white text-5xl font-bold font-serif">Achat</h1>
                         </div>
                     </a>
                 </div>
