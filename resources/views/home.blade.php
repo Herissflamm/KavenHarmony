@@ -51,7 +51,7 @@
             <div class = "relative md:grid md:grid-cols-2 md:gap-3 md:place-items-center">
                 <div class="relative max-w-xl mx-auto md:mt-20 mt-5">
                     <a href="{{ url('/search') }}"> 
-                        <img src="/logo/piano.jpeg" class="h-2/5 w-full object-cover rounded-md brightness-50" alt="Piano"/>
+                        <img src="/logo/piano.jpeg" class="h-2/5 w-full object-cover rounded-md brightness-25" alt="Piano"/>
                         <div class="absolute inset-0 flex items-center justify-center">
                             <h1 class="text-white text-5xl font-bold font-serif">Location</h1>
                         </div>
@@ -61,7 +61,7 @@
                 
                 <div class="relative max-w-xl mx-auto md:mt-20 mt-5">
                     <a href="{{ url('/search') }}"> 
-                        <img src="/logo/guitare.jpeg" class="h-2/5 w-full object-cover rounded-md brightness-50" alt="Guitare"/>
+                        <img src="/logo/guitare.jpeg" class="h-2/5 w-full object-cover rounded-md brightness-25" alt="Guitare"/>
                         <div class="absolute inset-0 flex items-center justify-center">
                             <h1 class="text-white text-5xl font-bold font-serif">Achat</h1>
                         </div>
