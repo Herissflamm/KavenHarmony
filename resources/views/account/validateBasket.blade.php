@@ -12,12 +12,12 @@
 </head>
 <body>
 @include('navbar')
-<div class="pl-5 pb-5">
+<div class="lg:text-left text-center lg:pl-5 pb-5">
   <h1 class="font-bold text-xl font-serif flex justify-center pb-2">Merci !</h1>
   <h1 class="font-bold text-xl font-serif flex justify-center">Votre commande a été effectué avec succès !</h1>
 </div>
 
-<div class="pl-5 pb-5">
+<div class="lg:text-left text-center lg:pl-5 pb-5">
   <h1 class="font-montserrat flex justify-center pb-2">Vous pouvez maintenant contacter le/les vendeur(s) :</h1>
   @foreach ($sellers as $seller)
   <div class="font-montserrat text-lg flex justify-center items-center pb-2 text-center">

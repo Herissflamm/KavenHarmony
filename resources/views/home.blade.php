@@ -32,7 +32,7 @@
 
             <img src="/logo/disquerouge.png" class="absolute md:top-[20%] md:-left-45 md:w-auto w-2/3 hidden lg:block" alt="Disque rouge">
 
-            <div class="md:pt-5 md:w-2/5 m-auto relative">
+            <div class="md:pt-5 lg:w-2/5 md:w-4/5 m-auto relative">
                 <h1 class="md:text-2xl text-center font-bold font-serif pb-2">
                     Bienvenue sur notre plateforme !
                 </h1>

@@ -4,7 +4,9 @@ $( document ).ready(function() {
   let crossDate = document.getElementById("crossDate");
   let crossError = document.getElementById("crossError");
 
-  btn.addEventListener('click', showModalDate);
+  if(btn != null){
+    btn.addEventListener('click', showModalDate);
+  }
   crossDate.addEventListener('click', showModalDate);
   if(crossError != null){
     crossError.addEventListener('click', showModalError);

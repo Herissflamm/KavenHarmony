@@ -8,7 +8,7 @@
 </head>
 <body class = "">
 @include('navbar')
-<div class="pl-5">
+<div class="md:pl-5">
   <a href="{{url('/search') }}"> 
     <p class="font-montserrat">
       < Retour 
@@ -163,7 +163,7 @@
             </label>
 
             <div class="row mb-0 pb-10 pt-2">
-                <div class="col-md-6 offset-md-4">
+                <div class="col-md-6 offset-md-4 items-center flex justify-center">
                     <button type="submit" class="btn btn-primary rounded-full bg-purple-400 text-white pl-5 pr-5 pt-1 pb-1">
                         Modifier l'annonce
                     </button>

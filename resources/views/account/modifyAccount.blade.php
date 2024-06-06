@@ -186,7 +186,7 @@
                     </div>
                 </div>
 
-                <div class="-ml-20 row mb-3">
+                <div class="md:-ml-20 row mb-3">
                     <label for="images" class="col-md-4 col-form-label text-md-end">Photo de profil : </label>
 
                     <div class="flex items-center pt-2">
@@ -210,7 +210,7 @@
                 <div class="flex flex-col items-center">
                     <div class="row mb-0 p-2 pb-4">
                         <div class="col-md-6 offset-md-4 flex justify-center">
-                            <button type="submit" class="btn btn-primary bg-yellow-400 rounded-full border-2 border-yellow-400 shadow-inner p-1">
+                            <button type="submit" class="btn btn-primary bg-yellow-400 rounded-full border-2 border-yellow-400 shadow-inner p-1 text-white">
                                 Modifier son compte
                             </button>
                         </div>

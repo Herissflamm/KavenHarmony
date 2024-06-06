@@ -5,10 +5,10 @@
             <a href="{{ url('/home') }}"> <img src="/logo/icone.png" class="md:w-24 md:m-auto" alt="Icone du site"/> </a>
             <ul class="text-sm font-serif text-white">
                 <li>
-                    <a href="#" class="hover:underline">Condition Générales de Location</a>
+                    <a href="{{url('/conditionSell')}}" class="hover:underline">Conditions Générales de ventes</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:underline">Mentions légales</a>
+                    <a href="{{url('/mention')}}" class="hover:underline">Mentions légales</a>
                 </li>
                 <li>
                     <a href="#" class="hover:underline">Condition d'utilisation</a>

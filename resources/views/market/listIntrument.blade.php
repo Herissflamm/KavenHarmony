@@ -12,10 +12,10 @@
 <body class = "dark:bg-white-50">
 @include('navbar')
 <span class="hidden" id="customer">{{$customer}}</span>
-<div class="flex">
-  <div class="relative flex w-full max-w-56 flex-col overflow-y-auto bg-white py-4 pb-12 shadow-x overflow-hidden">
+<div class="md:flex">
+  <div class="items-center relative flex w-full md:max-w-56 flex-col overflow-y-auto bg-white py-4 pb-12 shadow-x overflow-hidden">
     <div class="mt-4 border-t h-auto border-gray-200 border-2 rounded-lg shadow-inner">
-      <h3 class="bg-purple-400 text-center text-xl rounded-tr-lg text-white">Filtre</h3>
+      <h3 class="bg-purple-400 text-center text-xl rounded-lg md:rounded-tr-lg text-white">Filtre</h3>
       <ul role="list" class="px-2 py-3 font-medium text-gray-900">
         <li>
           <a href="#" class="block px-2 py-3 cursor-pointer" id="clearFilter">Retirer les filtres selectionné</a>
@@ -96,22 +96,22 @@
     </div>
   </div>
   <div class="m-auto">
-    <h1 class="text-xl p-10 text-center">Derniers ajouts</h1>
-    <div class="grid grid-cols-4 gap-2 object-center" id="allInstrument">
+    <h1 class="text-xl px-10 pb-4 text-center">Derniers ajouts</h1>
+    <div class="md:grid md:grid-cols-4 md:gap-2" id="allInstrument">
       @foreach ($instruments as $instrument)
-      <div class="rounded overflow-hidden shadow-lg w-60" name="{{ $instrument->name }}">
+      <div class="rounded overflow-hidden shadow-lg w-60 m-auto mb-4" name="{{ $instrument->name }}">
         <div class="w-52 h-52">
           @if($instrument->image)
-            <img src="/images/{{$instrument->image[0]->path}}" class="object-fill w-52 h-52" alt="{{$instrument->name}}"/>
+            <img src="/images/{{$instrument->image[0]->path}}" class="object-fill w-52 h-52 p-2" alt="{{$instrument->name}}"/>
           @endif
         </div>
         <div class="grid grid-cols-2 pb-2">
           <div class="text-left">
-            <p class="font-montserrat text-lg">{{ $instrument->name }}</p>
+            <p class="font-montserrat text-lg ml-1">{{ $instrument->name }}</p>
             @if($instrument->sell != null)
-              <p class="font-serif">{{ $instrument->sell->price}} €</p>
+              <p class="font-serif ml-1">{{ $instrument->sell->price}} €</p>
             @elseif($instrument->rent != null)
-              <p class="font-serif">{{ $instrument->rent->price}} € /{{ $instrument->rent->frequency->frequency}}</p>
+              <p class="font-serif ml-1">{{ $instrument->rent->price}} € /{{ $instrument->rent->frequency->frequency}}</p>
             @endif
           </div>
           <div class="rounded-full text-purple-400 bg-white flex justify-end items-center p-1">

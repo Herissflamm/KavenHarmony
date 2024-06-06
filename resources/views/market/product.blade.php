@@ -38,16 +38,16 @@
     <button class="text-white bg-purple-400 rounded-full py-1 px-2" type="submit">Louer le produit</button>
   </form>
 </div>
-<img src="/logo/disquerouge.png" class="absolute top-100 right-10" alt="Disque rouge">
-<div class="pl-20">
+<img src="/logo/disquerouge.png" class="hidden lg:flex lg:absolute top-100 right-10" alt="Disque rouge">
+<div class="lg:pl-20">
   <a href="{{url('/search') }}"> 
     <p class="font-montserrat">
       < Retour 
     </p>
   </a> 
 </div>
-<div class="flex">
-  <h1 class="font-montserrat font-bold pl-20 text-xl">{{$instrument->name}}</h1>
+<div class="flex lg:justify-start items-center justify-center">
+  <h1 class="font-montserrat font-bold lg:pl-20 md:pl-10 text-xl">{{$instrument->name}}</h1>
   @if(Auth::user() != null)
     @if(Auth::user()->id == $instrument->seller->id_users)
       <a href="{{ route('modifyProduct', ['instrument' => $instrument->id]) }}" class="block py-2 px-3 text-gray-900 rounded">
@@ -58,16 +58,19 @@
     @endif
   @endif
 </div>
-<h2 class="font-montserrat pl-20 text-lg">{{$instrument->type_instrument->type}}</h2>
-<div class="grid grid-cols-2 gap-28">
-  <div class="bg-purple-400 rounded-r-2xl text-white min-h-60">
-    <h1 class="text-xl font-montserrat font-bold pl-10">Description</h1>
-    <p class="pl-10 p-5 text-ellipsis overflow-auto max-h-96">{{$instrument->description}}</p>
+<div class="flex lg:justify-start items-center justify-center">
+  <h2 class="font-montserrat lg:pl-20 md:pl-10 lg:text-lg italic">{{$instrument->type_instrument->type}}</h2>
+</div>
+
+<div class="md:grid md:grid-cols-2 md:gap-28 px-2">
+  <div class="bg-purple-400 lg:rounded-r-2xl rounded-2xl text-white lg:min-h-60 min-h-40">
+    <h1 class="text-xl font-montserrat font-bold lg:pl-10 pl-5">Description</h1>
+    <p class="lg:pl-10 lg:p-5 p-2 text-ellipsis overflow-auto max-h-96">{{$instrument->description}}</p>
   </div>
-  <div class="pl-40">
-    <div class="rounded-lg border-2 border-yellow-400 bg-yellow-400 grid grid-cols-2 w-9/12 h-44">
+  <div class="lg:pl-40 pt-2">
+    <div class="rounded-lg border-2 border-yellow-400 bg-yellow-400 grid grid-cols-2 lg:w-9/12 lg:h-44 h-30">
       @if ($instrument->seller->users->image != null)
-        <div class="relative w-40 h-40 m-2 overflow-hidden bg-white rounded-full">
+        <div class="relative w-20 h-20 lg:w-40 lg:h-40 m-2 overflow-hidden bg-white rounded-full">
           <img src="/images/{{$instrument->seller->users->image->path}}" class="w-full h-full object-fill rounded" src="Photo de profil">
         </div>
       @else
@@ -78,7 +81,7 @@
         </div>
       @endif
       <div class="relative">
-        <h1 class="text-white text-4xl font-montserrat pb-5 text-center m-auto pr-12 pt-5">{{$instrument->seller->users->last_name}} {{$instrument->seller->users->first_name[0]}}.</h1>
+        <h1 class="text-white lg:text-4xl md:text-2xl text-2xl font-serif pb-5 text-center m-auto pr-12 pt-5">{{$instrument->seller->users->last_name}} {{$instrument->seller->users->first_name[0]}}.</h1>
         <div class="flex m-auto bottom-0 absolute pb-2">
           <div class="text-purple-400 border-2 rounded-full items-center bg-white flex justify-center pl-1 pr-1">
             <a href="{{ route('accountSeller', ['id' => $instrument->seller->users->id]) }}">
@@ -119,20 +122,20 @@
       @endif          
   </div>
 </div>
-<h1 class="font-serif font-bold pl-20 text-xl pb-5">Images du produit</h1>
-<div class="flex items-center pt-2 pb-5 pl-20">
+<h1 class="font-serif font-bold text-center md:text-left md:pl-20 text-xl pb-5">Images du produit</h1>
+<div class="flex items-center pt-2 pb-5 lg:pl-20 md:justify-start justify-center">
   
   @foreach ($instrument->image as $image)
   <div>
-    <img src="/images/{{$image->path}}" class="w-48 h-48 object-fill pr-5" alt="{{$instrument->name}}"/>
+    <img src="/images/{{$image->path}}" class="w-48 h-48 object-fill lg:pr-5" alt="{{$instrument->name}}"/>
   </div>
   @endforeach
 </div>
-<div class="pb-3 pl-20">
-  <h1 class="font-montserrat font-bold text-xl pb-5">Suggestion</h1>
-  <div class="grid grid-cols-5 gap-2 ">
+<div class="pb-3 md:pl-20 m-auto">
+  <h1 class="font-serif font-bold text-xl pb-5">Suggestion</h1>
+  <div class="md:grid lg:grid-cols-5 md:grid-cols-2 md:gap-1 lg:gap-2">
     @foreach ($suggestInstrument as $instrument)
-    <div class="rounded overflow-hidden shadow-lg w-60" name="{{ $instrument->name }}">
+    <div class="rounded overflow-hidden shadow-lg w-60 m-auto mb-4" name="{{ $instrument->name }}">
         <div class="w-52 h-52">
           @if($instrument->image)
             <img src="/images/{{$instrument->image[0]->path}}" class="object-fill w-52 h-52" alt="{{$instrument->name}}"/>
